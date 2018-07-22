@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>simple-data-table</title>
+    <meta charset="utf-8"/>
+
+    <link href="https://fonts.googleapis.com/css?family=Chivo|Overpass" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles/main.css"/>
+    <link rel="stylesheet" href="../src/skins/default.css"/>
+    <script src="../test/fixtures/2-rows.js"></script>
+    <script src="../src/index.js"></script>
+
+    <link rel="stylesheet" href="vendors/highlight/styles/github.css"/>
+    <script src="vendors/highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+
+<h1>SimpleDataTable</h1>
+
+<section>
+    <h2><em>Example 1</em>: Minimal</h2>
+    <div id="example-1"></div>
+    <script>
+        (function () {
+            const d = new SimpleDataTable(document.querySelector('#example-1'));
+            d.load(FIXTURE_2_ROWS);
+            d.render();
+        })();
+    </script>
+    <pre><code>
+const d = new SimpleDataTable(document.querySelector('#example-1'));
+d.load(FIXTURE_2_ROWS);
+d.render();
+    </code></pre>
+</section>
+
+<section>
+    <h2><em>Example 2</em>: Change label of add button</h2>
+    <div id="example-2"></div>
+    <script>
+        (function () {
+            const d = new SimpleDataTable(document.querySelector('#example-2'), {
+                addButtonLabel: 'Add'
+            });
+            d.load(FIXTURE_2_ROWS);
+            d.render();
+        })();
+    </script>
+    <pre><code>
+const d = new SimpleDataTable(document.querySelector('#example-2'), {
+    addButtonLabel: 'Add'
+});
+d.load(FIXTURE_2_ROWS);
+d.render();
+    </code></pre>
+</section>
+
+<section>
+    <h2><em>Example 3</em>: Change prefix od default column (use DevTools to watch)</h2>
+    <div id="example-3"></div>
+    <script>
+        (function () {
+            const d = new SimpleDataTable(document.querySelector('#example-3'), {
+                addButtonLabel: 'Add'
+            });
+            d.render();
+            const $addButton = d.$el.querySelector('button.add-row');
+            $addButton.dispatchEvent(new Event('click'));
+        })();
+    </script>
+    <pre><code>
+const d = new SimpleDataTable(document.querySelector('#example-3'), {
+    addButtonLabel: 'Add'
+});
+d.render();
+    </code></pre>
+</section>
+
+<section>
+    <h2><em>Example 4</em>: Change default number of columns</h2>
+    <div id="example-4"></div>
+    <script>
+        (function () {
+            const d = new SimpleDataTable(document.querySelector('#example-4'), {
+                defaultColumnNumber: 1
+            });
+            d.render();
+            const $addButton = d.$el.querySelector('button.add-row');
+            $addButton.dispatchEvent(new Event('click'));
+            $addButton.dispatchEvent(new Event('click'));
+        })();
+    </script>
+    <pre><code>
+const d = new SimpleDataTable(document.querySelector('#example-4'), {
+    defaultColumnNumber: 1
+});
+d.render();
+    </code></pre>
+</section>
+
+</body>
+</html>

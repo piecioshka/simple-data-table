@@ -1,0 +1,52 @@
+{
+    "name": "simple-data-table",
+    "description": "Lightweight and simple data table with no dependencies",
+    "version": "1.0.0",
+    "license": "MIT",
+    "author": {
+        "name": "Piotr Kowalski",
+        "email": "piecioshka@gmail.com",
+        "url": "https://piecioshka.pl/"
+    },
+    "scripts": {
+        "clear": "rm -rf dist/ coverage/ .nyc_output",
+        "clear:all": "rm -rf node_modules/ && npm run clear",
+        "test": "npm run test:unit",
+        "test:unit": "ava",
+        "coverage": "nyc npm run test",
+        "count": "find . -name '*.js' -not -path './node_modules/*' | xargs wc -l | sort -r",
+        "lint": "eslint **/**.js"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "ava": "^0.25.0",
+        "jsdom": "^11.11.0",
+        "eslint": "^5.1.0",
+        "eslint-config-piecioshka": "^2.0.0",
+        "nyc": "^12.0.2"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:piecioshka/simple-data-table.git"
+    },
+    "files": [
+        "demo",
+        "src",
+        "package.json",
+        "README.md"
+    ],
+    "keywords": [
+        "simple",
+        "customizable",
+        "configurable",
+        "powerful",
+        "data",
+        "table",
+        "display",
+        "gui",
+        "browser",
+        "lightweight",
+        "no dependencies"
+    ],
+    "main": "./src/index.js"
+}

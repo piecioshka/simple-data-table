@@ -1,0 +1,26 @@
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+body {
+    width: 620px;
+    margin: 0 auto;
+    font-weight: normal;
+    font-family: 'Overpass', sans-serif;
+}
+
+h1 {
+    font-family: 'Chivo', sans-serif;
+    border-bottom: 1px solid;
+}
+
+h2 > em {
+    background: #000;
+    color: #fff;
+    font-style: normal;
+    padding: 3px;
+}
+
+section {
+    margin: 0 0 100px 0;
+}
