@@ -1,7 +1,7 @@
 {
     "name": "simple-data-table",
     "description": "Lightweight and simple data table with no dependencies",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "license": "MIT",
     "author": {
         "name": "Piotr Kowalski",
