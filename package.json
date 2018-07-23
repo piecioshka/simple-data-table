@@ -9,13 +9,13 @@
         "url": "https://piecioshka.pl/"
     },
     "scripts": {
-        "clear": "rm -rf dist/ coverage/ .nyc_output",
+        "clear": "rm -rf coverage/ .nyc_output",
         "clear:all": "rm -rf node_modules/ && npm run clear",
         "test": "npm run test:unit",
         "test:unit": "ava",
         "coverage": "nyc npm run test",
         "count": "find . -name '*.js' -not -path './node_modules/*' | xargs wc -l | sort -r",
-        "lint": "eslint **/**.js"
+        "lint": "eslint ./"
     },
     "dependencies": {},
     "devDependencies": {
@@ -30,7 +30,6 @@
         "url": "git@github.com:piecioshka/simple-data-table.git"
     },
     "files": [
-        "demo",
         "src",
         "package.json",
         "README.md"
