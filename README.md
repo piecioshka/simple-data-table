@@ -18,14 +18,27 @@ npm install simple-data-table
 ```
 
 ```javascript
-const d = new SimpleDataTable(document.querySelector('#example-1'));
-d.load(FIXTURE_2_ROWS);
+const d = new SimpleDataTable($container);
+d.load([
+    {
+        column1: 'Cell 1',
+        column2: 'Cell 2',
+        column3: 'Cell 3'
+    },
+    {
+        column1: 'Cell 1 (row 2)',
+        column2: 'Cell 2 (row 2)',
+        column3: 'Cell 3 (row 2)'
+    }
+]);
 d.render();
 ```
 
 ## Examples
 
 More examples: <https://piecioshka.github.io/simple-data-table/demo/>
+
+![](./screenshots/example-1.png)
 
 ## Options
 
@@ -69,6 +82,47 @@ const d = new SimpleDataTable($container, {
 });
 d.load(...);
 d.render();
+```
+
+## Events
+
+### `SimpleDataTable.EVENTS.UPDATE`
+
+Events is dispatching when you change any of input in table.
+
+Example:
+
+```js
+const d = new SimpleDataTable($container);
+d.on(SimpleDataTable.EVENTS.UPDATE, () => {
+    // do some stuff...
+});
+```
+
+### `SimpleDataTable.EVENTS.ROW_ADDED`
+
+Events is dispatching when you add new record.
+
+Example:
+
+```js
+const d = new SimpleDataTable($container);
+d.on(SimpleDataTable.EVENTS.ROW_ADDED, () => {
+    // do some stuff...
+});
+```
+
+### `SimpleDataTable.EVENTS.ROW_REMOVED`
+
+Events is dispatching when you remove any record.
+
+Example:
+
+```js
+const d = new SimpleDataTable($container);
+d.on(SimpleDataTable.EVENTS.ROW_REMOVED, () => {
+    // do some stuff...
+});
 ```
 
 ## Tested browsers
