@@ -1,10 +1,22 @@
-# simple-data-table ([npm](https://www.npmjs.com/package/simple-data-table))
+# simple-data-table
 
 [![npm version](https://badge.fury.io/js/simple-data-table.svg)](https://badge.fury.io/js/simple-data-table)
 [![downloads count](https://img.shields.io/npm/dt/simple-data-table.svg)](https://www.npmjs.com/~piecioshka)
 [![travis](https://img.shields.io/travis/piecioshka/simple-data-table.svg?maxAge=2592000)](https://travis-ci.org/piecioshka/simple-data-table)
+[![dependencies](https://david-dm.org/piecioshka/simple-data-table.svg)](https://gibhu.com/piecioshka/simple-data-table)
 
 Lightweight and simple data table with no dependencies
+
+## Features
+
+* :checkered_flag: Display data (array with objects) in simple table
+* :checkered_flag: Lazy loading of data (you can load data whenever you can)
+* :checkered_flag: Support custom skins
+* :checkered_flag: Small size of package
+* :checkered_flag: No dependencies
+* :checkered_flag: Support custom events (update, add, remove)
+* :checkered_flag: Fluent API
+* :construction: Recognize data in input and change input type
 
 ## Installation
 
@@ -18,7 +30,8 @@ npm install simple-data-table
 ```
 
 ```javascript
-const d = new SimpleDataTable($container);
+const $container = document.querySelector('#place-to-render');
+const d = new SimpleDataTable($container, options);
 d.load([
     {
         column1: 'Cell 1',
@@ -36,13 +49,13 @@ d.render();
 
 ## Examples
 
-More examples: <https://piecioshka.github.io/simple-data-table/demo/>
-
 ![](./screenshots/example-1.png)
+
+More examples: <https://piecioshka.github.io/simple-data-table/demo/>
 
 ## Options
 
-### `addButtonLabel` _(Default: '✚')_
+#### `addButtonLabel` _(Default: '✚')_
 
 Change value od button which add new row.
 
@@ -50,13 +63,13 @@ Example:
 
 ```js
 const d = new SimpleDataTable($container, {
-    addButtonLabel: 'Add new row'
+    addButtonLabel: 'New record'
 });
 d.load(...);
 d.render();
 ```
 
-### `defaultColumnPrefix` _(Default: 'column')_
+#### `defaultColumnPrefix` _(Default: 'column')_
 
 Define what "name" should have cells in new added columns.
 
@@ -70,7 +83,7 @@ d.load(...);
 d.render();
 ```
 
-### `defaultColumnNumber` _(Default: 3)_
+#### `defaultColumnNumber` _(Default: 3)_
 
 Define how much columns should contain row in empty table. 
 
@@ -86,7 +99,7 @@ d.render();
 
 ## Events
 
-### `SimpleDataTable.EVENTS.UPDATE`
+#### `SimpleDataTable.EVENTS.UPDATE`
 
 Events is dispatching when you change any of input in table.
 
@@ -99,7 +112,7 @@ d.on(SimpleDataTable.EVENTS.UPDATE, () => {
 });
 ```
 
-### `SimpleDataTable.EVENTS.ROW_ADDED`
+#### `SimpleDataTable.EVENTS.ROW_ADDED`
 
 Events is dispatching when you add new record.
 
@@ -112,7 +125,7 @@ d.on(SimpleDataTable.EVENTS.ROW_ADDED, () => {
 });
 ```
 
-### `SimpleDataTable.EVENTS.ROW_REMOVED`
+#### `SimpleDataTable.EVENTS.ROW_REMOVED`
 
 Events is dispatching when you remove any record.
 
@@ -140,7 +153,7 @@ npm test
 
 ## Code coverage
 
-Get code coverage ratio with [Istanbul](https://github.com/gotwarlost/istanbul):
+Check code coverage with [Istanbul](https://github.com/gotwarlost/istanbul):
 
 ```bash
 npm run coverage
