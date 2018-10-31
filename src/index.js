@@ -4,6 +4,7 @@ class SimpleDataTable {
         this.addButtonLabel = options.addButtonLabel || '✚';
         this.defaultColumnPrefix = options.defaultColumnPrefix || 'column';
         this.defaultColumnNumber = options.defaultColumnNumber || 3;
+        this.defaultHighlightedCellClass = options.defaultHighlightedCellClass || 'highlighted-cell';
         this.data = [];
         this._events = {};
     }
@@ -42,6 +43,68 @@ class SimpleDataTable {
 
     getRowsCount() {
         return this.$el.querySelectorAll('tr').length;
+    }
+
+    findCellsByContent(...content) {
+        const indexes = [];
+        const $rows = this.$el.querySelectorAll('tr');
+
+        $rows.forEach((row, rowIndex) => {
+            const cells = row.querySelectorAll('td');
+
+            cells.forEach((cell, cellIndex) => {
+                const $cellInput = cell.querySelector('input');
+                const cellContent = $cellInput
+                    ? $cellInput.value
+                    : cell.textContent;
+
+                content.forEach((item) => {
+                    if (cellContent === item) {
+                        indexes.push({
+                            rowIndex,
+                            cellIndex
+                        });
+                    }
+                });
+            });
+        });
+        return indexes;
+    }
+
+    getCell(rowIndex, cellIndex) {
+        const $rows = this.$el.querySelectorAll('tr');
+        const $row = $rows[rowIndex];
+
+        if (!$row) {
+            return null;
+        }
+
+        const $cells = $row.querySelectorAll('td');
+        const $cell = $cells[cellIndex];
+
+        if (!$cell) {
+            return null;
+        }
+
+        return $cell;
+    }
+
+    highlightCell(rowIndex, cellIndex) {
+        const $cell = this.getCell(rowIndex, cellIndex);
+        $cell.classList.add(this.defaultHighlightedCellClass);
+    }
+
+    clearHighlightedCells() {
+        const $cells = this.$el.querySelectorAll('td');
+        $cells.forEach(($cell) => {
+            $cell.classList.remove(this.defaultHighlightedCellClass);
+        });
+    }
+
+    setInputCellContent(rowIndex, cellIndex, content) {
+        const $cell = this.getCell(rowIndex, cellIndex);
+        const $input = $cell.querySelector('input');
+        $input.value = content;
     }
 
     _createCellWithRemoveRowButton() {
@@ -113,7 +176,6 @@ class SimpleDataTable {
     _fetchColumnNames() {
         const $tbody = this.$el.querySelector('tbody');
         const $firstRecord = $tbody.querySelector('tr');
-
 
         if (!$firstRecord) {
             return Array(this.defaultColumnNumber)

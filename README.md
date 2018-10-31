@@ -16,6 +16,9 @@ Lightweight and simple data table with no dependencies
 * :checkered_flag: No dependencies
 * :checkered_flag: Support custom events (update, add, remove)
 * :checkered_flag: Fluent API
+* :checkered_flag: API: Find cells with content
+* :checkered_flag: API: Highlight cells
+* :checkered_flag: API: Support put value into single cell
 * :construction: Recognize data in input and change input type
 
 ## Installation
@@ -85,7 +88,7 @@ d.render();
 
 #### `defaultColumnNumber` _(Default: 3)_
 
-Define how much columns should contain row in empty table. 
+Define how much columns should contain row in empty table.
 
 Example:
 
@@ -96,6 +99,60 @@ const d = new SimpleDataTable($container, {
 d.load(...);
 d.render();
 ```
+
+#### `defaultHighlightedCellClass` _(Default: 'highlighted-cell')_
+
+Define class of highlighted cell.Example:
+
+```js
+const d = new SimpleDataTable($container, {
+    defaultHighlightedCellClass: 'my-highlight'
+});
+d.load(...);
+d.render();
+```
+
+## API
+
+#### `render(): SimpleDataTable`
+
+Render table into DOM.
+
+#### `getRowsCount(): number`
+
+Get number of rows.
+
+#### `findCellsByContent(...content): Array<{ rowIndex: number, cellIndex: number }>`
+
+Get list of cell positions which contains passed strings.
+
+#### `getCell( rowIndex: number , cellIndex: number ): HTMLElement || null`
+
+Get DOM reference of concrete cell.
+
+#### `highlightCell( rowIndex: number, cellIndex: number )`
+
+Add class to concrete cell.
+
+#### `clearHighlightedCells()`
+
+Remove CSS class of all highlighted cells.
+
+#### `setInputCellContent( rowIndex: number, cellIndex: number, content: string )`
+
+Put content into input in concrete cell.
+
+#### `load( data: Array )`
+
+Loading data into table component.
+
+#### `emit( name: string, payload: any )`
+
+Trigger event on SimpleDataTable instance.
+
+#### `on( name: string, handler: Function )`
+
+Listen on events.
 
 ## Events
 

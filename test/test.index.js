@@ -27,6 +27,15 @@ test('clear passed container', (assert) => {
     a.render();
 });
 
+test('not passed $target', (assert) => {
+    try {
+        const d = new SimpleDataTable();
+        d.render();
+    } catch (err) {
+        assert.is(err.name, 'Error');
+    }
+});
+
 test('lazy load data', (assert) => {
     const a = new SimpleDataTable($target);
     assert.is(a.data.length, 0);
@@ -183,4 +192,79 @@ test('default number of columns should be configurable', (assert) => {
         .filter($element => $element);
 
     assert.is($cellsWithInput.length, 5);
+});
+
+test('API: find cells', (assert) => {
+    const d = new SimpleDataTable($target, {
+        defaultColumnNumber: 5
+    });
+    d.load([{ foo: 'bar' }, { foo: 'bar2' }]);
+    d.render();
+
+    const indexes1 = d.findCellsByContent('bar2');
+    assert.is(indexes1.length, 1);
+
+    const indexes2 = d.findCellsByContent('bar');
+    assert.is(indexes2.length, 1);
+
+    const indexes3 = d.findCellsByContent('not exist');
+    assert.is(indexes3.length, 0);
+});
+
+test('API: get DOM reference of cell', (assert) => {
+    const d = new SimpleDataTable($target, {
+        defaultColumnNumber: 5
+    });
+    d.load([{ foo: 'bar' }, { foo: 'bar2' }]);
+    d.render();
+
+    const $cell = d.getCell(1, 0);
+    assert.is($cell.firstElementChild.value, 'bar2');
+
+    const $notExistedCellInRow = d.getCell(0, 99);
+    assert.is($notExistedCellInRow, null);
+
+    const $notExistedCellAtAll = d.getCell(99, 99);
+    assert.is($notExistedCellAtAll, null);
+});
+
+test('API: highlight cell by add special CSS class', (assert) => {
+    const d = new SimpleDataTable($target, {
+        defaultColumnNumber: 5,
+        defaultHighlightedCellClass: 'cookie'
+    });
+    d.load([{ foo: 'bar' }]);
+    d.render();
+
+    d.highlightCell(0, 0);
+    const $cell = d.getCell(0, 0);
+    assert.true($cell.classList.contains('cookie'));
+});
+
+test('API: remove highlighted cells', (assert) => {
+    const d = new SimpleDataTable($target, {
+        defaultColumnNumber: 5,
+        defaultHighlightedCellClass: 'cookie'
+    });
+    d.load([{ foo: 'bar' }]);
+    d.render();
+
+    d.highlightCell(0, 0);
+    const $cell = d.getCell(0, 0);
+    assert.true($cell.classList.contains('cookie'));
+
+    d.clearHighlightedCell();
+    assert.false($cell.classList.contains('cookie'));
+});
+
+test('API: set content into cell', (assert) => {
+    const d = new SimpleDataTable($target);
+    d.load([{ foo: 'bar' }]);
+    d.render();
+
+    const $cell = d.getCell(0, 0);
+    assert.is($cell.firstElementChild.value, 'bar');
+
+    d.setInputCellContent(0, 0, 'baz');
+    assert.is($cell.firstElementChild.value, 'baz');
 });
