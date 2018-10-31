@@ -253,7 +253,7 @@ test('API: remove highlighted cells', (assert) => {
     const $cell = d.getCell(0, 0);
     assert.true($cell.classList.contains('cookie'));
 
-    d.clearHighlightedCell();
+    d.clearHighlightedCells();
     assert.false($cell.classList.contains('cookie'));
 });
 
