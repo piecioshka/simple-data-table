@@ -9,17 +9,16 @@ Lightweight and simple data table with no dependencies
 
 ## Features
 
-* :checkered_flag: Display data (array with objects) in simple table
-* :checkered_flag: Lazy loading of data (you can load data whenever you can)
-* :checkered_flag: Support custom skins
-* :checkered_flag: Small size of package
-* :checkered_flag: No dependencies
-* :checkered_flag: Support custom events (update, add, remove)
-* :checkered_flag: Fluent API
-* :checkered_flag: API: Find cells with content
-* :checkered_flag: API: Highlight cells
-* :checkered_flag: API: Support put value into single cell
-* :construction: Recognize data in input and change input type
+* :white_check_mark: Display data (array with objects) in simple table
+* :white_check_mark: Lazy loading of data (you can load data whenever you can)
+* :white_check_mark: Support custom skins
+* :white_check_mark: Small size of package
+* :white_check_mark: No dependencies
+* :white_check_mark: Support custom events (update, add, remove)
+* :white_check_mark: Fluent API
+* :white_check_mark: API: Find cells with content
+* :white_check_mark: API: Highlight cells
+* :white_check_mark: API: Support put value into single cell
 
 ## Installation
 
