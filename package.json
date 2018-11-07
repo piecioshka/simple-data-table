@@ -13,16 +13,18 @@
         "clear:all": "rm -rf node_modules/ && npm run clear",
         "test": "npm run test:unit",
         "test:unit": "ava",
-        "coverage": "nyc npm run test",
+        "coverage": "nyc npm run test && nyc report --reporter=html",
+        "coveralls": "nyc report --reporter=text-lcov | coveralls -v",
         "count": "find . -name '*.js' -not -path './node_modules/*' | xargs wc -l | sort -r",
         "lint": "eslint ./"
     },
     "dependencies": {},
     "devDependencies": {
         "ava": "^0.25.0",
-        "jsdom": "^11.11.0",
+        "coveralls": "^3.0.2",
         "eslint": "^5.1.0",
         "eslint-config-piecioshka": "^2.0.0",
+        "jsdom": "^11.11.0",
         "nyc": "^12.0.2"
     },
     "repository": {

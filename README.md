@@ -4,8 +4,9 @@
 [![downloads count](https://img.shields.io/npm/dt/simple-data-table.svg)](https://www.npmjs.com/~piecioshka)
 [![travis](https://img.shields.io/travis/piecioshka/simple-data-table.svg?maxAge=2592000)](https://travis-ci.org/piecioshka/simple-data-table)
 [![dependencies](https://david-dm.org/piecioshka/simple-data-table.svg)](https://github.com/piecioshka/simple-data-table)
+[![coveralls](https://coveralls.io/repos/github/piecioshka/simple-data-table/badge.svg?branch=master)](https://coveralls.io/github/piecioshka/simple-data-table?branch=master)
 
-Lightweight and simple data table with no dependencies
+:hammer: Lightweight and simple data table with no dependencies
 
 ## Features
 
