@@ -16,7 +16,7 @@
         "coverage": "nyc npm run test && nyc report --reporter=html",
         "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
         "count": "find . -name '*.js' -not -path './node_modules/*' | xargs wc -l | sort -r",
-        "lint": "eslint ./"
+        "lint": "eslint ."
     },
     "dependencies": {},
     "devDependencies": {
