@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/simple-data-table.svg)](https://badge.fury.io/js/simple-data-table)
 [![downloads count](https://img.shields.io/npm/dt/simple-data-table.svg)](https://www.npmjs.com/~piecioshka)
-[![travis](https://img.shields.io/travis/piecioshka/simple-data-table.svg?maxAge=2592000)](https://travis-ci.org/piecioshka/simple-data-table)
+[![travis](https://img.shields.io/travis/piecioshka/simple-data-table.svg)](https://travis-ci.org/piecioshka/simple-data-table)
 [![dependencies](https://david-dm.org/piecioshka/simple-data-table.svg)](https://github.com/piecioshka/simple-data-table)
 [![codecov](https://codecov.io/gh/piecioshka/simple-data-table/branch/master/graph/badge.svg)](https://codecov.io/gh/piecioshka/simple-data-table)
 
