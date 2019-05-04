@@ -13,15 +13,15 @@
         "clear:all": "rm -rf node_modules/ && npm run clear",
         "test": "npm run test:unit",
         "test:unit": "ava",
-        "coverage": "nyc npm run test && nyc report --reporter=html",
-        "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
+        "coverage": "nyc npm run test && nyc report --reporter=text-lcov | coveralls -v",
         "count": "find . -name '*.js' -not -path './node_modules/*' | xargs wc -l | sort -r",
         "lint": "eslint ."
     },
-    "dependencies": {},
+    "dependencies": {
+    },
     "devDependencies": {
         "ava": "^1.4.1",
-        "codecov": "^3.3.0",
+        "coveralls": "^3.0.3",
         "eslint": "^5.16.0",
         "eslint-config-piecioshka": "^2.0.1",
         "jsdom": "^14.1.0",
