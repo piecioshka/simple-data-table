@@ -297,7 +297,7 @@ test('API: function to sort by column (default values)', (assert) => {
 });
 
 test('API: function to sort by column', (assert) => {
-    assert.plan(3);
+    assert.plan(1);
 
     const d = new SimpleDataTable($target);
     d.load([{
@@ -312,12 +312,8 @@ test('API: function to sort by column', (assert) => {
     }]);
     d.render();
 
-    assert.is(typeof d.sortByColumn, 'function');
-
     d.on(SimpleDataTable.EVENTS.DATA_SORTED, () => {
         assert.deepEqual(d.data.map(cell => cell.val), [1000, 100, 10]);
-        d.render();
-        assert.is(d.getCell(0, 0).firstElementChild.value, 'xyz');
     });
     d.sortByColumn(1, (a, b) => b - a);
 });
