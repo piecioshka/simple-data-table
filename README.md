@@ -19,6 +19,7 @@
 * :white_check_mark: API: Find cells with content
 * :white_check_mark: API: Highlight cells
 * :white_check_mark: API: Support put value into single cell
+* :white_check_mark: API: Sorting by a concrete cell with a given function
 
 ## Installation
 
@@ -48,6 +49,7 @@ d.load([
 ]);
 d.render();
 ```
+![](./screenshots/example-0.png)
 
 ## Examples
 
@@ -153,24 +155,28 @@ Trigger event on SimpleDataTable instance.
 
 Listen on events.
 
+#### `sortByColumn( cellIndex : number, comparingFunction : Function )`
+
+Sorts data and triggers `DATA_SORTED` event. By default takes `cellIndex=0` and sorts as [`String.prototype.localeCompare`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare).
+
 ## Events
 
 #### `SimpleDataTable.EVENTS.UPDATE`
 
-Events is dispatching when you change any of input in table.
+Event is dispatching when you change any of input in table.
 
 Example:
 
 ```js
 const d = new SimpleDataTable($container);
-d.on(SimpleDataTable.EVENTS.UPDATE, () => {
-    // do some stuff...
+d.on(SimpleDataTable.EVENTS.UPDATE, (data) => {
+    // do some stuff with the updated data...
 });
 ```
 
 #### `SimpleDataTable.EVENTS.ROW_ADDED`
 
-Events is dispatching when you add new record.
+Event is dispatching when you add new record.
 
 Example:
 
@@ -183,13 +189,26 @@ d.on(SimpleDataTable.EVENTS.ROW_ADDED, () => {
 
 #### `SimpleDataTable.EVENTS.ROW_REMOVED`
 
-Events is dispatching when you remove any record.
+Event is dispatching when you remove any record.
 
 Example:
 
 ```js
 const d = new SimpleDataTable($container);
 d.on(SimpleDataTable.EVENTS.ROW_REMOVED, () => {
+    // do some stuff...
+});
+```
+
+#### `SimpleDataTable.EVENTS.DATA_SORTED`
+
+Event is dispatching after data is sorted with `sortByColumn` function.
+
+Example:
+
+```js
+const d = new SimpleDataTable($container);
+d.on(SimpleDataTable.EVENTS.DATA_SORTED, () => {
     // do some stuff...
 });
 ```
