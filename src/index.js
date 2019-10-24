@@ -217,11 +217,23 @@ class SimpleDataTable {
         return this;
     }
 
+    sortByColumn(
+        cellIndex = 0,
+        comparingFunction = (a, b) => a.toString().localeCompare(b.toString())
+    ) {
+        this.data.sort((firstRow, secondRow) => comparingFunction(
+            Object.values(firstRow)[cellIndex],
+            Object.values(secondRow)[cellIndex])
+        );
+        this.emit(SimpleDataTable.EVENTS.DATA_SORTED);
+    }
+
     static get EVENTS() {
         return {
             UPDATE: 'SimpleDataTable.EVENTS.UPDATE',
             ROW_ADDED: 'SimpleDataTable.EVENTS.ROW_ADDED',
-            ROW_REMOVED: 'SimpleDataTable.EVENTS.ROW_REMOVED'
+            ROW_REMOVED: 'SimpleDataTable.EVENTS.ROW_REMOVED',
+            DATA_SORTED: 'SimpleDataTable.EVENTS.DATA_SORTED'
         };
     }
 }

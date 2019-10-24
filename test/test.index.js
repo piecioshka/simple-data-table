@@ -271,3 +271,53 @@ test('API: set content into cell', (assert) => {
     d.setInputCellContent(0, 0, 'baz');
     assert.is($cell.firstElementChild.value, 'baz');
 });
+
+test('API: function to sort by column (default values)', (assert) => {
+    assert.plan(4);
+
+    const d = new SimpleDataTable($target);
+    d.load([{
+        id: 'ghi'
+    }, {
+        id: 'abc'
+    }, {
+        id: 'def'
+    }]);
+    d.render();
+
+    assert.is(typeof d.sortByColumn, 'function');
+
+    d.on(SimpleDataTable.EVENTS.DATA_SORTED, () => {
+        assert.deepEqual(d.data.map(cell => cell.id), ['abc', 'def', 'ghi']);
+        assert.is(d.getCell(0, 0).firstElementChild.value, 'ghi');
+        d.render();
+        assert.is(d.getCell(0, 0).firstElementChild.value, 'abc');
+    });
+    d.sortByColumn();
+});
+
+test('API: function to sort by column', (assert) => {
+    assert.plan(3);
+
+    const d = new SimpleDataTable($target);
+    d.load([{
+        id: 'ghi',
+        val: 100,
+    }, {
+        id: 'xyz',
+        val: 1000
+    }, {
+        id: 'abc',
+        val: 10
+    }]);
+    d.render();
+
+    assert.is(typeof d.sortByColumn, 'function');
+
+    d.on(SimpleDataTable.EVENTS.DATA_SORTED, () => {
+        assert.deepEqual(d.data.map(cell => cell.val), [1000, 100, 10]);
+        d.render();
+        assert.is(d.getCell(0, 0).firstElementChild.value, 'xyz');
+    });
+    d.sortByColumn(1, (a, b) => b - a);
+});
