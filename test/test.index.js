@@ -22,18 +22,20 @@ test('should be a class', (assert) => {
 test('clear passed container', (assert) => {
     $target.innerHTML = '<p>aaa</p>';
     assert.is($target.children.length, 1);
+    assert.not($target.querySelector('p'), null);
 
     const a = new SimpleDataTable($target);
     a.render();
+    assert.is($target.children.length, 2);
+    assert.is($target.querySelector('p'), null);
 });
 
 test('not passed $target', (assert) => {
-    try {
+    const err = assert.throws(() => {
         const d = new SimpleDataTable();
         d.render();
-    } catch (err) {
-        assert.is(err.name, 'Error');
-    }
+    });
+    assert.is(err.name, 'Error');
 });
 
 test('lazy load data', (assert) => {
@@ -83,7 +85,8 @@ test('trigger custom event after changed data', (assert) => {
     });
 
     $target.querySelector('input').value = 'xxx';
-    $target.querySelector('input').dispatchEvent(new window.Event('change'));
+    $target.querySelector('input')
+        .dispatchEvent(new window.Event('change'));
     assert.deepEqual(a.data[0].foo, 'xxx');
 });
 
@@ -267,4 +270,50 @@ test('API: set content into cell', (assert) => {
 
     d.setInputCellContent(0, 0, 'baz');
     assert.is($cell.firstElementChild.value, 'baz');
+});
+
+test('API: function to sort by column (default values)', (assert) => {
+    assert.plan(4);
+
+    const d = new SimpleDataTable($target);
+    d.load([{
+        id: 'ghi'
+    }, {
+        id: 'abc'
+    }, {
+        id: 'def'
+    }]);
+    d.render();
+
+    assert.is(typeof d.sortByColumn, 'function');
+
+    d.on(SimpleDataTable.EVENTS.DATA_SORTED, () => {
+        assert.deepEqual(d.data.map(cell => cell.id), ['abc', 'def', 'ghi']);
+        assert.is(d.getCell(0, 0).firstElementChild.value, 'ghi');
+        d.render();
+        assert.is(d.getCell(0, 0).firstElementChild.value, 'abc');
+    });
+    d.sortByColumn();
+});
+
+test('API: function to sort by column', (assert) => {
+    assert.plan(1);
+
+    const d = new SimpleDataTable($target);
+    d.load([{
+        id: 'ghi',
+        val: 100,
+    }, {
+        id: 'xyz',
+        val: 1000
+    }, {
+        id: 'abc',
+        val: 10
+    }]);
+    d.render();
+
+    d.on(SimpleDataTable.EVENTS.DATA_SORTED, () => {
+        assert.deepEqual(d.data.map(cell => cell.val), [1000, 100, 10]);
+    });
+    d.sortByColumn(1, (a, b) => b - a);
 });

@@ -132,7 +132,7 @@ class SimpleDataTable {
         const $addButton = document.createElement('button');
         $addButton.classList.add('add-row');
         $addButton.textContent = this.addButtonLabel;
-        $addButton.addEventListener('click', this._createRow.bind(this));
+        $addButton.addEventListener('click', this._createEmptyRow.bind(this));
         return $addButton;
     }
 
@@ -151,7 +151,7 @@ class SimpleDataTable {
         return $cell;
     }
 
-    _createRow() {
+    _createEmptyRow() {
         const $tbody = this.$el.querySelector('tbody');
         const rowsCount = $tbody.querySelectorAll('tr').length;
         const $row = document.createElement('tr');
@@ -217,11 +217,23 @@ class SimpleDataTable {
         return this;
     }
 
+    sortByColumn(
+        cellIndex = 0,
+        comparingFunction = (a, b) => a.toString().localeCompare(b.toString())
+    ) {
+        this.data.sort((firstRow, secondRow) => comparingFunction(
+            Object.values(firstRow)[cellIndex],
+            Object.values(secondRow)[cellIndex])
+        );
+        this.emit(SimpleDataTable.EVENTS.DATA_SORTED);
+    }
+
     static get EVENTS() {
         return {
             UPDATE: 'SimpleDataTable.EVENTS.UPDATE',
             ROW_ADDED: 'SimpleDataTable.EVENTS.ROW_ADDED',
-            ROW_REMOVED: 'SimpleDataTable.EVENTS.ROW_REMOVED'
+            ROW_REMOVED: 'SimpleDataTable.EVENTS.ROW_REMOVED',
+            DATA_SORTED: 'SimpleDataTable.EVENTS.DATA_SORTED'
         };
     }
 }
