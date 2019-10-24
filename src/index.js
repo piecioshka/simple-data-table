@@ -132,7 +132,7 @@ class SimpleDataTable {
         const $addButton = document.createElement('button');
         $addButton.classList.add('add-row');
         $addButton.textContent = this.addButtonLabel;
-        $addButton.addEventListener('click', this._createRow.bind(this));
+        $addButton.addEventListener('click', this._createEmptyRow.bind(this));
         return $addButton;
     }
 
@@ -151,7 +151,7 @@ class SimpleDataTable {
         return $cell;
     }
 
-    _createRow() {
+    _createEmptyRow() {
         const $tbody = this.$el.querySelector('tbody');
         const rowsCount = $tbody.querySelectorAll('tr').length;
         const $row = document.createElement('tr');

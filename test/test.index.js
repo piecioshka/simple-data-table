@@ -22,18 +22,20 @@ test('should be a class', (assert) => {
 test('clear passed container', (assert) => {
     $target.innerHTML = '<p>aaa</p>';
     assert.is($target.children.length, 1);
+    assert.not($target.querySelector('p'), null);
 
     const a = new SimpleDataTable($target);
     a.render();
+    assert.is($target.children.length, 2);
+    assert.is($target.querySelector('p'), null);
 });
 
 test('not passed $target', (assert) => {
-    try {
+    const err = assert.throws(() => {
         const d = new SimpleDataTable();
         d.render();
-    } catch (err) {
-        assert.is(err.name, 'Error');
-    }
+    });
+    assert.is(err.name, 'Error');
 });
 
 test('lazy load data', (assert) => {
@@ -83,7 +85,8 @@ test('trigger custom event after changed data', (assert) => {
     });
 
     $target.querySelector('input').value = 'xxx';
-    $target.querySelector('input').dispatchEvent(new window.Event('change'));
+    $target.querySelector('input')
+        .dispatchEvent(new window.Event('change'));
     assert.deepEqual(a.data[0].foo, 'xxx');
 });
 
