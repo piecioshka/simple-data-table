@@ -19,12 +19,12 @@
     },
     "dependencies": {},
     "devDependencies": {
-        "ava": "^2.4.0",
-        "coveralls": "^3.0.7",
-        "eslint": "^6.5.1",
+        "ava": "^3.5.0",
+        "coveralls": "^3.0.11",
+        "eslint": "^6.8.0",
         "eslint-config-piecioshka": "^2.0.2",
-        "jsdom": "^15.2.0",
-        "nyc": "^14.1.1"
+        "jsdom": "^16.2.1",
+        "nyc": "^15.0.0"
     },
     "repository": {
         "type": "git",
@@ -48,10 +48,5 @@
         "lightweight",
         "no dependencies"
     ],
-    "main": "./src/index.js",
-    "ava": {
-        "helpers": [
-            "**/fixtures/**/*"
-        ]
-    }
+    "main": "./src/index.js"
 }
