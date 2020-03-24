@@ -2,7 +2,7 @@ language: node_js
 
 os:
   - linux
-  - osx
+  # - osx # not support
   - windows
 
 node_js:
