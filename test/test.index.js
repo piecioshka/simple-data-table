@@ -244,7 +244,7 @@ test('API: highlight cell by add special CSS class', (assert) => {
     assert.true($cell.classList.contains('cookie'));
 });
 
-test('API: remove highlighted cells', (assert) => {
+test('API: clear highlighted cells', (assert) => {
     const d = new SimpleDataTable($target, {
         defaultColumnNumber: 5,
         defaultHighlightedCellClass: 'cookie'
