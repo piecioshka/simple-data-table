@@ -98,9 +98,11 @@ t.load(...);
 t.render();
 ```
 
-#### `defaultColumnNumber` _(Default: 3)_
+#### `defaultColumnNumber` _(Default: null)_
 
 Define how much columns should contain row in empty table.
+
+By default, use the size of headers or the number of cells in the first row.
 
 Example:
 

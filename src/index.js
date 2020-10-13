@@ -4,7 +4,7 @@ class SimpleDataTable {
         this.addButtonLabel = options.addButtonLabel || '✚';
         this.readonly = options.readonly || false;
         this.defaultColumnPrefix = options.defaultColumnPrefix || 'column';
-        this.defaultColumnNumber = options.defaultColumnNumber || 3;
+        this.defaultColumnNumber = options.defaultColumnNumber || null;
         this.defaultHighlightedCellClass = options.defaultHighlightedCellClass || 'highlighted-cell';
         this.header = [];
         this.data = [];
@@ -222,9 +222,17 @@ class SimpleDataTable {
         const $firstRecord = $tbody.querySelector('tr');
 
         if (!$firstRecord) {
-            return Array(this.defaultColumnNumber)
+            const size = this.defaultColumnNumber
+                ? this.defaultColumnNumber
+                : this.header
+                    ? this.header.length
+                    : this.data[0] && this.data[0].length;
+            if (!size) {
+                return [];
+            }
+            return Array(size)
                 .fill(this.defaultColumnPrefix)
-                .map((name, index) => `${name}-${index + 1}`);
+                .map((name, index) => `${name}${index + 1}`);
         }
 
         const $elements = Array.from($firstRecord.children);

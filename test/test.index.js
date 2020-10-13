@@ -341,3 +341,24 @@ test('API: function to sort by column', (assert) => {
     });
     d.sortByColumn(1, (a, b) => b - a);
 });
+
+test('API: function to set headers', (assert) => {
+    const d = new SimpleDataTable($target);
+    d.setHeader(['Id', 'Value']);
+    d.load([{
+        id: 'ghi',
+        val: 100,
+    }, {
+        id: 'xyz',
+        val: 1000
+    }, {
+        id: 'abc',
+        val: 10
+    }]);
+    d.render();
+
+    const $header = d.$el.querySelector('thead');
+    assert.not($header, null);
+    assert.is($header.querySelector('th:nth-child(1)').textContent.trim(), 'Id');
+    assert.is($header.querySelector('th:nth-child(2)').textContent.trim(), 'Value');
+});

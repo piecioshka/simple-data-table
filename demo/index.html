@@ -65,7 +65,8 @@ t.render();
     <script>
         (function () {
             const t = new SimpleDataTable(document.querySelector('#example-3'), {
-                defaultColumnPrefix: 'col'
+                defaultColumnNumber: 2,
+                defaultColumnPrefix: 'col-',
             });
             t.render();
             const $addButton = t.$el.querySelector('button.add-row');
