@@ -24,70 +24,70 @@ test('clear passed container', (assert) => {
     assert.is($target.children.length, 1);
     assert.not($target.querySelector('p'), null);
 
-    const a = new SimpleDataTable($target);
-    a.render();
+    const t = new SimpleDataTable($target);
+    t.render();
     assert.is($target.children.length, 2);
     assert.is($target.querySelector('p'), null);
 });
 
 test('not passed $target', (assert) => {
     const err = assert.throws(() => {
-        const d = new SimpleDataTable();
-        d.render();
+        const t = new SimpleDataTable();
+        t.render();
     });
     assert.is(err.name, 'Error');
 });
 
 test('lazy load data', (assert) => {
-    const a = new SimpleDataTable($target);
-    assert.is(a.data.length, 0);
+    const t = new SimpleDataTable($target);
+    assert.is(t.data.length, 0);
 
-    a.load(FIXTURE_3_ROWS);
-    assert.is(a.data.length, 3);
-    assert.not(a.data, FIXTURE_3_ROWS);
+    t.load(FIXTURE_3_ROWS);
+    assert.is(t.data.length, 3);
+    assert.not(t.data, FIXTURE_3_ROWS);
 });
 
 test('render loaded data into DOM', (assert) => {
-    const a = new SimpleDataTable($target);
-    a.load(FIXTURE_3_ROWS);
-    a.render();
+    const t = new SimpleDataTable($target);
+    t.load(FIXTURE_3_ROWS);
+    t.render();
 
     assert.is($target.querySelectorAll('tr').length, FIXTURE_3_ROWS.length);
 });
 
 test('add new record after clicking a button', (assert) => {
-    const a = new SimpleDataTable($target);
-    a.render();
+    const t = new SimpleDataTable($target);
+    t.render();
 
     assert.is($target.querySelectorAll('tr').length, 0);
 
     const $addButton = $target.querySelector('button.add-row');
     assert.true($addButton instanceof window.HTMLElement);
 
-    a.on(SimpleDataTable.EVENTS.ROW_ADDED, () => {
+    t.on(SimpleDataTable.EVENTS.ROW_ADDED, () => {
         assert.is($target.querySelectorAll('tr').length, 1);
     });
     $addButton.dispatchEvent(new window.Event('click'));
 });
 
 test('trigger custom event after changed data', (assert) => {
-    const a = new SimpleDataTable($target);
-    a.load([
+    const t = new SimpleDataTable($target);
+    t.load([
         {
             foo: 'bar'
         }
     ]);
-    a.render();
-    assert.deepEqual(a.data[0].foo, 'bar');
+    t.render();
+    assert.deepEqual(t.data[0].foo, 'bar');
 
-    a.on(SimpleDataTable.EVENTS.UPDATE, (data) => {
-        assert.deepEqual(a.data, data);
+    t.on(SimpleDataTable.EVENTS.UPDATE, (data) => {
+        assert.deepEqual(t.data, data);
     });
 
     $target.querySelector('input').value = 'xxx';
     $target.querySelector('input')
         .dispatchEvent(new window.Event('change'));
-    assert.deepEqual(a.data[0].foo, 'xxx');
+    assert.deepEqual(t.data[0].foo, 'xxx');
 });
 
 test('support fluent API', (assert) => {
@@ -103,56 +103,56 @@ test('support fluent API', (assert) => {
 
 test('add button text should be configurable', (assert) => {
     const label = 'Załaduj';
-    const d = new SimpleDataTable($target, {
+    const t = new SimpleDataTable($target, {
         addButtonLabel: label
     });
-    d.render();
+    t.render();
     const $addButton = $target.querySelector('button.add-row');
     assert.is($addButton.textContent, label);
 });
 
 test('removing row should be possible', (assert) => {
-    const d = new SimpleDataTable($target);
-    d.load([{ foo: 'bar' }]);
-    d.render();
+    const t = new SimpleDataTable($target);
+    t.load([{ foo: 'bar' }]);
+    t.render();
 
-    const $removeButton = d.$el.querySelector('button.remove-row');
+    const $removeButton = t.$el.querySelector('button.remove-row');
     assert.true($removeButton instanceof window.HTMLElement);
     assert.not($removeButton.textContent, '');
 });
 
 test('API: function to get rows count', (assert) => {
-    const d = new SimpleDataTable($target);
-    d.load([{ foo: 'bar' }]);
-    d.render();
+    const t = new SimpleDataTable($target);
+    t.load([{ foo: 'bar' }]);
+    t.render();
 
-    assert.is(typeof d.getRowsCount, 'function');
-    assert.is(d.getRowsCount(), 1);
-    d.load([{ foo: 'bar' }, { baz: 'boo' }]);
-    assert.is(d.getRowsCount(), 1);
-    d.render();
-    assert.is(d.getRowsCount(), 2);
+    assert.is(typeof t.getRowsCount, 'function');
+    assert.is(t.getRowsCount(), 1);
+    t.load([{ foo: 'bar' }, { baz: 'boo' }]);
+    assert.is(t.getRowsCount(), 1);
+    t.render();
+    assert.is(t.getRowsCount(), 2);
 });
 
 test('remove row after click button', (assert) => {
-    const d = new SimpleDataTable($target);
-    d.load([{ foo: 'bar' }]);
-    d.render();
+    const t = new SimpleDataTable($target);
+    t.load([{ foo: 'bar' }]);
+    t.render();
 
-    assert.is(d.getRowsCount(), 1);
-    assert.is(d.data.length, 1);
+    assert.is(t.getRowsCount(), 1);
+    assert.is(t.data.length, 1);
 
-    const $removeButton = d.$el.querySelector('button.remove-row');
+    const $removeButton = t.$el.querySelector('button.remove-row');
     $removeButton.dispatchEvent(new window.Event('click'));
 
-    assert.is(d.getRowsCount(), 0);
-    assert.is(d.data.length, 0);
+    assert.is(t.getRowsCount(), 0);
+    assert.is(t.data.length, 0);
 });
 
 test('just added row should have remove button', (assert) => {
-    const d = new SimpleDataTable($target);
-    d.load([{ foo: 'bar' }]);
-    d.render();
+    const t = new SimpleDataTable($target);
+    t.load([{ foo: 'bar' }]);
+    t.render();
 
     const $addButton = $target.querySelector('button.add-row');
     $addButton.dispatchEvent(new window.Event('click'));
@@ -166,29 +166,29 @@ test('just added row should have remove button', (assert) => {
 test('remove row action should trigger custom event', (assert) => {
     assert.plan(1);
 
-    const d = new SimpleDataTable($target);
-    d.load([{ foo: 'bar' }]);
-    d.render();
+    const t = new SimpleDataTable($target);
+    t.load([{ foo: 'bar' }]);
+    t.render();
 
     const $removeButton = $target.querySelector('button.remove-row');
 
-    d.on(SimpleDataTable.EVENTS.ROW_REMOVED, (data) => {
-        assert.deepEqual(d.data, data);
+    t.on(SimpleDataTable.EVENTS.ROW_REMOVED, (data) => {
+        assert.deepEqual(t.data, data);
     });
 
     $removeButton.dispatchEvent(new window.Event('click'));
 });
 
 test('default number of columns should be configurable', (assert) => {
-    const d = new SimpleDataTable($target, {
+    const t = new SimpleDataTable($target, {
         defaultColumnNumber: 5
     });
-    d.render();
+    t.render();
 
     const $addButton = $target.querySelector('button.add-row');
     $addButton.dispatchEvent(new window.Event('click'));
 
-    const $firstRow = d.$el.querySelector('tr');
+    const $firstRow = t.$el.querySelector('tr');
     const $cells = $firstRow.querySelectorAll('td');
     const $cellsWithInput = [...$cells]
         .map($cell => $cell.querySelector('input'))
@@ -222,109 +222,109 @@ test("in readonly mode inputs are disabled", (assert) => {
 });
 
 test('API: find cells', (assert) => {
-    const d = new SimpleDataTable($target, {
+    const t = new SimpleDataTable($target, {
         defaultColumnNumber: 5
     });
-    d.load([{ foo: 'bar' }, { foo: 'bar2' }]);
-    d.render();
+    t.load([{ foo: 'bar' }, { foo: 'bar2' }]);
+    t.render();
 
-    const indexes1 = d.findCellsByContent('bar2');
+    const indexes1 = t.findCellsByContent('bar2');
     assert.is(indexes1.length, 1);
 
-    const indexes2 = d.findCellsByContent('bar');
+    const indexes2 = t.findCellsByContent('bar');
     assert.is(indexes2.length, 1);
 
-    const indexes3 = d.findCellsByContent('not exist');
+    const indexes3 = t.findCellsByContent('not exist');
     assert.is(indexes3.length, 0);
 });
 
 test('API: get DOM reference of cell', (assert) => {
-    const d = new SimpleDataTable($target, {
+    const t = new SimpleDataTable($target, {
         defaultColumnNumber: 5
     });
-    d.load([{ foo: 'bar' }, { foo: 'bar2' }]);
-    d.render();
+    t.load([{ foo: 'bar' }, { foo: 'bar2' }]);
+    t.render();
 
-    const $cell = d.getCell(1, 0);
+    const $cell = t.getCell(1, 0);
     assert.is($cell.firstElementChild.value, 'bar2');
 
-    const $notExistedCellInRow = d.getCell(0, 99);
+    const $notExistedCellInRow = t.getCell(0, 99);
     assert.is($notExistedCellInRow, null);
 
-    const $notExistedCellAtAll = d.getCell(99, 99);
+    const $notExistedCellAtAll = t.getCell(99, 99);
     assert.is($notExistedCellAtAll, null);
 });
 
 test('API: highlight cell by add special CSS class', (assert) => {
-    const d = new SimpleDataTable($target, {
+    const t = new SimpleDataTable($target, {
         defaultColumnNumber: 5,
         defaultHighlightedCellClass: 'cookie'
     });
-    d.load([{ foo: 'bar' }]);
-    d.render();
+    t.load([{ foo: 'bar' }]);
+    t.render();
 
-    d.highlightCell(0, 0);
-    const $cell = d.getCell(0, 0);
+    t.highlightCell(0, 0);
+    const $cell = t.getCell(0, 0);
     assert.true($cell.classList.contains('cookie'));
 });
 
 test('API: clear highlighted cells', (assert) => {
-    const d = new SimpleDataTable($target, {
+    const t = new SimpleDataTable($target, {
         defaultColumnNumber: 5,
         defaultHighlightedCellClass: 'cookie'
     });
-    d.load([{ foo: 'bar' }]);
-    d.render();
+    t.load([{ foo: 'bar' }]);
+    t.render();
 
-    d.highlightCell(0, 0);
-    const $cell = d.getCell(0, 0);
+    t.highlightCell(0, 0);
+    const $cell = t.getCell(0, 0);
     assert.true($cell.classList.contains('cookie'));
 
-    d.clearHighlightedCells();
+    t.clearHighlightedCells();
     assert.false($cell.classList.contains('cookie'));
 });
 
 test('API: set content into cell', (assert) => {
-    const d = new SimpleDataTable($target);
-    d.load([{ foo: 'bar' }]);
-    d.render();
+    const t = new SimpleDataTable($target);
+    t.load([{ foo: 'bar' }]);
+    t.render();
 
-    const $cell = d.getCell(0, 0);
+    const $cell = t.getCell(0, 0);
     assert.is($cell.firstElementChild.value, 'bar');
 
-    d.setInputCellContent(0, 0, 'baz');
+    t.setInputCellContent(0, 0, 'baz');
     assert.is($cell.firstElementChild.value, 'baz');
 });
 
 test('API: function to sort by column (default values)', (assert) => {
     assert.plan(4);
 
-    const d = new SimpleDataTable($target);
-    d.load([{
+    const t = new SimpleDataTable($target);
+    t.load([{
         id: 'ghi'
     }, {
         id: 'abc'
     }, {
         id: 'def'
     }]);
-    d.render();
+    t.render();
 
-    assert.is(typeof d.sortByColumn, 'function');
+    assert.is(typeof t.sortByColumn, 'function');
 
-    d.on(SimpleDataTable.EVENTS.DATA_SORTED, () => {
-        assert.deepEqual(d.data.map(cell => cell.id), ['abc', 'def', 'ghi']);
-        assert.is(d.getCell(0, 0).firstElementChild.value, 'ghi');
-        d.render();
-        assert.is(d.getCell(0, 0).firstElementChild.value, 'abc');
+    t.on(SimpleDataTable.EVENTS.DATA_SORTED, () => {
+        assert.deepEqual(t.data.map(cell => cell.id), ['abc', 'def', 'ghi']);
+        assert.is(t.getCell(0, 0).firstElementChild.value, 'ghi');
+        t.render();
+        assert.is(t.getCell(0, 0).firstElementChild.value, 'abc');
     });
-    d.sortByColumn();
+    t.sortByColumn();
 });
 
 test('API: function to sort by column', (assert) => {
     assert.plan(1);
 
-    const d = new SimpleDataTable($target);
-    d.load([{
+    const t = new SimpleDataTable($target);
+    t.load([{
         id: 'ghi',
         val: 100,
     }, {
@@ -334,18 +334,18 @@ test('API: function to sort by column', (assert) => {
         id: 'abc',
         val: 10
     }]);
-    d.render();
+    t.render();
 
-    d.on(SimpleDataTable.EVENTS.DATA_SORTED, () => {
-        assert.deepEqual(d.data.map(cell => cell.val), [1000, 100, 10]);
+    t.on(SimpleDataTable.EVENTS.DATA_SORTED, () => {
+        assert.deepEqual(t.data.map(cell => cell.val), [1000, 100, 10]);
     });
-    d.sortByColumn(1, (a, b) => b - a);
+    t.sortByColumn(1, (a, b) => b - a);
 });
 
 test('API: function to set headers', (assert) => {
-    const d = new SimpleDataTable($target);
-    d.setHeaders(['Id', 'Value']);
-    d.load([{
+    const t = new SimpleDataTable($target);
+    t.setHeaders(['Id', 'Value']);
+    t.load([{
         id: 'ghi',
         val: 100,
     }, {
@@ -355,10 +355,40 @@ test('API: function to set headers', (assert) => {
         id: 'abc',
         val: 10
     }]);
-    d.render();
+    t.render();
 
-    const $header = d.$el.querySelector('thead');
+    const $header = t.$el.querySelector('thead');
     assert.not($header, null);
     assert.is($header.querySelector('th:nth-child(1)').textContent.trim(), 'Id');
     assert.is($header.querySelector('th:nth-child(2)').textContent.trim(), 'Value');
+});
+
+test('click on headers will sort the table', (assert) => {
+    const t = new SimpleDataTable($target);
+    t.setHeaders(['Id', 'Value']);
+    t.load([
+        { id: 'b', val: 1, },
+        { id: 'c', val: 3, },
+        { id: 'a', val: 2, },
+    ]);
+    t.render();
+
+    const $header = t.$el.querySelector('thead');
+    const $firstHeaderCell = $header.querySelector('th:nth-child(1)');
+    $firstHeaderCell.dispatchEvent(new window.Event('click'));
+
+    assert.deepEqual(t.data, [
+        { id: 'a', val: 2, },
+        { id: 'b', val: 1, },
+        { id: 'c', val: 3, },
+    ]);
+
+    const $secondHeaderCell = $header.querySelector('th:nth-child(2)');
+    $secondHeaderCell.dispatchEvent(new window.Event('click'));
+
+    assert.deepEqual(t.data, [
+        { id: 'b', val: 1, },
+        { id: 'a', val: 2, },
+        { id: 'c', val: 3, },
+    ]);
 });
