@@ -2,6 +2,7 @@ class SimpleDataTable {
     constructor($el, options = {}) {
         this.$el = $el;
         this.addButtonLabel = options.addButtonLabel || '✚';
+        this.readonly = options.readonly || false;
         this.defaultColumnPrefix = options.defaultColumnPrefix || 'column';
         this.defaultColumnNumber = options.defaultColumnNumber || 3;
         this.defaultHighlightedCellClass = options.defaultHighlightedCellClass || 'highlighted-cell';
@@ -28,16 +29,21 @@ class SimpleDataTable {
                 $row.appendChild($cell);
             });
 
-            this._addCellWithRemoveButton($row);
+            const $cell = (this.readonly)
+                ? this._createEmptyCell()
+                : this._createCellWithRemoveRowButton();
+            $row.appendChild($cell);
 
             $tbody.appendChild($row);
         });
 
         this.$el.appendChild($table);
 
-        const $addButton = this._createAddButton();
+        if (!this.readonly) {
+            const $addButton = this._createAddButton();
+            this.$el.appendChild($addButton);
+        }
 
-        this.$el.appendChild($addButton);
         return this;
     }
 
@@ -107,8 +113,12 @@ class SimpleDataTable {
         $input.value = content;
     }
 
+    _createEmptyCell() {
+        return document.createElement('td');
+    }
+
     _createCellWithRemoveRowButton() {
-        const $cell = document.createElement('td');
+        const $cell = this._createEmptyCell();
         const $removeButton = document.createElement('button');
         $removeButton.classList.add('remove-row');
         $removeButton.textContent = '✖︎';
@@ -142,10 +152,14 @@ class SimpleDataTable {
         $input.value = value;
         $input.name = name;
 
+        if (this.readonly) {
+            $input.disabled = true;
+        }
+
         $input.addEventListener('change', () => {
             this.data[rowIndex][name] = $input.value;
             this.emit(SimpleDataTable.EVENTS.UPDATE, this.data);
-        }, this);
+        });
 
         $cell.appendChild($input);
         return $cell;
@@ -167,7 +181,7 @@ class SimpleDataTable {
 
         this.data.push(record);
 
-        this._addCellWithRemoveButton($row);
+        $row.appendChild(this._createCellWithRemoveRowButton());
         $tbody.appendChild($row);
 
         this.emit(SimpleDataTable.EVENTS.ROW_ADDED);
@@ -187,11 +201,6 @@ class SimpleDataTable {
         return $elements.map(($cell) => $cell.querySelector('input'))
             .filter(($element) => $element)
             .map(($input) => $input.name);
-    }
-
-    _addCellWithRemoveButton($row) {
-        const $cellWithButton = this._createCellWithRemoveRowButton();
-        $row.appendChild($cellWithButton);
     }
 
     load(data) {

@@ -197,6 +197,30 @@ test('default number of columns should be configurable', (assert) => {
     assert.is($cellsWithInput.length, 5);
 });
 
+test("in readonly mode there is no buttons", (assert) => {
+    const t = new SimpleDataTable($target, {
+        readonly: true,
+    });
+    t.render();
+
+    const $addButton = $target.querySelector("button.add-row");
+    const $removeButton = $target.querySelector("button.remove-row");
+
+    assert.is($addButton, null);
+    assert.is($removeButton, null);
+});
+
+test("in readonly mode inputs are disabled", (assert) => {
+    const t = new SimpleDataTable($target, {
+        readonly: true,
+    });
+    t.load([{ foo: 'bar' }]);
+    t.render();
+
+    const $firstInput = $target.querySelector("input");
+    assert.is($firstInput.disabled, true);
+});
+
 test('API: find cells', (assert) => {
     const d = new SimpleDataTable($target, {
         defaultColumnNumber: 5
