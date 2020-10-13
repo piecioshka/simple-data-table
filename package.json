@@ -9,7 +9,7 @@
         "url": "https://piecioshka.pl/"
     },
     "scripts": {
-        "build": "webpack ./src/index.js -o dist --mode development --output-library-type umd",
+        "build": "webpack ./src/index.js -o dist --output-library-type umd",
         "clear": "rm -rf coverage/ .nyc_output/ coverage.lcov",
         "clear:all": "rm -rf node_modules/ && npm run clear",
         "test": "npm run test:unit",
