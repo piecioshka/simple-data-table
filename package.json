@@ -16,7 +16,7 @@
         "test": "npm run test:unit",
         "test:unit": "ava",
         "coverage": "nyc npm run test && nyc report --reporter=text-lcov | coveralls -v",
-        "demo": "cross-env NODE_DEBUG=gh-pages gh-pages --src '{demo,dist}/*' -d .",
+        "demo": "cross-env NODE_DEBUG=gh-pages gh-pages --src '{demo,dist,src,test}/**' -d .",
         "lint": "eslint ."
     },
     "dependencies": {},
