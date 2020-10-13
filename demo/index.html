@@ -25,15 +25,15 @@
     <div id="example-1"></div>
     <script>
         (function () {
-            const d = new SimpleDataTable(document.querySelector('#example-1'));
-            d.load(FIXTURE_2_ROWS);
-            d.render();
+            const t = new SimpleDataTable(document.querySelector('#example-1'));
+            t.load(FIXTURE_2_ROWS);
+            t.render();
         })();
     </script>
     <pre><code>
-const d = new SimpleDataTable(document.querySelector('#example-1'));
-d.load(...);
-d.render();
+const t = new SimpleDataTable(document.querySelector('#example-1'));
+t.load(...);
+t.render();
     </code></pre>
 </section>
 
@@ -42,19 +42,19 @@ d.render();
     <div id="example-2"></div>
     <script>
         (function () {
-            const d = new SimpleDataTable(document.querySelector('#example-2'), {
+            const t = new SimpleDataTable(document.querySelector('#example-2'), {
                 addButtonLabel: 'Add'
             });
-            d.load(FIXTURE_2_ROWS);
-            d.render();
+            t.load(FIXTURE_2_ROWS);
+            t.render();
         })();
     </script>
     <pre><code>
-const d = new SimpleDataTable(document.querySelector('#example-2'), {
+const t = new SimpleDataTable(document.querySelector('#example-2'), {
     addButtonLabel: 'Add'
 });
-d.load(...);
-d.render();
+t.load(...);
+t.render();
     </code></pre>
 </section>
 
@@ -63,19 +63,19 @@ d.render();
     <div id="example-3"></div>
     <script>
         (function () {
-            const d = new SimpleDataTable(document.querySelector('#example-3'), {
-                addButtonLabel: 'Add'
+            const t = new SimpleDataTable(document.querySelector('#example-3'), {
+                defaultColumnPrefix: 'col'
             });
-            d.render();
-            const $addButton = d.$el.querySelector('button.add-row');
+            t.render();
+            const $addButton = t.$el.querySelector('button.add-row');
             $addButton.dispatchEvent(new Event('click'));
         })();
     </script>
     <pre><code>
-const d = new SimpleDataTable(document.querySelector('#example-3'), {
-    addButtonLabel: 'Add'
+const t = new SimpleDataTable(document.querySelector('#example-3'), {
+    defaultColumnPrefix: 'col'
 });
-d.render();
+t.render();
     </code></pre>
 </section>
 
@@ -84,20 +84,40 @@ d.render();
     <div id="example-4"></div>
     <script>
         (function () {
-            const d = new SimpleDataTable(document.querySelector('#example-4'), {
+            const t = new SimpleDataTable(document.querySelector('#example-4'), {
                 defaultColumnNumber: 1
             });
-            d.render();
-            const $addButton = d.$el.querySelector('button.add-row');
+            t.render();
+            const $addButton = t.$el.querySelector('button.add-row');
             $addButton.dispatchEvent(new Event('click'));
             $addButton.dispatchEvent(new Event('click'));
         })();
     </script>
     <pre><code>
-const d = new SimpleDataTable(document.querySelector('#example-4'), {
+const t = new SimpleDataTable(document.querySelector('#example-4'), {
     defaultColumnNumber: 1
 });
-d.render();
+t.render();
+    </code></pre>
+</section>
+
+<section>
+    <h2><em>Example 5</em>: Readonly</h2>
+    <div id="example-5"></div>
+    <script>
+        (function () {
+            const t = new SimpleDataTable(document.querySelector('#example-5'), {
+                readonly: true
+            });
+            t.load(FIXTURE_2_ROWS);
+            t.render();
+        })();
+    </script>
+    <pre><code>
+const t = new SimpleDataTable(document.querySelector('#example-5'), {
+    readonly: true
+});
+t.render();
     </code></pre>
 </section>
 

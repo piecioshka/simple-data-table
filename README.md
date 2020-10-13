@@ -20,6 +20,7 @@
 * :white_check_mark: API: Highlight cells
 * :white_check_mark: API: Support put value into single cell
 * :white_check_mark: API: Sorting by a concrete cell with a given function
+* :white_check_mark: Readonly Mode
 
 ## Installation
 
@@ -34,8 +35,8 @@ npm install simple-data-table
 
 ```javascript
 const $container = document.querySelector('#place-to-render');
-const d = new SimpleDataTable($container, options);
-d.load([
+const t = new SimpleDataTable($container, options);
+t.load([
     {
         column1: 'Cell 1',
         column2: 'Cell 2',
@@ -47,8 +48,9 @@ d.load([
         column3: 'Cell 3 (row 2)'
     }
 ]);
-d.render();
+t.render();
 ```
+
 ![](./screenshots/example-0.png)
 
 ## Examples
@@ -66,11 +68,11 @@ Change value od button which add new row.
 Example:
 
 ```js
-const d = new SimpleDataTable($container, {
+const t = new SimpleDataTable($container, {
     addButtonLabel: 'New record'
 });
-d.load(...);
-d.render();
+t.load(...);
+t.render();
 ```
 
 #### `defaultColumnPrefix` _(Default: 'column')_
@@ -80,11 +82,11 @@ Define what "name" should have cells in new added columns.
 Example:
 
 ```js
-const d = new SimpleDataTable($container, {
+const t = new SimpleDataTable($container, {
     defaultColumnPrefix: 'random'
 });
-d.load(...);
-d.render();
+t.load(...);
+t.render();
 ```
 
 #### `defaultColumnNumber` _(Default: 3)_
@@ -94,11 +96,11 @@ Define how much columns should contain row in empty table.
 Example:
 
 ```js
-const d = new SimpleDataTable($container, {
+const t = new SimpleDataTable($container, {
     defaultColumnNumber: '7'
 });
-d.load(...);
-d.render();
+t.load(...);
+t.render();
 ```
 
 #### `defaultHighlightedCellClass` _(Default: 'highlighted-cell')_
@@ -106,11 +108,23 @@ d.render();
 Define class of highlighted cell.Example:
 
 ```js
-const d = new SimpleDataTable($container, {
+const t = new SimpleDataTable($container, {
     defaultHighlightedCellClass: 'my-highlight'
 });
-d.load(...);
-d.render();
+t.load(...);
+t.render();
+```
+
+#### `readonly` _(Default: false)_
+
+Define class of highlighted cell.Example:
+
+```js
+const t = new SimpleDataTable($container, {
+    readonly: true
+});
+t.load(...);
+t.render();
 ```
 
 ## API
