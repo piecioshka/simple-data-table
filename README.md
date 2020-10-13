@@ -148,7 +148,7 @@ Render table into DOM.
 
 Get number of rows.
 
-#### `findCellsByContent(...content): Array<{ rowIndex: number, cellIndex: number }>`
+#### `findCellsByContent( ...content ): Array<{ rowIndex: number, cellIndex: number }>`
 
 Get list of cell positions which contains passed strings.
 
@@ -168,11 +168,11 @@ Remove CSS class of all highlighted cells.
 
 Put content into input in concrete cell.
 
-#### `setHeaders( items: Array )`
+#### `setHeaders( items: Array<string> )`
 
 Setup column headers. Sorting is enabled by default.
 
-#### `load( data: Array )`
+#### `load( data: Array<object> )`
 
 Loading data into table component.
 
