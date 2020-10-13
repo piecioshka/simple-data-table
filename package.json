@@ -19,12 +19,12 @@
     },
     "dependencies": {},
     "devDependencies": {
-        "ava": "^3.5.0",
-        "coveralls": "^3.0.11",
+        "ava": "^3.13.0",
+        "coveralls": "^3.1.0",
         "eslint": "^6.8.0",
-        "eslint-config-piecioshka": "^2.0.2",
-        "jsdom": "^16.2.1",
-        "nyc": "^15.0.0"
+        "eslint-config-piecioshka": "^2.0.3",
+        "jsdom": "^16.4.0",
+        "nyc": "^15.1.0"
     },
     "repository": {
         "type": "git",
