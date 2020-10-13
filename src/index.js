@@ -287,6 +287,4 @@ class SimpleDataTable {
 }
 
 // Exports
-if (typeof exports === 'object' && typeof module === 'object') {
-    module.exports = { SimpleDataTable };
-}
+module.exports = { SimpleDataTable };
