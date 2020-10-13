@@ -290,4 +290,6 @@ class SimpleDataTable {
 }
 
 // Exports
-module.exports = { SimpleDataTable };
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { SimpleDataTable };
+}
