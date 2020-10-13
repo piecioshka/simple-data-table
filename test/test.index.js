@@ -395,3 +395,24 @@ test('click on headers will sort the table', (assert) => {
         { id: 'c', val: 3, },
     ]);
 });
+
+test('when defaultColumnNumber is not defined use headers number', (assert) => {
+    const t = new SimpleDataTable($target);
+    t.setHeaders(['a', 'b', 'c', 'd']);
+    t.render();
+
+    const $addButton = $target.querySelector('button.add-row');
+    $addButton.dispatchEvent(new window.Event('click'));
+
+    assert.is(t.$el.querySelectorAll('tbody td input[name^="column"]').length, 4);
+});
+
+test('when defaultColumnNumber & headers number are not defined use first row of data', (assert) => {
+    const t = new SimpleDataTable($target);
+    t.load([
+        { name: 'John', surname: 'Brown', age: 16, car: 'Ferrari', hight: 186 },
+    ]);
+    t.render();
+
+    assert.is(t.$el.querySelectorAll('tbody tr:nth-child(1) td input').length, 5);
+});

@@ -10,6 +10,7 @@
     },
     "scripts": {
         "build": "webpack ./src/index.js -o dist --output-library-type umd",
+        "watch": "npm run build -- -w",
         "clear": "rm -rf coverage/ .nyc_output/ coverage.lcov",
         "clear:all": "rm -rf node_modules/ && npm run clear",
         "test": "npm run test:unit",
