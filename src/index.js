@@ -18,12 +18,7 @@ class SimpleDataTable {
         this.headers.forEach((name, index) => {
             const $cell = this._createEmptyHeaderCell();
             $cell.textContent = name;
-
-            $cell.addEventListener('click', () => {
-                this.sortByColumn(index);
-                this.render();
-            });
-
+            $cell.addEventListener('click', () => this.sortByColumn(index));
             $header.appendChild($cell);
         });
 
@@ -243,6 +238,7 @@ class SimpleDataTable {
 
     setHeaders(items) {
         this.headers = items;
+        return this;
     }
 
     load(data) {
@@ -276,6 +272,7 @@ class SimpleDataTable {
             Object.values(firstRow)[cellIndex],
             Object.values(secondRow)[cellIndex])
         );
+        this.render();
         this.emit(SimpleDataTable.EVENTS.DATA_SORTED);
     }
 

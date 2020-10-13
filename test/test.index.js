@@ -95,6 +95,7 @@ test('support fluent API', (assert) => {
 
     new SimpleDataTable($target)
         .render()
+        .setHeaders([])
         .load([])
         .on(SimpleDataTable.EVENTS.UPDATE, () => updates++)
         .on(SimpleDataTable.EVENTS.UPDATE, () => updates++)
@@ -129,7 +130,6 @@ test('API: function to get rows count', (assert) => {
     t.load([{ foo: 'bar' }]);
     t.render();
 
-    assert.is(typeof t.getRowsCount, 'function');
     assert.is(t.getRowsCount(), 1);
     t.load([{ foo: 'bar' }, { baz: 'boo' }]);
     assert.is(t.getRowsCount(), 1);
@@ -157,13 +157,11 @@ test('just added row should have remove button', (assert) => {
     t.load([{ foo: 'bar' }]);
     t.render();
 
-    const $addButton = $target.querySelector('button.add-row');
+    const $addButton = t.$el.querySelector('button.add-row');
     $addButton.dispatchEvent(new window.Event('click'));
 
-    const numberOfRemoveButtons = $target
-        .querySelectorAll('button.remove-row').length;
-
-    assert.is(numberOfRemoveButtons, 2);
+    const buttonsNumber = t.$el.querySelectorAll('button.remove-row').length;
+    assert.is(buttonsNumber, 2);
 });
 
 test('remove row action should trigger custom event', (assert) => {
@@ -300,7 +298,7 @@ test('API: set content into cell', (assert) => {
 });
 
 test('API: function to sort by column (default values)', (assert) => {
-    assert.plan(4);
+    assert.plan(2);
 
     const t = new SimpleDataTable($target);
     t.load([{
@@ -312,14 +310,11 @@ test('API: function to sort by column (default values)', (assert) => {
     }]);
     t.render();
 
-    assert.is(typeof t.sortByColumn, 'function');
-
     t.on(SimpleDataTable.EVENTS.DATA_SORTED, () => {
         assert.deepEqual(t.data.map(cell => cell.id), ['abc', 'def', 'ghi']);
-        assert.is(t.getCell(0, 0).firstElementChild.value, 'ghi');
-        t.render();
         assert.is(t.getCell(0, 0).firstElementChild.value, 'abc');
     });
+
     t.sortByColumn();
 });
 
@@ -414,5 +409,8 @@ test('when defaultColumnNumber & headers number are not defined use first row of
     ]);
     t.render();
 
-    assert.is(t.$el.querySelectorAll('tbody tr:nth-child(1) td input').length, 5);
+    const $addButton = $target.querySelector('button.add-row');
+    $addButton.dispatchEvent(new window.Event('click'));
+
+    assert.is(t.$el.querySelectorAll('tbody tr:nth-child(2) td input').length, 5);
 });
