@@ -91,14 +91,17 @@ test('trigger custom event after changed data', (assert) => {
 });
 
 test('support fluent API', (assert) => {
+    let updates = 0;
+
     new SimpleDataTable($target)
         .render()
         .load([])
-        .on(SimpleDataTable.EVENTS.UPDATE, () => null)
+        .on(SimpleDataTable.EVENTS.UPDATE, () => updates++)
+        .on(SimpleDataTable.EVENTS.UPDATE, () => updates++)
         .emit(SimpleDataTable.EVENTS.UPDATE)
         .render();
 
-    assert.pass();
+    assert.is(updates, 2);
 });
 
 test('add button text should be configurable', (assert) => {
