@@ -17,7 +17,7 @@ module.exports = {
         'strict': ['off'],
         'object-curly-newline': ['off'],
         'no-magic-numbers': ['error', {
-            'ignore': [1, 3]
+            'ignore': [0, 1, 3]
         }]
     },
 
