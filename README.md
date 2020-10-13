@@ -21,6 +21,7 @@
 * :white_check_mark: API: Support put value into single cell
 * :white_check_mark: API: Sorting by a concrete cell with a given function
 * :white_check_mark: Readonly Mode
+* :white_check_mark: Header + Sorting by column
 
 ## Installation
 
@@ -164,6 +165,10 @@ Remove CSS class of all highlighted cells.
 #### `setInputCellContent( rowIndex: number, cellIndex: number, content: string )`
 
 Put content into input in concrete cell.
+
+#### `setHeader( items: Array )`
+
+Setup column headers. Sorting is enabled by default.
 
 #### `load( data: Array )`
 

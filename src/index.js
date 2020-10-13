@@ -6,8 +6,29 @@ class SimpleDataTable {
         this.defaultColumnPrefix = options.defaultColumnPrefix || 'column';
         this.defaultColumnNumber = options.defaultColumnNumber || 3;
         this.defaultHighlightedCellClass = options.defaultHighlightedCellClass || 'highlighted-cell';
+        this.header = [];
         this.data = [];
         this._events = {};
+    }
+
+    _renderHeader($table) {
+        const $thead = document.createElement('thead');
+        const $header = document.createElement('tr');
+
+        this.header.forEach((name, index) => {
+            const $cell = this._createEmptyHeaderCell();
+            $cell.textContent = name;
+
+            $cell.addEventListener('click', () => {
+                this.sortByColumn(index);
+                this.render();
+            });
+
+            $header.appendChild($cell);
+        });
+
+        $thead.appendChild($header);
+        $table.appendChild($thead);
     }
 
     render() {
@@ -18,6 +39,11 @@ class SimpleDataTable {
         this.$el.innerHTML = '';
 
         const $table = document.createElement('table');
+
+        if (this.header.length > 0) {
+            this._renderHeader($table);
+        }
+
         const $tbody = document.createElement('tbody');
         $table.appendChild($tbody);
 
@@ -117,6 +143,10 @@ class SimpleDataTable {
         return document.createElement('td');
     }
 
+    _createEmptyHeaderCell() {
+        return document.createElement('th');
+    }
+
     _createCellWithRemoveRowButton() {
         const $cell = this._createEmptyCell();
         const $removeButton = document.createElement('button');
@@ -201,6 +231,10 @@ class SimpleDataTable {
         return $elements.map(($cell) => $cell.querySelector('input'))
             .filter(($element) => $element)
             .map(($input) => $input.name);
+    }
+
+    setHeader(items) {
+        this.header = items;
     }
 
     load(data) {

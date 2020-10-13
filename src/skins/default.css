@@ -1,3 +1,9 @@
+th {
+    border: none;
+    background-color: #d7d7d7;
+    padding: 0;
+}
+
 td {
     border: none;
     padding: 0;
