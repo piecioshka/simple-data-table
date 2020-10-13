@@ -42,14 +42,23 @@ d.load([
         column3: 'Cell 3'
     },
     {
-        column1: 'Cell 1 (row 2)',
-        column2: 'Cell 2 (row 2)',
-        column3: 'Cell 3 (row 2)'
+        column1: 'Cell 4',
+        column2: 'Cell 5',
+        column3: 'Cell 6'
+    },
+    {
+        column1: 'Cell 7',
+        column2: 'Cell 8',
+        column3: 'Cell 9'
+    },
+    {
+        column1: 'Cell 10',
+        column2: 'Cell 11',
+        column3: 'Cell 12'
     }
 ]);
 d.render();
 ```
-![](./screenshots/example-0.png)
 
 ## Examples
 
