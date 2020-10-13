@@ -344,7 +344,7 @@ test('API: function to sort by column', (assert) => {
 
 test('API: function to set headers', (assert) => {
     const d = new SimpleDataTable($target);
-    d.setHeader(['Id', 'Value']);
+    d.setHeaders(['Id', 'Value']);
     d.load([{
         id: 'ghi',
         val: 100,

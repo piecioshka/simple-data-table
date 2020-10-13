@@ -6,7 +6,7 @@ class SimpleDataTable {
         this.defaultColumnPrefix = options.defaultColumnPrefix || 'column';
         this.defaultColumnNumber = options.defaultColumnNumber || null;
         this.defaultHighlightedCellClass = options.defaultHighlightedCellClass || 'highlighted-cell';
-        this.header = [];
+        this.headers = [];
         this.data = [];
         this._events = {};
     }
@@ -15,7 +15,7 @@ class SimpleDataTable {
         const $thead = document.createElement('thead');
         const $header = document.createElement('tr');
 
-        this.header.forEach((name, index) => {
+        this.headers.forEach((name, index) => {
             const $cell = this._createEmptyHeaderCell();
             $cell.textContent = name;
 
@@ -40,7 +40,7 @@ class SimpleDataTable {
 
         const $table = document.createElement('table');
 
-        if (this.header.length > 0) {
+        if (this.headers.length > 0) {
             this._renderHeader($table);
         }
 
@@ -224,8 +224,8 @@ class SimpleDataTable {
         if (!$firstRecord) {
             const size = this.defaultColumnNumber
                 ? this.defaultColumnNumber
-                : this.header
-                    ? this.header.length
+                : this.headers
+                    ? this.headers.length
                     : this.data[0] && this.data[0].length;
             if (!size) {
                 return [];
@@ -241,8 +241,8 @@ class SimpleDataTable {
             .map(($input) => $input.name);
     }
 
-    setHeader(items) {
-        this.header = items;
+    setHeaders(items) {
+        this.headers = items;
     }
 
     load(data) {

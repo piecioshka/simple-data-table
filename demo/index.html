@@ -124,21 +124,21 @@ t.render();
 </section>
 
 <section>
-    <h2><em>Example 6</em>: Header + Sorting</h2>
+    <h2><em>Example 6</em>: Headers + Sorting</h2>
     <div id="example-6"></div>
     <script>
         (function () {
             const t = new SimpleDataTable(document.querySelector('#example-6'), {
                 readonly: true
             });
-            t.setHeader(['Value', 'Color', 'Name']);
+            t.setHeaders(['Value', 'Color', 'Name']);
             t.load(FIXTURE_3_ROWS);
             t.render();
         })();
     </script>
     <pre><code>
 const t = new SimpleDataTable(document.querySelector('#example-6'));
-t.setHeader(['Value', 'Color', 'Name']);
+t.setHeaders(['Value', 'Color', 'Name']);
 t.load(...);
 t.render();
     </code></pre>
