@@ -26,7 +26,7 @@ test('clear passed container', (assert) => {
 
     const t = new SimpleDataTable($target);
     t.render();
-    assert.is($target.children.length, 2);
+    assert.is($target.children.length, 1);
     assert.is($target.querySelector('p'), null);
 });
 
@@ -237,6 +237,12 @@ test('API: find cells', (assert) => {
 
     const indexes3 = t.findCellsByContent('not exist');
     assert.is(indexes3.length, 0);
+
+    t.load([{ foo: 'bar' }, { foo: 'bar' }]);
+    t.render();
+
+    const indexes4 = t.findCellsByContent('bar');
+    assert.is(indexes4.length, 2);
 });
 
 test('API: get DOM reference of cell', (assert) => {

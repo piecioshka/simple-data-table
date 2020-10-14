@@ -13,22 +13,21 @@ class SimpleDataTable {
 
     _renderTHead($table) {
         const $thead = document.createElement('thead');
-        const $header = document.createElement('tr');
+        const $row = document.createElement('tr');
 
         this.headers.forEach((name, index) => {
             const $cell = this._createEmptyHeaderCell();
             $cell.textContent = name;
             $cell.addEventListener('click', () => this.sortByColumn(index));
-            $header.appendChild($cell);
+            $row.appendChild($cell);
         });
 
-        $thead.appendChild($header);
+        $thead.appendChild($row);
         $table.appendChild($thead);
     }
 
     _renderTBody($table) {
         const $tbody = document.createElement('tbody');
-        $table.appendChild($tbody);
 
         this.data.forEach((item, rowIndex) => {
             const $row = document.createElement('tr');
@@ -45,6 +44,8 @@ class SimpleDataTable {
 
             $tbody.appendChild($row);
         });
+
+        $table.appendChild($tbody);
     }
 
     render() {
@@ -52,7 +53,7 @@ class SimpleDataTable {
             throw new Error('this.$el is not defined');
         }
 
-        this.$el.innerHTML = '';
+        SimpleDataTable.clearElement(this.$el);
 
         const $wrapper = document.createElement('div');
         $wrapper.classList.add('simple-data-table');
@@ -292,6 +293,13 @@ class SimpleDataTable {
             DATA_SORTED: 'SimpleDataTable.EVENTS.DATA_SORTED'
         };
     }
+
+    static clearElement($element) {
+        while ($element.firstElementChild) {
+            $element.firstElementChild.remove();
+        }
+    }
+
 }
 
 // Exports

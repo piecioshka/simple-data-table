@@ -142,7 +142,7 @@ Render table into DOM.
 
 Get number of rows.
 
-#### `findCellsByContent( ...content ): Array<{ rowIndex: number, cellIndex: number }>`
+#### `findCellsByContent( ...content: Array<string> ): Array<{ rowIndex: number, cellIndex: number }>`
 
 Get list of cell positions which contains passed strings.
 
@@ -231,6 +231,12 @@ t.on(SimpleDataTable.EVENTS.DATA_SORTED, () => {
     // do some stuff...
 });
 ```
+
+## Static
+
+#### `SimpleDataTable.clearElement( $element: HTMLElement )`
+
+Recursive remove children from passed HTMLElement.
 
 ## Tested browsers
 
