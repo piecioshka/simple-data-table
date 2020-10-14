@@ -197,8 +197,8 @@ Event is dispatching when you change any of input in table.
 Example:
 
 ```js
-const d = new SimpleDataTable($container);
-d.on(SimpleDataTable.EVENTS.UPDATE, (data) => {
+const t = new SimpleDataTable($container);
+t.on(SimpleDataTable.EVENTS.UPDATE, (data) => {
     // do some stuff with the updated data...
 });
 ```
@@ -210,8 +210,8 @@ Event is dispatching when you add new record.
 Example:
 
 ```js
-const d = new SimpleDataTable($container);
-d.on(SimpleDataTable.EVENTS.ROW_ADDED, () => {
+const t = new SimpleDataTable($container);
+t.on(SimpleDataTable.EVENTS.ROW_ADDED, () => {
     // do some stuff...
 });
 ```
@@ -223,8 +223,8 @@ Event is dispatching when you remove any record.
 Example:
 
 ```js
-const d = new SimpleDataTable($container);
-d.on(SimpleDataTable.EVENTS.ROW_REMOVED, () => {
+const t = new SimpleDataTable($container);
+t.on(SimpleDataTable.EVENTS.ROW_REMOVED, () => {
     // do some stuff...
 });
 ```
@@ -236,8 +236,8 @@ Event is dispatching after data is sorted with `sortByColumn` function.
 Example:
 
 ```js
-const d = new SimpleDataTable($container);
-d.on(SimpleDataTable.EVENTS.DATA_SORTED, () => {
+const t = new SimpleDataTable($container);
+t.on(SimpleDataTable.EVENTS.DATA_SORTED, () => {
     // do some stuff...
 });
 ```
