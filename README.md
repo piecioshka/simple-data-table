@@ -74,8 +74,6 @@ More examples: <https://piecioshka.github.io/simple-data-table/demo/>
 
 Change value od button which add new row.
 
-Example:
-
 ```js
 const t = new SimpleDataTable($container, {
     addButtonLabel: 'New record'
@@ -87,8 +85,6 @@ t.render();
 #### `defaultColumnPrefix` _(Default: 'column')_
 
 Define what "name" should have cells in new added columns.
-
-Example:
 
 ```js
 const t = new SimpleDataTable($container, {
@@ -104,8 +100,6 @@ Define how much columns should contain row in empty table.
 
 By default, use the size of headers or the number of cells in the first row.
 
-Example:
-
 ```js
 const t = new SimpleDataTable($container, {
     defaultColumnNumber: '7'
@@ -116,7 +110,7 @@ t.render();
 
 #### `defaultHighlightedCellClass` _(Default: 'highlighted-cell')_
 
-Define class of highlighted cell.Example:
+Define class of highlighted cell.
 
 ```js
 const t = new SimpleDataTable($container, {
@@ -128,7 +122,7 @@ t.render();
 
 #### `readonly` _(Default: false)_
 
-Define class of highlighted cell.Example:
+Define class of highlighted cell.
 
 ```js
 const t = new SimpleDataTable($container, {
@@ -186,15 +180,17 @@ Listen on events.
 
 #### `sortByColumn( cellIndex : number, comparingFunction : Function )`
 
-Sorts data and triggers `DATA_SORTED` event. By default takes `cellIndex=0` and sorts as [`String.prototype.localeCompare`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare).
+Sorts data and triggers `DATA_SORTED` event.
+
+By default takes `cellIndex=0` and sorts as [`String.prototype.localeCompare`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare).
+
+**WARNING**: Function `sortByColumn()` runs `render()` under the hood.
 
 ## Events
 
 #### `SimpleDataTable.EVENTS.UPDATE`
 
 Event is dispatching when you change any of input in table.
-
-Example:
 
 ```js
 const t = new SimpleDataTable($container);
@@ -207,8 +203,6 @@ t.on(SimpleDataTable.EVENTS.UPDATE, (data) => {
 
 Event is dispatching when you add new record.
 
-Example:
-
 ```js
 const t = new SimpleDataTable($container);
 t.on(SimpleDataTable.EVENTS.ROW_ADDED, () => {
@@ -220,8 +214,6 @@ t.on(SimpleDataTable.EVENTS.ROW_ADDED, () => {
 
 Event is dispatching when you remove any record.
 
-Example:
-
 ```js
 const t = new SimpleDataTable($container);
 t.on(SimpleDataTable.EVENTS.ROW_REMOVED, () => {
@@ -232,8 +224,6 @@ t.on(SimpleDataTable.EVENTS.ROW_REMOVED, () => {
 #### `SimpleDataTable.EVENTS.DATA_SORTED`
 
 Event is dispatching after data is sorted with `sortByColumn` function.
-
-Example:
 
 ```js
 const t = new SimpleDataTable($container);
