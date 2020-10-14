@@ -9,13 +9,11 @@
         "url": "https://piecioshka.pl/"
     },
     "scripts": {
-        "build": "webpack ./src/index.js -o dist --output-library-type umd",
         "clear": "rm -rf coverage/ .nyc_output/ coverage.lcov",
         "clear:all": "rm -rf node_modules/ && npm run clear",
         "test": "npm run test:unit",
         "test:unit": "ava",
         "coverage": "nyc npm run test && nyc report --reporter=text-lcov | coveralls -v",
-        "count": "find . -name '*.js' -not -path './node_modules/*' | xargs wc -l | sort -r",
         "lint": "eslint ."
     },
     "dependencies": {},
@@ -25,9 +23,7 @@
         "eslint": "^6.8.0",
         "eslint-config-piecioshka": "^2.0.3",
         "jsdom": "^16.4.0",
-        "nyc": "^15.1.0",
-        "webpack": "^5.1.0",
-        "webpack-cli": "^4.0.0"
+        "nyc": "^15.1.0"
     },
     "repository": {
         "type": "git",
@@ -35,7 +31,6 @@
     },
     "files": [
         "src",
-        "dist",
         "package.json",
         "README.md"
     ],
@@ -52,5 +47,5 @@
         "lightweight",
         "no dependencies"
     ],
-    "main": "./dist/main.js"
+    "main": "./src/index.js"
 }

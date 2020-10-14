@@ -14,6 +14,7 @@ module.exports = {
 
     // http://eslint.org/docs/rules/
     rules: {
+        'no-nested-ternary': ['off'],
         'strict': ['off'],
         'object-curly-newline': ['off'],
         'no-magic-numbers': ['error', {

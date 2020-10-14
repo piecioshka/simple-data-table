@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="styles/main.css"/>
     <link rel="stylesheet" href="../src/skins/default.css"/>
     <script src="../test/fixtures/2-rows.js"></script>
+    <script src="../test/fixtures/3-rows.js"></script>
     <script src="../src/index.js"></script>
 
     <link rel="stylesheet" href="vendors/highlight/styles/github.css"/>
@@ -64,7 +65,8 @@ t.render();
     <script>
         (function () {
             const t = new SimpleDataTable(document.querySelector('#example-3'), {
-                defaultColumnPrefix: 'col'
+                defaultColumnNumber: 2,
+                defaultColumnPrefix: 'col-',
             });
             t.render();
             const $addButton = t.$el.querySelector('button.add-row');
@@ -73,7 +75,7 @@ t.render();
     </script>
     <pre><code>
 const t = new SimpleDataTable(document.querySelector('#example-3'), {
-    defaultColumnPrefix: 'col'
+    defaultColumnPrefix: 'col-'
 });
 t.render();
     </code></pre>
@@ -102,7 +104,7 @@ t.render();
 </section>
 
 <section>
-    <h2><em>Example 5</em>: Readonly</h2>
+    <h2><em>Example 5</em>: Readonly Mode</h2>
     <div id="example-5"></div>
     <script>
         (function () {
@@ -117,6 +119,27 @@ t.render();
 const t = new SimpleDataTable(document.querySelector('#example-5'), {
     readonly: true
 });
+t.render();
+    </code></pre>
+</section>
+
+<section>
+    <h2><em>Example 6</em>: Headers + Sorting</h2>
+    <div id="example-6"></div>
+    <script>
+        (function () {
+            const t = new SimpleDataTable(document.querySelector('#example-6'), {
+                readonly: true
+            });
+            t.setHeaders(['Value', 'Color', 'Name']);
+            t.load(FIXTURE_3_ROWS);
+            t.render();
+        })();
+    </script>
+    <pre><code>
+const t = new SimpleDataTable(document.querySelector('#example-6'));
+t.setHeaders(['Value', 'Color', 'Name']);
+t.load(...);
 t.render();
     </code></pre>
 </section>

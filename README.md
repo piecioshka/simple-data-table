@@ -21,6 +21,7 @@
 * :white_check_mark: API: Support put value into single cell
 * :white_check_mark: API: Sorting by a concrete cell with a given function
 * :white_check_mark: Readonly Mode
+* :white_check_mark: Headers + Sorting by column
 
 ## Installation
 
@@ -73,8 +74,6 @@ More examples: <https://piecioshka.github.io/simple-data-table/demo/>
 
 Change value od button which add new row.
 
-Example:
-
 ```js
 const t = new SimpleDataTable($container, {
     addButtonLabel: 'New record'
@@ -87,8 +86,6 @@ t.render();
 
 Define what "name" should have cells in new added columns.
 
-Example:
-
 ```js
 const t = new SimpleDataTable($container, {
     defaultColumnPrefix: 'random'
@@ -97,11 +94,11 @@ t.load(...);
 t.render();
 ```
 
-#### `defaultColumnNumber` _(Default: 3)_
+#### `defaultColumnNumber` _(Default: null)_
 
 Define how much columns should contain row in empty table.
 
-Example:
+By default, use the size of headers or the number of cells in the first row.
 
 ```js
 const t = new SimpleDataTable($container, {
@@ -113,7 +110,7 @@ t.render();
 
 #### `defaultHighlightedCellClass` _(Default: 'highlighted-cell')_
 
-Define class of highlighted cell.Example:
+Define class of highlighted cell.
 
 ```js
 const t = new SimpleDataTable($container, {
@@ -125,7 +122,7 @@ t.render();
 
 #### `readonly` _(Default: false)_
 
-Define class of highlighted cell.Example:
+Define class of highlighted cell.
 
 ```js
 const t = new SimpleDataTable($container, {
@@ -145,7 +142,7 @@ Render table into DOM.
 
 Get number of rows.
 
-#### `findCellsByContent(...content): Array<{ rowIndex: number, cellIndex: number }>`
+#### `findCellsByContent( ...content: Array<string> ): Array<{ rowIndex: number, cellIndex: number }>`
 
 Get list of cell positions which contains passed strings.
 
@@ -165,7 +162,11 @@ Remove CSS class of all highlighted cells.
 
 Put content into input in concrete cell.
 
-#### `load( data: Array )`
+#### `setHeaders( items: Array<string> )`
+
+Setup column headers. Sorting is enabled by default.
+
+#### `load( data: Array<object> )`
 
 Loading data into table component.
 
@@ -179,7 +180,11 @@ Listen on events.
 
 #### `sortByColumn( cellIndex : number, comparingFunction : Function )`
 
-Sorts data and triggers `DATA_SORTED` event. By default takes `cellIndex=0` and sorts as [`String.prototype.localeCompare`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare).
+Sorts data and triggers `DATA_SORTED` event.
+
+By default takes `cellIndex=0` and sorts as [`String.prototype.localeCompare`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare).
+
+**WARNING**: Function `sortByColumn()` runs `render()` under the hood.
 
 ## Events
 
@@ -187,11 +192,9 @@ Sorts data and triggers `DATA_SORTED` event. By default takes `cellIndex=0` and 
 
 Event is dispatching when you change any of input in table.
 
-Example:
-
 ```js
-const d = new SimpleDataTable($container);
-d.on(SimpleDataTable.EVENTS.UPDATE, (data) => {
+const t = new SimpleDataTable($container);
+t.on(SimpleDataTable.EVENTS.UPDATE, (data) => {
     // do some stuff with the updated data...
 });
 ```
@@ -200,11 +203,9 @@ d.on(SimpleDataTable.EVENTS.UPDATE, (data) => {
 
 Event is dispatching when you add new record.
 
-Example:
-
 ```js
-const d = new SimpleDataTable($container);
-d.on(SimpleDataTable.EVENTS.ROW_ADDED, () => {
+const t = new SimpleDataTable($container);
+t.on(SimpleDataTable.EVENTS.ROW_ADDED, () => {
     // do some stuff...
 });
 ```
@@ -213,11 +214,9 @@ d.on(SimpleDataTable.EVENTS.ROW_ADDED, () => {
 
 Event is dispatching when you remove any record.
 
-Example:
-
 ```js
-const d = new SimpleDataTable($container);
-d.on(SimpleDataTable.EVENTS.ROW_REMOVED, () => {
+const t = new SimpleDataTable($container);
+t.on(SimpleDataTable.EVENTS.ROW_REMOVED, () => {
     // do some stuff...
 });
 ```
@@ -226,14 +225,18 @@ d.on(SimpleDataTable.EVENTS.ROW_REMOVED, () => {
 
 Event is dispatching after data is sorted with `sortByColumn` function.
 
-Example:
-
 ```js
-const d = new SimpleDataTable($container);
-d.on(SimpleDataTable.EVENTS.DATA_SORTED, () => {
+const t = new SimpleDataTable($container);
+t.on(SimpleDataTable.EVENTS.DATA_SORTED, () => {
     // do some stuff...
 });
 ```
+
+## Static
+
+#### `SimpleDataTable.clearElement( $element: HTMLElement )`
+
+Recursive remove children from passed HTMLElement.
 
 ## Tested browsers
 
