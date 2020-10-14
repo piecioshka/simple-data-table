@@ -1,25 +1,25 @@
-th {
+.simple-data-table th {
     border: none;
     background-color: #d7d7d7;
     padding: 0;
 }
 
-td {
+.simple-data-table td {
     border: none;
     padding: 0;
 }
 
-input {
+.simple-data-table input {
     border: 1px solid #d7d7d7;
     display: inline-block;
     padding: 5px;
 }
 
-input:focus {
+.simple-data-table input:focus {
     border: 1px solid #3498db;
 }
 
-button.remove-row {
+.simple-data-table button.remove-row {
     background: transparent;
     color: #de5b49;
     border: 1px solid #de5b49;
@@ -32,22 +32,22 @@ button.remove-row {
     width: 25px;
 }
 
-button.remove-row:hover {
+.simple-data-table button.remove-row:hover {
     background: #de5b49;
     color: #fff;
 }
 
-button.remove-row:focus {
+.simple-data-table button.remove-row:focus {
     background: #de5b49;
     color: #fff;
     outline: none;
 }
 
-button.remove-row::-moz-focus-inner {
+.simple-data-table button.remove-row::-moz-focus-inner {
     border: 0;
 }
 
-button.add-row {
+.simple-data-table button.add-row {
     background: transparent;
     color: #324d5c;
     border: 1px solid #324d5c;
@@ -59,17 +59,17 @@ button.add-row {
     padding: 0 6px;
 }
 
-button.add-row:hover {
+.simple-data-table button.add-row:hover {
     background: #324d5c;
     color: #fff;
 }
 
-button.add-row:focus {
+.simple-data-table button.add-row:focus {
     background: #324d5c;
     color: #fff;
     outline: none;
 }
 
-button.add-row::-moz-focus-inner {
+.simple-data-table button.add-row::-moz-focus-inner {
     border: 0;
 }

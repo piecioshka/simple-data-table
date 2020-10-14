@@ -11,7 +11,7 @@ class SimpleDataTable {
         this._events = {};
     }
 
-    _renderHeader($table) {
+    _renderTHead($table) {
         const $thead = document.createElement('thead');
         const $header = document.createElement('tr');
 
@@ -26,19 +26,7 @@ class SimpleDataTable {
         $table.appendChild($thead);
     }
 
-    render() {
-        if (!this.$el) {
-            throw new Error('this.$el is not defined');
-        }
-
-        this.$el.innerHTML = '';
-
-        const $table = document.createElement('table');
-
-        if (this.headers.length > 0) {
-            this._renderHeader($table);
-        }
-
+    _renderTBody($table) {
         const $tbody = document.createElement('tbody');
         $table.appendChild($tbody);
 
@@ -57,13 +45,33 @@ class SimpleDataTable {
 
             $tbody.appendChild($row);
         });
+    }
 
-        this.$el.appendChild($table);
+    render() {
+        if (!this.$el) {
+            throw new Error('this.$el is not defined');
+        }
+
+        this.$el.innerHTML = '';
+
+        const $wrapper = document.createElement('div');
+        $wrapper.classList.add('simple-data-table');
+        const $table = document.createElement('table');
+
+        if (this.headers.length > 0) {
+            this._renderTHead($table);
+        }
+
+        this._renderTBody($table);
+
+        $wrapper.appendChild($table);
 
         if (!this.readonly) {
             const $addButton = this._createAddButton();
-            this.$el.appendChild($addButton);
+            $wrapper.appendChild($addButton);
         }
+
+        this.$el.appendChild($wrapper);
 
         return this;
     }
