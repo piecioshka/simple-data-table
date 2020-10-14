@@ -287,4 +287,10 @@ class SimpleDataTable {
 }
 
 // Exports
-module.exports = { SimpleDataTable };
+if (typeof module === 'object' && module.exports) {
+    module.exports = { SimpleDataTable };
+} else if (typeof define === 'function' && define.amd) {
+    define(() => ({ SimpleDataTable }));
+} else {
+    window.SimpleDataTable = SimpleDataTable;
+}
