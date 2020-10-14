@@ -9,19 +9,26 @@
 
 ## Features
 
-* :white_check_mark: Display data (array with objects) in simple table
-* :white_check_mark: Lazy loading of data (you can load data whenever you can)
-* :white_check_mark: Support custom skins
+* :white_check_mark: Display any data (array with objects) in simple table layout
+* :white_check_mark: Support custom skins _(style children of `div.simple-data-table`)_
 * :white_check_mark: Small size of package
 * :white_check_mark: No dependencies
-* :white_check_mark: Support custom events (update, add, remove)
-* :white_check_mark: Fluent API
-* :white_check_mark: API: Find cells with content
-* :white_check_mark: API: Highlight cells
-* :white_check_mark: API: Support put value into single cell
-* :white_check_mark: API: Sorting by a concrete cell with a given function
+* :white_check_mark: Support custom events (`on`, `emit`)
+  * Updated cell content
+  * Row removed
+  * Row added
+  * Sorted table
+* :white_check_mark: Fluent API _(not available in all public methods)_
+* :white_check_mark: API
+  * Lazy loading of data (`load()`)
+  * Read number of rows (`getRowsCount()`)
+  * Get content from concrete cell (`getCell`)
+  * Find cells which contains concrete text (`findCellsByContent()`)
+  * Highlight cells (`highlightCell`, `clearHighlightedCells()`)
+  * Support put value into single cell (`setInputCellContent()`)
+  * Sorting by a concrete cell with a given function (`sortByColumn()`)
+  * Define headers, as a first row (`setHeaders()`)
 * :white_check_mark: Readonly Mode
-* :white_check_mark: Headers + Sorting by column
 
 ## Installation
 
