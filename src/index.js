@@ -37,7 +37,7 @@ class SimpleDataTable {
                 $row.appendChild($cell);
             });
 
-            const $cell = (this.readonly)
+            const $cell = this.readonly
                 ? this._createEmptyCell()
                 : this._createCellWithRemoveRowButton();
             $row.appendChild($cell);
@@ -98,7 +98,7 @@ class SimpleDataTable {
                     if (cellContent === item) {
                         indexes.push({
                             rowIndex,
-                            cellIndex
+                            cellIndex,
                         });
                     }
                 });
@@ -240,7 +240,8 @@ class SimpleDataTable {
         }
 
         const $elements = Array.from($firstRecord.children);
-        return $elements.map(($cell) => $cell.querySelector('input'))
+        return $elements
+            .map(($cell) => $cell.querySelector('input'))
             .filter(($element) => $element)
             .map(($input) => $input.name);
     }
@@ -277,21 +278,14 @@ class SimpleDataTable {
         cellIndex = 0,
         comparingFunction = (a, b) => a.toString().localeCompare(b.toString())
     ) {
-        this.data.sort((firstRow, secondRow) => comparingFunction(
-            Object.values(firstRow)[cellIndex],
-            Object.values(secondRow)[cellIndex])
+        this.data.sort((firstRow, secondRow) =>
+            comparingFunction(
+                Object.values(firstRow)[cellIndex],
+                Object.values(secondRow)[cellIndex]
+            )
         );
         this.render();
         this.emit(SimpleDataTable.EVENTS.DATA_SORTED);
-    }
-
-    static get EVENTS() {
-        return {
-            UPDATE: 'SimpleDataTable.EVENTS.UPDATE',
-            ROW_ADDED: 'SimpleDataTable.EVENTS.ROW_ADDED',
-            ROW_REMOVED: 'SimpleDataTable.EVENTS.ROW_REMOVED',
-            DATA_SORTED: 'SimpleDataTable.EVENTS.DATA_SORTED'
-        };
     }
 
     static clearElement($element) {
@@ -299,8 +293,14 @@ class SimpleDataTable {
             $element.firstElementChild.remove();
         }
     }
-
 }
+
+SimpleDataTable.EVENTS = {
+    UPDATE: 'SimpleDataTable.EVENTS.UPDATE',
+    ROW_ADDED: 'SimpleDataTable.EVENTS.ROW_ADDED',
+    ROW_REMOVED: 'SimpleDataTable.EVENTS.ROW_REMOVED',
+    DATA_SORTED: 'SimpleDataTable.EVENTS.DATA_SORTED',
+};
 
 // Exports
 if (typeof module === 'object' && module.exports) {

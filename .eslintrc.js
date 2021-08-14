@@ -15,11 +15,12 @@ module.exports = {
     // http://eslint.org/docs/rules/
     rules: {
         'no-nested-ternary': ['off'],
-        'strict': ['off'],
+        strict: ['off'],
         'object-curly-newline': ['off'],
         'no-magic-numbers': ['error', {
-            'ignore': [0, 1, 3]
-        }]
+            ignore: [0, 1, 3]
+        }],
+        'arrow-parens': ['off']
     },
 
     // List of global variables.
