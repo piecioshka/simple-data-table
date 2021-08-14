@@ -16,13 +16,12 @@
         "coverage": "nyc npm run test && nyc report --reporter=text-lcov | coveralls -v",
         "lint": "eslint ."
     },
-    "dependencies": {},
     "devDependencies": {
         "ava": "^3.13.0",
         "coveralls": "^3.1.0",
-        "eslint": "^6.8.0",
+        "eslint": "^7.32.0",
         "eslint-config-piecioshka": "^2.0.3",
-        "jsdom": "^16.4.0",
+        "jsdom": "^17.0.0",
         "nyc": "^15.1.0"
     },
     "repository": {
