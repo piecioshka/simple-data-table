@@ -1,8 +1,8 @@
 # simple-data-table
 
 [![npm version](https://badge.fury.io/js/simple-data-table.svg)](https://badge.fury.io/js/simple-data-table)
-[![downloads count](https://img.shields.io/npm/dt/simple-data-table.svg)](https://www.npmjs.com/~piecioshka)
-[![travis](https://img.shields.io/travis/piecioshka/simple-data-table.svg)](https://travis-ci.org/piecioshka/simple-data-table)
+[![downloads count](https://img.shields.io/npm/dt/simple-data-table.svg)](https://www.npmjs.com/package/simple-data-table)
+[![travis-ci](https://api.travis-ci.com/piecioshka/simple-data-table.svg?branch=master)](https://app.travis-ci.com/github/piecioshka/simple-data-table)
 [![coveralls](https://coveralls.io/repos/github/piecioshka/simple-data-table/badge.svg?branch=master)](https://coveralls.io/github/piecioshka/simple-data-table?branch=master)
 
 :hammer: Lightweight and simple data table with no dependencies
