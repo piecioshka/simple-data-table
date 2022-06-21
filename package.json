@@ -13,12 +13,10 @@
         "clear:all": "rm -rf node_modules/ && npm run clear",
         "test": "ava",
         "coverage": "nyc npm run test && nyc report --reporter=html",
-        "coveralls": "nyc npm run test && nyc report --reporter=text-lcov | coveralls -v",
         "lint": "eslint ."
     },
     "devDependencies": {
         "ava": "^3.13.0",
-        "coveralls": "^3.1.0",
         "eslint": "^8.5.0",
         "eslint-config-piecioshka": "^2.0.3",
         "jsdom": "^19.0.0",
