@@ -1,4 +1,4 @@
-const FIXTURE_3_ROWS = [
+const DUMMY_3_ROWS = [
     {
         value: 34,
         backgroundColor: '#3498db',
@@ -20,9 +20,9 @@ const FIXTURE_3_ROWS = [
 
 // Exports
 if (typeof module === 'object' && module.exports) {
-    module.exports = { FIXTURE_3_ROWS };
+    module.exports = { DUMMY_3_ROWS };
 } else if (typeof define === 'function' && define.amd) {
-    define(() => ({ FIXTURE_3_ROWS }));
+    define(() => ({ DUMMY_3_ROWS }));
 } else {
-    window.FIXTURE_3_ROWS = FIXTURE_3_ROWS;
+    window.DUMMY_3_ROWS = DUMMY_3_ROWS;
 }

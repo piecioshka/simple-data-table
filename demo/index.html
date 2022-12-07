@@ -9,8 +9,8 @@
 
     <link rel="stylesheet" href="styles/main.css"/>
     <link rel="stylesheet" href="../src/skins/default.css"/>
-    <script src="../test/fixtures/2-rows.js"></script>
-    <script src="../test/fixtures/3-rows.js"></script>
+    <script src="../test/dummies/2-rows.js"></script>
+    <script src="../test/dummies/3-rows.js"></script>
     <script src="../src/index.js"></script>
 
     <link rel="stylesheet" href="vendors/highlight/styles/github.css"/>
@@ -27,7 +27,7 @@
     <script>
         (function () {
             const t = new SimpleDataTable(document.querySelector('#example-1'));
-            t.load(FIXTURE_2_ROWS);
+            t.load(DUMMY_2_ROWS);
             t.render();
         })();
     </script>
@@ -46,7 +46,7 @@ t.render();
             const t = new SimpleDataTable(document.querySelector('#example-2'), {
                 addButtonLabel: 'Add'
             });
-            t.load(FIXTURE_2_ROWS);
+            t.load(DUMMY_2_ROWS);
             t.render();
         })();
     </script>
@@ -111,7 +111,7 @@ t.render();
             const t = new SimpleDataTable(document.querySelector('#example-5'), {
                 readonly: true
             });
-            t.load(FIXTURE_2_ROWS);
+            t.load(DUMMY_2_ROWS);
             t.render();
         })();
     </script>
@@ -132,7 +132,7 @@ t.render();
                 readonly: true
             });
             t.setHeaders(['Value', 'Color', 'Name']);
-            t.load(FIXTURE_3_ROWS);
+            t.load(DUMMY_3_ROWS);
             t.render();
         })();
     </script>

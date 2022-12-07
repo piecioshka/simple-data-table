@@ -7,7 +7,7 @@ const window = global.window = new jsdom.JSDOM().window;
 const document = global.document = window.document;
 
 const { SimpleDataTable } = require('../src/index');
-const { FIXTURE_3_ROWS } = require('./fixtures/3-rows');
+const { DUMMY_3_ROWS } = require('./dummies/3-rows');
 
 let $target;
 
@@ -42,17 +42,17 @@ test('lazy load data', (assert) => {
     const t = new SimpleDataTable($target);
     assert.is(t.data.length, 0);
 
-    t.load(FIXTURE_3_ROWS);
+    t.load(DUMMY_3_ROWS);
     assert.is(t.data.length, 3);
-    assert.not(t.data, FIXTURE_3_ROWS);
+    assert.not(t.data, DUMMY_3_ROWS);
 });
 
 test('render loaded data into DOM', (assert) => {
     const t = new SimpleDataTable($target);
-    t.load(FIXTURE_3_ROWS);
+    t.load(DUMMY_3_ROWS);
     t.render();
 
-    assert.is($target.querySelectorAll('tr').length, FIXTURE_3_ROWS.length);
+    assert.is($target.querySelectorAll('tr').length, DUMMY_3_ROWS.length);
 });
 
 test('add new record after clicking a button', (assert) => {

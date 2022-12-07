@@ -1,4 +1,4 @@
-const FIXTURE_2_ROWS = [
+const DUMMY_2_ROWS = [
     {
         column1: 'Cell 1',
         column2: 'Cell 2',
@@ -13,9 +13,9 @@ const FIXTURE_2_ROWS = [
 
 // Exports
 if (typeof module === 'object' && module.exports) {
-    module.exports = { FIXTURE_2_ROWS };
+    module.exports = { DUMMY_2_ROWS };
 } else if (typeof define === 'function' && define.amd) {
-    define(() => ({ FIXTURE_2_ROWS }));
+    define(() => ({ DUMMY_2_ROWS }));
 } else {
-    window.FIXTURE_2_ROWS = FIXTURE_2_ROWS;
+    window.DUMMY_2_ROWS = DUMMY_2_ROWS;
 }
