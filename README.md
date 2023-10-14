@@ -35,6 +35,8 @@
 npm install simple-data-table
 ```
 
+## Usage
+
 ```html
 <link rel="stylesheet" href="src/skins/default.css"/>
 <script src="src/index.js"></script>
@@ -43,8 +45,8 @@ npm install simple-data-table
 ```javascript
 const $container = document.querySelector('#place-to-render');
 const options = { /* all available options are described below */ };
-const table = new SimpleDataTable($container, options);
-table.load([
+const t = new SimpleDataTable($container, options);
+t.load([
     {
         column1: 'Cell 1',
         column2: 'Cell 2',
@@ -66,7 +68,7 @@ table.load([
         column3: 'Cell 12'
     }
 ]);
-table.render();
+t.render();
 ```
 
 ## Examples
