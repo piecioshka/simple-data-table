@@ -13,6 +13,8 @@ class SimpleDataTable {
             columnIndex: -1,
             descending: false,
         };
+        this._comparingFunction = (a, b) => a.toString()
+            .localeCompare(b.toString());
     }
 
     _renderTHead($table) {
@@ -30,7 +32,7 @@ class SimpleDataTable {
                 this._sorted.descending = (this._sorted.columnIndex === index)
                     && !this._sorted.descending;
                 this._sorted.columnIndex = index;
-                this.sortByColumn();
+                this._sortByColumn();
             });
             $row.appendChild($cell);
         });
@@ -259,6 +261,10 @@ class SimpleDataTable {
             .map(($input) => $input.name);
     }
 
+    /**
+     * @param {string[]} items
+     * @returns
+     */
     setHeaders(items) {
         this._headers = items;
         return this;
@@ -287,19 +293,21 @@ class SimpleDataTable {
         return this;
     }
 
-    sortByColumn(
-        comparingFunction = (a, b) => a.toString().localeCompare(b.toString())
-    ) {
+    _sortByColumn() {
         const index = this._sorted.columnIndex;
         const order = this._sorted.descending ? 1 : -1;
         this.data.sort((firstRow, secondRow) =>
-            comparingFunction(
+            this._comparingFunction(
                 Object.values(firstRow)[index],
                 Object.values(secondRow)[index]
             ) * order
         );
         this.render();
         this.emit(SimpleDataTable.EVENTS.DATA_SORTED);
+    }
+
+    setComparingFunction(fn) {
+        this._comparingFunction = fn;
     }
 
     static clearElement($element) {

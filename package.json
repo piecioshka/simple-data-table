@@ -11,7 +11,7 @@
     "scripts": {
         "clear": "rm -rf coverage/ .nyc_output/ coverage.lcov",
         "clear:all": "rm -rf node_modules/ && npm run clear",
-        "test": "ava",
+        "test": "ava test/specs/",
         "coverage": "nyc npm run test && nyc report --reporter=html",
         "lint": "eslint ."
     },
