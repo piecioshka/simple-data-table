@@ -128,9 +128,7 @@ t.render();
     <div id="example-6"></div>
     <script>
         (function () {
-            const t = new SimpleDataTable(document.querySelector('#example-6'), {
-                readonly: true
-            });
+            const t = new SimpleDataTable(document.querySelector('#example-6'));
             t.setHeaders(['Value', 'Color', 'Name']);
             t.load(DUMMY_3_ROWS);
             t.render();
