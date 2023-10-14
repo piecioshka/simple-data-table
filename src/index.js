@@ -13,7 +13,7 @@ class SimpleDataTable {
             columnIndex: -1,
             descending: false,
         };
-        this._comparingFunction = (a, b) => a.toString()
+        this._sortComparingFn = (a, b) => a.toString()
             .localeCompare(b.toString());
     }
 
@@ -297,7 +297,7 @@ class SimpleDataTable {
         const index = this._sorted.columnIndex;
         const order = this._sorted.descending ? 1 : -1;
         this.data.sort((firstRow, secondRow) =>
-            this._comparingFunction(
+            this._sortComparingFn(
                 Object.values(firstRow)[index],
                 Object.values(secondRow)[index]
             ) * order
@@ -306,8 +306,8 @@ class SimpleDataTable {
         this.emit(SimpleDataTable.EVENTS.DATA_SORTED);
     }
 
-    setComparingFunction(fn) {
-        this._comparingFunction = fn;
+    setSortComparingFn(fn) {
+        this._sortComparingFn = fn;
     }
 
     static clearElement($element) {

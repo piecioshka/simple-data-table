@@ -25,7 +25,7 @@
   * Find cells which contains concrete text (`findCellsByContent()`)
   * Highlight cells (`highlightCell`, `clearHighlightedCells()`)
   * Support put value into single cell (`setInputCellContent()`)
-  * Sorting by a concrete cell with a given function (`_sortByColumn()` & `setComparingFunction`)
+  * Sorting by a concrete cell with a given function (`_sortByColumn()` & `setSortComparingFn`)
   * Define headers, as a first row (`setHeaders()`)
 * :white_check_mark: Readonly Mode
 
@@ -193,9 +193,9 @@ Sorts data and triggers `DATA_SORTED` event.
 
 **WARNING**: Function `sortByColumn()` runs `render()` under the hood.
 
-#### `setComparingFunction( fn: (val1, val2) => 0, 1, -1 )`
+#### `setSortComparingFn( fn: (val1, val2) => 0, 1, -1 )`
 
-Set `_comparingFunction()` which by default use [`String.prototype.localeCompare`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare).
+Set `_sortComparingFn()` which by default use [`String.prototype.localeCompare`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare).
 
 ## Events
 
