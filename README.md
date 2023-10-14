@@ -247,24 +247,12 @@ t.on(SimpleDataTable.EVENTS.DATA_SORTED, () => {
 
 Recursive remove children from passed HTMLElement.
 
-## Tested browsers
+## Tested under browsers
 
 * Safari v10.1.2
 * Firefox v61.0.1
 * Chrome v67.0.3396.99
 * Opera v51.0.2830.40
-
-## Unit tests
-
-```bash
-npm test
-```
-
-## Code coverage
-
-```bash
-npm run coverage
-```
 
 ## License
 
