@@ -2,7 +2,6 @@
 
 [![npm version](https://badge.fury.io/js/simple-data-table.svg)](https://badge.fury.io/js/simple-data-table)
 [![downloads count](https://img.shields.io/npm/dt/simple-data-table.svg)](https://www.npmjs.com/package/simple-data-table)
-[![travis-ci](https://api.travis-ci.com/piecioshka/simple-data-table.svg?branch=master)](https://app.travis-ci.com/github/piecioshka/simple-data-table)
 
 :hammer: Lightweight and simple data table with no dependencies
 
