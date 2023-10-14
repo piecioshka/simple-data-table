@@ -187,11 +187,11 @@ Trigger event on SimpleDataTable instance.
 
 Listen on events.
 
-#### `sortByColumn( cellIndex : number, comparingFunction : Function )`
+#### `sortByColumn( comparingFunction : Function )`
 
 Sorts data and triggers `DATA_SORTED` event.
 
-By default takes `cellIndex=0` and sorts as [`String.prototype.localeCompare`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare).
+Use [`String.prototype.localeCompare`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare).
 
 **WARNING**: Function `sortByColumn()` runs `render()` under the hood.
 
