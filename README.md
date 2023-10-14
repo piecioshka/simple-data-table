@@ -25,7 +25,7 @@
   * Find cells which contains concrete text (`findCellsByContent()`)
   * Highlight cells (`highlightCell`, `clearHighlightedCells()`)
   * Support put value into single cell (`setInputCellContent()`)
-  * Sorting by a concrete cell with a given function (`sortByColumn()`)
+  * Sorting by a concrete cell with a given function (`_sortByColumn()` & `setSortComparingFn`)
   * Define headers, as a first row (`setHeaders()`)
 * :white_check_mark: Readonly Mode
 
@@ -35,6 +35,8 @@
 npm install simple-data-table
 ```
 
+## Usage
+
 ```html
 <link rel="stylesheet" href="src/skins/default.css"/>
 <script src="src/index.js"></script>
@@ -42,6 +44,7 @@ npm install simple-data-table
 
 ```javascript
 const $container = document.querySelector('#place-to-render');
+const options = { /* all available options are described below */ };
 const t = new SimpleDataTable($container, options);
 t.load([
     {
@@ -184,13 +187,15 @@ Trigger event on SimpleDataTable instance.
 
 Listen on events.
 
-#### `sortByColumn( cellIndex : number, comparingFunction : Function )`
+#### `_sortByColumn()`
 
 Sorts data and triggers `DATA_SORTED` event.
 
-By default takes `cellIndex=0` and sorts as [`String.prototype.localeCompare`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare).
-
 **WARNING**: Function `sortByColumn()` runs `render()` under the hood.
+
+#### `setSortComparingFn( fn: (val1, val2) => 0, 1, -1 )`
+
+Set `_sortComparingFn()` which by default use [`String.prototype.localeCompare`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare).
 
 ## Events
 
@@ -244,24 +249,12 @@ t.on(SimpleDataTable.EVENTS.DATA_SORTED, () => {
 
 Recursive remove children from passed HTMLElement.
 
-## Tested browsers
+## Tested under browsers
 
 * Safari v10.1.2
 * Firefox v61.0.1
 * Chrome v67.0.3396.99
 * Opera v51.0.2830.40
-
-## Unit tests
-
-```bash
-npm test
-```
-
-## Code coverage
-
-```bash
-npm run coverage
-```
 
 ## License
 

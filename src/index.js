@@ -6,19 +6,34 @@ class SimpleDataTable {
         this.defaultColumnPrefix = options.defaultColumnPrefix || 'column';
         this.defaultColumnNumber = options.defaultColumnNumber || null;
         this.defaultHighlightedCellClass = options.defaultHighlightedCellClass || 'highlighted-cell';
-        this.headers = [];
+        this._headers = [];
         this.data = [];
         this._events = {};
+        this._sorted = {
+            columnIndex: -1,
+            descending: false,
+        };
+        this._sortComparingFn = (a, b) => a.toString()
+            .localeCompare(b.toString());
     }
 
     _renderTHead($table) {
         const $thead = document.createElement('thead');
         const $row = document.createElement('tr');
 
-        this.headers.forEach((name, index) => {
+        this._headers.forEach((name, index) => {
             const $cell = this._createEmptyHeaderCell();
-            $cell.textContent = name;
-            $cell.addEventListener('click', () => this.sortByColumn(index));
+            let label = name;
+            if (this._sorted.columnIndex === index) {
+                label += ` ${this._sorted.descending ? '\u2191' : '\u2193'}`;
+            }
+            $cell.textContent = label;
+            $cell.addEventListener('click', () => {
+                this._sorted.descending = (this._sorted.columnIndex === index)
+                    && !this._sorted.descending;
+                this._sorted.columnIndex = index;
+                this._sortByColumn();
+            });
             $row.appendChild($cell);
         });
 
@@ -59,7 +74,7 @@ class SimpleDataTable {
         $wrapper.classList.add('simple-data-table');
         const $table = document.createElement('table');
 
-        if (this.headers.length > 0) {
+        if (this._headers.length > 0) {
             this._renderTHead($table);
         }
 
@@ -228,8 +243,8 @@ class SimpleDataTable {
         if (!$firstRecord) {
             const size = this.defaultColumnNumber
                 ? this.defaultColumnNumber
-                : this.headers
-                    ? this.headers.length
+                : this._headers
+                    ? this._headers.length
                     : this.data[0] && this.data[0].length;
             if (!size) {
                 return [];
@@ -246,8 +261,12 @@ class SimpleDataTable {
             .map(($input) => $input.name);
     }
 
+    /**
+     * @param {string[]} items
+     * @returns
+     */
     setHeaders(items) {
-        this.headers = items;
+        this._headers = items;
         return this;
     }
 
@@ -274,18 +293,21 @@ class SimpleDataTable {
         return this;
     }
 
-    sortByColumn(
-        cellIndex = 0,
-        comparingFunction = (a, b) => a.toString().localeCompare(b.toString())
-    ) {
+    _sortByColumn() {
+        const index = this._sorted.columnIndex;
+        const order = this._sorted.descending ? 1 : -1;
         this.data.sort((firstRow, secondRow) =>
-            comparingFunction(
-                Object.values(firstRow)[cellIndex],
-                Object.values(secondRow)[cellIndex]
-            )
+            this._sortComparingFn(
+                Object.values(firstRow)[index],
+                Object.values(secondRow)[index]
+            ) * order
         );
         this.render();
         this.emit(SimpleDataTable.EVENTS.DATA_SORTED);
+    }
+
+    setSortComparingFn(fn) {
+        this._sortComparingFn = fn;
     }
 
     static clearElement($element) {

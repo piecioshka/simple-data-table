@@ -6,8 +6,8 @@ const jsdom = require('jsdom');
 const window = global.window = new jsdom.JSDOM().window;
 const document = global.document = window.document;
 
-const { SimpleDataTable } = require('../src/index');
-const { DUMMY_3_ROWS } = require('./dummies/3-rows');
+const { SimpleDataTable } = require('../../src/index');
+const { DUMMY_3_ROWS } = require('../dummies/3-rows');
 
 let $target;
 
@@ -303,49 +303,6 @@ test('API: set content into cell', (assert) => {
     assert.is($cell.firstElementChild.value, 'baz');
 });
 
-test('API: function to sort by column (default values)', (assert) => {
-    assert.plan(2);
-
-    const t = new SimpleDataTable($target);
-    t.load([{
-        id: 'ghi'
-    }, {
-        id: 'abc'
-    }, {
-        id: 'def'
-    }]);
-    t.render();
-
-    t.on(SimpleDataTable.EVENTS.DATA_SORTED, () => {
-        assert.deepEqual(t.data.map(cell => cell.id), ['abc', 'def', 'ghi']);
-        assert.is(t.getCell(0, 0).firstElementChild.value, 'abc');
-    });
-
-    t.sortByColumn();
-});
-
-test('API: function to sort by column', (assert) => {
-    assert.plan(1);
-
-    const t = new SimpleDataTable($target);
-    t.load([{
-        id: 'ghi',
-        val: 100,
-    }, {
-        id: 'xyz',
-        val: 1000
-    }, {
-        id: 'abc',
-        val: 10
-    }]);
-    t.render();
-
-    t.on(SimpleDataTable.EVENTS.DATA_SORTED, () => {
-        assert.deepEqual(t.data.map(cell => cell.val), [1000, 100, 10]);
-    });
-    t.sortByColumn(1, (a, b) => b - a);
-});
-
 test('API: function to set headers', (assert) => {
     const t = new SimpleDataTable($target);
     t.setHeaders(['Id', 'Value']);
@@ -382,18 +339,18 @@ test('click on headers will sort the table', (assert) => {
     $firstHeaderCell.dispatchEvent(new window.Event('click'));
 
     assert.deepEqual(t.data, [
-        { id: 'a', val: 2, },
-        { id: 'b', val: 1, },
         { id: 'c', val: 3, },
+        { id: 'b', val: 1, },
+        { id: 'a', val: 2, },
     ]);
 
     const $secondHeaderCell = $header.querySelector('th:nth-child(2)');
     $secondHeaderCell.dispatchEvent(new window.Event('click'));
 
     assert.deepEqual(t.data, [
-        { id: 'b', val: 1, },
-        { id: 'a', val: 2, },
         { id: 'c', val: 3, },
+        { id: 'a', val: 2, },
+        { id: 'b', val: 1, },
     ]);
 });
 
