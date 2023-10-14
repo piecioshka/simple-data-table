@@ -16,10 +16,10 @@
         "lint": "eslint ."
     },
     "devDependencies": {
-        "ava": "^3.13.0",
-        "eslint": "^8.5.0",
-        "eslint-config-piecioshka": "^2.0.3",
-        "jsdom": "^19.0.0",
+        "ava": "^5.3.1",
+        "eslint": "^8.51.0",
+        "eslint-config-piecioshka": "^2.2.4",
+        "jsdom": "^22.1.0",
         "nyc": "^15.1.0"
     },
     "repository": {
