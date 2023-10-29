@@ -24,7 +24,7 @@
   * Find cells which contains concrete text (`findCellsByContent()`)
   * Highlight cells (`highlightCell`, `clearHighlightedCells()`)
   * Support put value into single cell (`setInputCellContent()`)
-  * Sorting by a concrete cell with a given function (`_sortByColumn()` & `setSortComparingFn`)
+  * Sorting by a concrete cell with a given function (`sortByColumn()` & `setSortComparingFn`)
   * Define headers, as a first row (`setHeaders()`)
 * :white_check_mark: Readonly Mode
 
@@ -186,7 +186,7 @@ Trigger event on SimpleDataTable instance.
 
 Listen on events.
 
-#### `_sortByColumn()`
+#### `sortByColumn( columnIndex: number )`
 
 Sorts data and triggers `DATA_SORTED` event.
 

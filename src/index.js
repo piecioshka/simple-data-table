@@ -31,8 +31,7 @@ class SimpleDataTable {
             $cell.addEventListener('click', () => {
                 this._sorted.descending = (this._sorted.columnIndex === index)
                     && !this._sorted.descending;
-                this._sorted.columnIndex = index;
-                this._sortByColumn();
+                this.sortByColumn(index);
             });
             $row.appendChild($cell);
         });
@@ -293,8 +292,8 @@ class SimpleDataTable {
         return this;
     }
 
-    _sortByColumn() {
-        const index = this._sorted.columnIndex;
+    sortByColumn(index) {
+        this._sorted.columnIndex = index;
         const order = this._sorted.descending ? 1 : -1;
         this.data.sort((firstRow, secondRow) =>
             this._sortComparingFn(

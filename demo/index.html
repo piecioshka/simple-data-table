@@ -132,6 +132,7 @@ t.render();
             t.setHeaders(['Value', 'Color', 'Name']);
             t.load(DUMMY_3_ROWS);
             t.render();
+            t.sortByColumn(0);
         })();
     </script>
     <pre><code>
@@ -139,6 +140,7 @@ const t = new SimpleDataTable(document.querySelector('#example-6'));
 t.setHeaders(['Value', 'Color', 'Name']);
 t.load(...);
 t.render();
+t.sortByColumn(0);
     </code></pre>
 </section>
 
