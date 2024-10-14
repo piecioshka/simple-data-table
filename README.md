@@ -3,7 +3,7 @@
 [![node version](https://img.shields.io/node/v/simple-data-table.svg)](https://www.npmjs.com/package/simple-data-table)
 [![npm version](https://badge.fury.io/js/simple-data-table.svg)](https://badge.fury.io/js/simple-data-table)
 [![downloads count](https://img.shields.io/npm/dt/simple-data-table.svg)](https://www.npmjs.com/package/simple-data-table)
-[![license](https://img.shields.io/npm/l/simple-data-table.svg)](https://www.npmjs.com/package/simple-data-table)
+[![license](https://img.shields.io/npm/l/simple-data-table.svg)](https://piecioshka.mit-license.org)
 
 :hammer: Lightweight and simple data table with no dependencies
 
