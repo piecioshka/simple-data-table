@@ -24,7 +24,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git@github.com:piecioshka/simple-data-table.git"
+        "url": "git+ssh://git@github.com/piecioshka/simple-data-table.git"
     },
     "files": [
         "src",
