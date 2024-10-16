@@ -4,22 +4,23 @@
 [![npm version](https://badge.fury.io/js/simple-data-table.svg)](https://badge.fury.io/js/simple-data-table)
 [![downloads count](https://img.shields.io/npm/dt/simple-data-table.svg)](https://www.npmjs.com/package/simple-data-table)
 [![license](https://img.shields.io/npm/l/simple-data-table.svg)](https://piecioshka.mit-license.org)
+[![github-ci](https://github.com/piecioshka/simple-data-table/actions/workflows/testing.yml/badge.svg)](https://github.com/piecioshka/simple-data-table/actions/workflows/testing.yml)
 
-:hammer: Lightweight and simple data table with no dependencies
+🔨 Lightweight and simple data table with no dependencies
 
 ## Features
 
-* :white_check_mark: Display any data (array with objects) in simple table layout
-* :white_check_mark: Support custom skins _(style children of `div.simple-data-table`)_
-* :white_check_mark: Small size of package
-* :white_check_mark: No dependencies
-* :white_check_mark: Support custom events (`on`, `emit`)
+* ✅ Display any data (array with objects) in simple table layout
+* ✅ Support custom skins _(style children of `div.simple-data-table`)_
+* ✅ Small size of package
+* ✅ No dependencies
+* ✅ Support custom events (`on`, `emit`)
   * Updated cell content
   * Row removed
   * Row added
   * Sorted table
-* :white_check_mark: Fluent API _(not available in all public methods)_
-* :white_check_mark: API
+* ✅ Fluent API _(not available in all public methods)_
+* ✅ API
   * Lazy loading of data (`load()`)
   * Read number of rows (`getRowsCount()`)
   * Get content from concrete cell (`getCell`)
@@ -28,7 +29,7 @@
   * Support put value into single cell (`setInputCellContent()`)
   * Sorting by a concrete cell with a given function (`sortByColumn()` & `setSortComparingFn`)
   * Define headers, as a first row (`setHeaders()`)
-* :white_check_mark: Readonly Mode
+* ✅ Readonly Mode
 
 ## Installation
 
