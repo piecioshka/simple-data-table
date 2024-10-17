@@ -74,11 +74,11 @@ t.load([
 t.render();
 ```
 
-## Examples
+## Preview 🎉
+
+<https://piecioshka.github.io/simple-data-table/demo/>
 
 ![](./screenshots/example-1.png)
-
-More examples: <https://piecioshka.github.io/simple-data-table/demo/>
 
 ## Options
 
