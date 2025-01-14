@@ -11,34 +11,34 @@
 
 ## Features
 
-* ✅ Display any data (array with objects) in simple table layout
-* ✅ Support custom skins _(style children of `div.simple-data-table`)_
-* ✅ Small size of package
-* ✅ No dependencies
-* ✅ Support custom events (`on`, `emit`)
-  * Updated cell content
-  * Row removed
-  * Row added
-  * Sorted table
-* ✅ Fluent API _(not available in all public methods)_
-* ✅ API
-  * Lazy loading of data (`load()`)
-  * Read number of rows (`getRowsCount()`)
-  * Get content from concrete cell (`getCell`)
-  * Find cells which contains concrete text (`findCellsByContent()`)
-  * Highlight cells (`highlightCell`, `clearHighlightedCells()`)
-  * Support put value into single cell (`setInputCellContent()`)
-  * Sorting by a concrete cell with a given function (`sortByColumn()` & `setSortComparingFn`)
-  * Define headers, as a first row (`setHeaders()`)
-* ✅ Readonly Mode
+- ✅ Display any data (array with objects) in simple table layout
+- ✅ Support custom skins _(style children of `div.simple-data-table`)_
+- ✅ Small size of package
+- ✅ No dependencies
+- ✅ Support custom events (`on`, `emit`)
+  - Updated cell content
+  - Row removed
+  - Row added
+  - Sorted table
+- ✅ Fluent API _(not available in all public methods)_
+- ✅ API
+  - Lazy loading of data (`load()`)
+  - Read number of rows (`getRowsCount()`)
+  - Get content from concrete cell (`getCell`)
+  - Find cells which contains concrete text (`findCellsByContent()`)
+  - Highlight cells (`highlightCell`, `clearHighlightedCells()`)
+  - Support put value into single cell (`setInputCellContent()`)
+  - Sorting by a concrete cell with a given function (`sortByColumn()` & `setSortComparingFn`)
+  - Define headers, as a first row (`setHeaders()`)
+- ✅ Readonly Mode
 
-## Installation
+## Usage
+
+Installation:
 
 ```bash
 npm install simple-data-table
 ```
-
-## Usage
 
 ```html
 <link rel="stylesheet" href="src/skins/default.css"/>
@@ -254,10 +254,10 @@ Recursive remove children from passed HTMLElement.
 
 ## Tested under browsers
 
-* Safari v10.1.2
-* Firefox v61.0.1
-* Chrome v67.0.3396.99
-* Opera v51.0.2830.40
+- Safari v10.1.2
+- Firefox v61.0.1
+- Chrome v67.0.3396.99
+- Opera v51.0.2830.40
 
 ## License
 
