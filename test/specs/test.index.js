@@ -137,6 +137,15 @@ test('API: function to get rows count', (assert) => {
     assert.is(t.getRowsCount(), 2);
 });
 
+test('API: rows count should not include the header row', (assert) => {
+    const t = new SimpleDataTable($target);
+    t.setHeaders(['Id', 'Value']);
+    t.load([{ id: 'a', val: 1 }, { id: 'b', val: 2 }]);
+    t.render();
+
+    assert.is(t.getRowsCount(), 2);
+});
+
 test('remove row after click button', (assert) => {
     const t = new SimpleDataTable($target);
     t.load([{ foo: 'bar' }]);
@@ -245,6 +254,16 @@ test('API: find cells', (assert) => {
     assert.is(indexes4.length, 2);
 });
 
+test('API: find cells when headers are set', (assert) => {
+    const t = new SimpleDataTable($target);
+    t.setHeaders(['Foo']);
+    t.load([{ foo: 'bar' }, { foo: 'bar2' }]);
+    t.render();
+
+    const indexes = t.findCellsByContent('bar2');
+    assert.deepEqual(indexes, [{ rowIndex: 1, cellIndex: 0 }]);
+});
+
 test('API: get DOM reference of cell', (assert) => {
     const t = new SimpleDataTable($target, {
         defaultColumnNumber: 5
@@ -260,6 +279,16 @@ test('API: get DOM reference of cell', (assert) => {
 
     const $notExistedCellAtAll = t.getCell(99, 99);
     assert.is($notExistedCellAtAll, null);
+});
+
+test('API: get DOM reference of cell when headers are set', (assert) => {
+    const t = new SimpleDataTable($target);
+    t.setHeaders(['Id', 'Value']);
+    t.load([{ id: 'a', val: 1 }, { id: 'b', val: 2 }]);
+    t.render();
+
+    assert.is(t.getCell(0, 0).firstElementChild.value, 'a');
+    assert.is(t.getCell(1, 0).firstElementChild.value, 'b');
 });
 
 test('API: highlight cell by add special CSS class', (assert) => {
