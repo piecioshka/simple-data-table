@@ -92,12 +92,12 @@ class SimpleDataTable {
     }
 
     getRowsCount() {
-        return this.$el.querySelectorAll('tr').length;
+        return this.$el.querySelectorAll('tbody tr').length;
     }
 
     findCellsByContent(...content) {
         const indexes = [];
-        const $rows = this.$el.querySelectorAll('tr');
+        const $rows = this.$el.querySelectorAll('tbody tr');
 
         $rows.forEach((row, rowIndex) => {
             const cells = row.querySelectorAll('td');
@@ -122,7 +122,7 @@ class SimpleDataTable {
     }
 
     getCell(rowIndex, cellIndex) {
-        const $rows = this.$el.querySelectorAll('tr');
+        const $rows = this.$el.querySelectorAll('tbody tr');
         const $row = $rows[rowIndex];
 
         if (!$row) {
