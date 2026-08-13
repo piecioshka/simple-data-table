@@ -45,8 +45,11 @@ npm install simple-data-table
 ```
 
 ```html
-<link rel="stylesheet" href="src/skins/default.css" />
-<script src="src/index.js"></script>
+<link
+    rel="stylesheet"
+    href="node_modules/simple-data-table/src/skins/default.css"
+/>
+<script src="node_modules/simple-data-table/src/index.js"></script>
 ```
 
 ```javascript
@@ -88,7 +91,7 @@ t.render();
 
 #### `addButtonLabel` _(Default: '✚')_
 
-Change value od button which add new row.
+Change the label of the button which adds a new row.
 
 ```js
 const t = new SimpleDataTable($container, {
@@ -100,7 +103,7 @@ t.render();
 
 #### `defaultColumnPrefix` _(Default: 'column')_
 
-Define what "name" should have cells in new added columns.
+Define the "name" prefix of cells in newly added columns.
 
 ```js
 const t = new SimpleDataTable($container, {
@@ -112,13 +115,13 @@ t.render();
 
 #### `defaultColumnNumber` _(Default: null)_
 
-Define how much columns should contain row in empty table.
+Define how many columns a new row should contain in an empty table.
 
-By default, use the size of headers or the number of cells in the first row.
+By default, the number of headers or the number of cells in the first row of data is used.
 
 ```js
 const t = new SimpleDataTable($container, {
-    defaultColumnNumber: '7'
+    defaultColumnNumber: 7
 });
 t.load(...);
 t.render();
@@ -138,7 +141,7 @@ t.render();
 
 #### `readonly` _(Default: false)_
 
-Define class of highlighted cell.
+Disable editing: inputs are disabled and rows cannot be added or removed.
 
 ```js
 const t = new SimpleDataTable($container, {
@@ -149,6 +152,8 @@ t.render();
 ```
 
 ## API
+
+**NOTE**: Methods which read from the DOM (`getRowsCount`, `findCellsByContent`, `getCell`, `highlightCell`, `clearHighlightedCells`, `setInputCellContent`) require calling `render()` first.
 
 #### `render(): SimpleDataTable`
 
@@ -162,7 +167,7 @@ Get number of rows.
 
 Get list of cell positions which contains passed strings.
 
-#### `getCell( rowIndex: number , cellIndex: number ): HTMLElement || null`
+#### `getCell( rowIndex: number, cellIndex: number ): HTMLElement | null`
 
 Get DOM reference of concrete cell.
 
@@ -200,7 +205,7 @@ Sorts data and triggers `DATA_SORTED` event.
 
 **WARNING**: Function `sortByColumn()` runs `render()` under the hood.
 
-#### `setSortComparingFn( fn: (val1, val2) => 0, 1, -1 )`
+#### `setSortComparingFn( fn: (val1, val2) => number )`
 
 Set `_sortComparingFn()` which by default use [`String.prototype.localeCompare`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare).
 
@@ -255,13 +260,6 @@ t.on(SimpleDataTable.EVENTS.DATA_SORTED, () => {
 #### `SimpleDataTable.clearElement( $element: HTMLElement )`
 
 Recursive remove children from passed HTMLElement.
-
-## Tested under browsers
-
-- Safari v10.1.2
-- Firefox v61.0.1
-- Chrome v67.0.3396.99
-- Opera v51.0.2830.40
 
 ## License
 
