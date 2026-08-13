@@ -243,11 +243,9 @@ class SimpleDataTable {
         const $firstRecord = $tbody.querySelector('tr');
 
         if (!$firstRecord) {
-            const size = this.defaultColumnNumber
-                ? this.defaultColumnNumber
-                : this._headers
-                    ? this._headers.length
-                    : this.data[0] && this.data[0].length;
+            const size = Number(this.defaultColumnNumber)
+                || this._headers.length
+                || (this.data[0] ? Object.keys(this.data[0]).length : 0);
             if (!size) {
                 return [];
             }

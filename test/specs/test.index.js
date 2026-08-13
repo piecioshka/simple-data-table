@@ -125,6 +125,29 @@ test('removing row should be possible', (assert) => {
     assert.not($removeButton.textContent, '');
 });
 
+test('add button uses loaded data to determine columns when no rows are rendered', (assert) => {
+    const t = new SimpleDataTable($target);
+    t.render();
+    t.load([{ a: 1, b: 2, c: 3 }]);
+
+    const $addButton = $target.querySelector('button.add-row');
+    $addButton.dispatchEvent(new window.Event('click'));
+
+    assert.is(t.$el.querySelectorAll('tbody tr td input').length, 3);
+});
+
+test('defaultColumnNumber passed as a string is respected', (assert) => {
+    const t = new SimpleDataTable($target, {
+        defaultColumnNumber: '7'
+    });
+    t.render();
+
+    const $addButton = $target.querySelector('button.add-row');
+    $addButton.dispatchEvent(new window.Event('click'));
+
+    assert.is(t.$el.querySelectorAll('tbody tr td input').length, 7);
+});
+
 test('editing a cell after removing an earlier row updates the correct record', (assert) => {
     const t = new SimpleDataTable($target);
     t.load([
