@@ -1,11 +1,15 @@
 # simple-data-table
 
+<!-- prettier-ignore-start -->
+
 [![node version](https://img.shields.io/node/v/simple-data-table.svg)](https://www.npmjs.com/package/simple-data-table)
 [![npm version](https://badge.fury.io/js/simple-data-table.svg)](https://badge.fury.io/js/simple-data-table)
 [![downloads count](https://img.shields.io/npm/dt/simple-data-table.svg)](https://www.npmjs.com/package/simple-data-table)
 [![size](https://packagephobia.com/badge?p=simple-data-table)](https://packagephobia.com/result?p=simple-data-table)
 [![license](https://img.shields.io/npm/l/simple-data-table.svg)](https://piecioshka.mit-license.org)
 [![github-ci](https://github.com/piecioshka/simple-data-table/actions/workflows/testing.yml/badge.svg)](https://github.com/piecioshka/simple-data-table/actions/workflows/testing.yml)
+
+<!-- prettier-ignore-end -->
 
 🔨 Lightweight and simple data table with no dependencies
 
@@ -16,20 +20,20 @@
 - ✅ Small size of package
 - ✅ No dependencies
 - ✅ Support custom events (`on`, `emit`)
-  - Updated cell content
-  - Row removed
-  - Row added
-  - Sorted table
+    - Updated cell content
+    - Row removed
+    - Row added
+    - Sorted table
 - ✅ Fluent API _(not available in all public methods)_
 - ✅ API
-  - Lazy loading of data (`load()`)
-  - Read number of rows (`getRowsCount()`)
-  - Get content from concrete cell (`getCell`)
-  - Find cells which contains concrete text (`findCellsByContent()`)
-  - Highlight cells (`highlightCell`, `clearHighlightedCells()`)
-  - Support put value into single cell (`setInputCellContent()`)
-  - Sorting by a concrete cell with a given function (`sortByColumn()` & `setSortComparingFn`)
-  - Define headers, as a first row (`setHeaders()`)
+    - Lazy loading of data (`load()`)
+    - Read number of rows (`getRowsCount()`)
+    - Get content from concrete cell (`getCell`)
+    - Find cells which contains concrete text (`findCellsByContent()`)
+    - Highlight cells (`highlightCell`, `clearHighlightedCells()`)
+    - Support put value into single cell (`setInputCellContent()`)
+    - Sorting by a concrete cell with a given function (`sortByColumn()` & `setSortComparingFn`)
+    - Define headers, as a first row (`setHeaders()`)
 - ✅ Readonly Mode
 
 ## Usage
@@ -41,35 +45,35 @@ npm install simple-data-table
 ```
 
 ```html
-<link rel="stylesheet" href="src/skins/default.css"/>
+<link rel="stylesheet" href="src/skins/default.css" />
 <script src="src/index.js"></script>
 ```
 
 ```javascript
 const $container = document.querySelector('#place-to-render');
-const options = { /* all available options are described below */ };
+const options = {/* all available options are described below */};
 const t = new SimpleDataTable($container, options);
 t.load([
     {
         column1: 'Cell 1',
         column2: 'Cell 2',
-        column3: 'Cell 3'
+        column3: 'Cell 3',
     },
     {
         column1: 'Cell 4',
         column2: 'Cell 5',
-        column3: 'Cell 6'
+        column3: 'Cell 6',
     },
     {
         column1: 'Cell 7',
         column2: 'Cell 8',
-        column3: 'Cell 9'
+        column3: 'Cell 9',
     },
     {
         column1: 'Cell 10',
         column2: 'Cell 11',
-        column3: 'Cell 12'
-    }
+        column3: 'Cell 12',
+    },
 ]);
 t.render();
 ```

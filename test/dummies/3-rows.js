@@ -2,20 +2,20 @@ const DUMMY_3_ROWS = [
     {
         value: 34,
         backgroundColor: '#3498db',
-        label: 'Angular'
+        label: 'Angular',
     },
 
     {
         value: 5,
         backgroundColor: '#2980b9',
-        label: 'Angular v1.x'
+        label: 'Angular v1.x',
     },
 
     {
         value: 13,
         backgroundColor: '#c0392b',
-        label: 'Nie'
-    }
+        label: 'Nie',
+    },
 ];
 
 // Exports

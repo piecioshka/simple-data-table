@@ -5,7 +5,8 @@ class SimpleDataTable {
         this.readonly = options.readonly || false;
         this.defaultColumnPrefix = options.defaultColumnPrefix || 'column';
         this.defaultColumnNumber = options.defaultColumnNumber || null;
-        this.defaultHighlightedCellClass = options.defaultHighlightedCellClass || 'highlighted-cell';
+        this.defaultHighlightedCellClass =
+            options.defaultHighlightedCellClass || 'highlighted-cell';
         this._headers = [];
         this.data = [];
         this._events = {};
@@ -13,8 +14,8 @@ class SimpleDataTable {
             columnIndex: -1,
             descending: false,
         };
-        this._sortComparingFn = (a, b) => a.toString()
-            .localeCompare(b.toString());
+        this._sortComparingFn = (a, b) =>
+            a.toString().localeCompare(b.toString());
     }
 
     _renderTHead($table) {
@@ -29,8 +30,9 @@ class SimpleDataTable {
             }
             $cell.textContent = label;
             $cell.addEventListener('click', () => {
-                this._sorted.descending = (this._sorted.columnIndex === index)
-                    && !this._sorted.descending;
+                this._sorted.descending =
+                    this._sorted.columnIndex === index &&
+                    !this._sorted.descending;
                 this.sortByColumn(index);
             });
             $row.appendChild($cell);
@@ -258,9 +260,10 @@ class SimpleDataTable {
         const $firstRecord = $tbody.querySelector('tr');
 
         if (!$firstRecord) {
-            const size = Number(this.defaultColumnNumber)
-                || this._headers.length
-                || (this.data[0] ? Object.keys(this.data[0]).length : 0);
+            const size =
+                Number(this.defaultColumnNumber) ||
+                this._headers.length ||
+                (this.data[0] ? Object.keys(this.data[0]).length : 0);
             if (!size) {
                 return [];
             }
@@ -310,11 +313,12 @@ class SimpleDataTable {
     sortByColumn(index) {
         this._sorted.columnIndex = index;
         const order = this._sorted.descending ? 1 : -1;
-        this.data.sort((firstRow, secondRow) =>
-            this._sortComparingFn(
-                Object.values(firstRow)[index],
-                Object.values(secondRow)[index]
-            ) * order
+        this.data.sort(
+            (firstRow, secondRow) =>
+                this._sortComparingFn(
+                    Object.values(firstRow)[index],
+                    Object.values(secondRow)[index],
+                ) * order,
         );
         this.render();
         this.emit(SimpleDataTable.EVENTS.DATA_SORTED);

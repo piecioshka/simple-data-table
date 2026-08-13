@@ -1,148 +1,170 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <title>simple-data-table</title>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <head>
+        <title>simple-data-table</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link href="https://fonts.googleapis.com/css?family=Chivo|Overpass" rel="stylesheet">
+        <link
+            href="https://fonts.googleapis.com/css?family=Chivo|Overpass"
+            rel="stylesheet"
+        />
 
-    <link rel="stylesheet" href="styles/main.css"/>
-    <link rel="stylesheet" href="../src/skins/default.css"/>
-    <script src="../test/dummies/2-rows.js"></script>
-    <script src="../test/dummies/3-rows.js"></script>
-    <script src="../src/index.js"></script>
+        <link rel="stylesheet" href="styles/main.css" />
+        <link rel="stylesheet" href="../src/skins/default.css" />
+        <script src="../test/dummies/2-rows.js"></script>
+        <script src="../test/dummies/3-rows.js"></script>
+        <script src="../src/index.js"></script>
 
-    <link rel="stylesheet" href="vendors/highlight/styles/github.css"/>
-    <script src="vendors/highlight/highlight.pack.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-</head>
-<body>
+        <link rel="stylesheet" href="vendors/highlight/styles/github.css" />
+        <script src="vendors/highlight/highlight.pack.js"></script>
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+    </head>
+    <body>
+        <h1>SimpleDataTable</h1>
 
-<h1>SimpleDataTable</h1>
-
-<section>
-    <h2><em>Example 1</em>: Minimal</h2>
-    <div id="example-1"></div>
-    <script>
-        (function () {
-            const t = new SimpleDataTable(document.querySelector('#example-1'));
-            t.load(DUMMY_2_ROWS);
-            t.render();
-        })();
-    </script>
-    <pre><code>
+        <section>
+            <h2><em>Example 1</em>: Minimal</h2>
+            <div id="example-1"></div>
+            <script>
+                (function () {
+                    const t = new SimpleDataTable(
+                        document.querySelector('#example-1'),
+                    );
+                    t.load(DUMMY_2_ROWS);
+                    t.render();
+                })();
+            </script>
+            <pre><code>
 const t = new SimpleDataTable(document.querySelector('#example-1'));
 t.load(...);
 t.render();
     </code></pre>
-</section>
+        </section>
 
-<section>
-    <h2><em>Example 2</em>: Change label of add button</h2>
-    <div id="example-2"></div>
-    <script>
-        (function () {
-            const t = new SimpleDataTable(document.querySelector('#example-2'), {
-                addButtonLabel: 'Add'
-            });
-            t.load(DUMMY_2_ROWS);
-            t.render();
-        })();
-    </script>
-    <pre><code>
+        <section>
+            <h2><em>Example 2</em>: Change label of add button</h2>
+            <div id="example-2"></div>
+            <script>
+                (function () {
+                    const t = new SimpleDataTable(
+                        document.querySelector('#example-2'),
+                        {
+                            addButtonLabel: 'Add',
+                        },
+                    );
+                    t.load(DUMMY_2_ROWS);
+                    t.render();
+                })();
+            </script>
+            <pre><code>
 const t = new SimpleDataTable(document.querySelector('#example-2'), {
     addButtonLabel: 'Add'
 });
 t.load(...);
 t.render();
     </code></pre>
-</section>
+        </section>
 
-<section>
-    <h2><em>Example 3</em>: Change prefix of default column (use DevTools to watch)</h2>
-    <div id="example-3"></div>
-    <script>
-        (function () {
-            const t = new SimpleDataTable(document.querySelector('#example-3'), {
-                defaultColumnNumber: 2,
-                defaultColumnPrefix: 'col-',
-            });
-            t.render();
-            const $addButton = t.$el.querySelector('button.add-row');
-            $addButton.dispatchEvent(new Event('click'));
-        })();
-    </script>
-    <pre><code>
+        <section>
+            <h2>
+                <em>Example 3</em>: Change prefix of default column (use
+                DevTools to watch)
+            </h2>
+            <div id="example-3"></div>
+            <script>
+                (function () {
+                    const t = new SimpleDataTable(
+                        document.querySelector('#example-3'),
+                        {
+                            defaultColumnNumber: 2,
+                            defaultColumnPrefix: 'col-',
+                        },
+                    );
+                    t.render();
+                    const $addButton = t.$el.querySelector('button.add-row');
+                    $addButton.dispatchEvent(new Event('click'));
+                })();
+            </script>
+            <pre><code>
 const t = new SimpleDataTable(document.querySelector('#example-3'), {
     defaultColumnPrefix: 'col-'
 });
 t.render();
     </code></pre>
-</section>
+        </section>
 
-<section>
-    <h2><em>Example 4</em>: Change default number of columns</h2>
-    <div id="example-4"></div>
-    <script>
-        (function () {
-            const t = new SimpleDataTable(document.querySelector('#example-4'), {
-                defaultColumnNumber: 1
-            });
-            t.render();
-            const $addButton = t.$el.querySelector('button.add-row');
-            $addButton.dispatchEvent(new Event('click'));
-            $addButton.dispatchEvent(new Event('click'));
-        })();
-    </script>
-    <pre><code>
+        <section>
+            <h2><em>Example 4</em>: Change default number of columns</h2>
+            <div id="example-4"></div>
+            <script>
+                (function () {
+                    const t = new SimpleDataTable(
+                        document.querySelector('#example-4'),
+                        {
+                            defaultColumnNumber: 1,
+                        },
+                    );
+                    t.render();
+                    const $addButton = t.$el.querySelector('button.add-row');
+                    $addButton.dispatchEvent(new Event('click'));
+                    $addButton.dispatchEvent(new Event('click'));
+                })();
+            </script>
+            <pre><code>
 const t = new SimpleDataTable(document.querySelector('#example-4'), {
     defaultColumnNumber: 1
 });
 t.render();
     </code></pre>
-</section>
+        </section>
 
-<section>
-    <h2><em>Example 5</em>: Readonly Mode</h2>
-    <div id="example-5"></div>
-    <script>
-        (function () {
-            const t = new SimpleDataTable(document.querySelector('#example-5'), {
-                readonly: true
-            });
-            t.load(DUMMY_2_ROWS);
-            t.render();
-        })();
-    </script>
-    <pre><code>
+        <section>
+            <h2><em>Example 5</em>: Readonly Mode</h2>
+            <div id="example-5"></div>
+            <script>
+                (function () {
+                    const t = new SimpleDataTable(
+                        document.querySelector('#example-5'),
+                        {
+                            readonly: true,
+                        },
+                    );
+                    t.load(DUMMY_2_ROWS);
+                    t.render();
+                })();
+            </script>
+            <pre><code>
 const t = new SimpleDataTable(document.querySelector('#example-5'), {
     readonly: true
 });
 t.render();
     </code></pre>
-</section>
+        </section>
 
-<section>
-    <h2><em>Example 6</em>: Headers + Sorting</h2>
-    <div id="example-6"></div>
-    <script>
-        (function () {
-            const t = new SimpleDataTable(document.querySelector('#example-6'));
-            t.setHeaders(['Value', 'Color', 'Name']);
-            t.load(DUMMY_3_ROWS);
-            t.render();
-            t.sortByColumn(0);
-        })();
-    </script>
-    <pre><code>
+        <section>
+            <h2><em>Example 6</em>: Headers + Sorting</h2>
+            <div id="example-6"></div>
+            <script>
+                (function () {
+                    const t = new SimpleDataTable(
+                        document.querySelector('#example-6'),
+                    );
+                    t.setHeaders(['Value', 'Color', 'Name']);
+                    t.load(DUMMY_3_ROWS);
+                    t.render();
+                    t.sortByColumn(0);
+                })();
+            </script>
+            <pre><code>
 const t = new SimpleDataTable(document.querySelector('#example-6'));
 t.setHeaders(['Value', 'Color', 'Name']);
 t.load(...);
 t.render();
 t.sortByColumn(0);
     </code></pre>
-</section>
-
-</body>
+        </section>
+    </body>
 </html>

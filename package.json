@@ -13,14 +13,17 @@
         "clear:all": "rm -rf node_modules/ && npm run clear",
         "test": "ava test/specs/",
         "coverage": "nyc npm run test && nyc report --reporter=html",
-        "lint": "eslint ."
+        "lint": "eslint .",
+        "format": "prettier --write .",
+        "format:check": "prettier --check ."
     },
     "devDependencies": {
         "ava": "^8.0.1",
         "eslint": "^8.57.1",
         "eslint-config-piecioshka": "^3.0.0",
         "jsdom": "^30.0.1",
-        "nyc": "^18.0.0"
+        "nyc": "^18.0.0",
+        "prettier": "^3.9.6"
     },
     "repository": {
         "type": "git",

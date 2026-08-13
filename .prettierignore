@@ -1,0 +1,5 @@
+coverage/
+dist/
+tmp/
+package-lock.json
+demo/vendors/

@@ -91,7 +91,11 @@ export declare class SimpleDataTable {
     /**
      * Puts content into the input of a cell.
      */
-    setInputCellContent(rowIndex: number, cellIndex: number, content: string): void;
+    setInputCellContent(
+        rowIndex: number,
+        cellIndex: number,
+        content: string,
+    ): void;
 
     /**
      * Sets column headers. Sorting is enabled by default.

@@ -3,8 +3,8 @@
 const test = require('ava').default;
 
 const jsdom = require('jsdom');
-const window = global.window = new jsdom.JSDOM().window;
-const document = global.document = window.document;
+const window = (global.window = new jsdom.JSDOM().window);
+const document = (global.document = window.document);
 
 const { SimpleDataTable } = require('../../src/index');
 const { DUMMY_3_ROWS } = require('../dummies/3-rows');
@@ -74,8 +74,8 @@ test('trigger custom event after changed data', (assert) => {
     const t = new SimpleDataTable($target);
     t.load([
         {
-            foo: 'bar'
-        }
+            foo: 'bar',
+        },
     ]);
     t.render();
     assert.deepEqual(t.data[0].foo, 'bar');
@@ -85,8 +85,7 @@ test('trigger custom event after changed data', (assert) => {
     });
 
     $target.querySelector('input').value = 'xxx';
-    $target.querySelector('input')
-        .dispatchEvent(new window.Event('change'));
+    $target.querySelector('input').dispatchEvent(new window.Event('change'));
     assert.deepEqual(t.data[0].foo, 'xxx');
 });
 
@@ -108,7 +107,7 @@ test('support fluent API', (assert) => {
 test('add button text should be configurable', (assert) => {
     const label = 'Załaduj';
     const t = new SimpleDataTable($target, {
-        addButtonLabel: label
+        addButtonLabel: label,
     });
     t.render();
     const $addButton = $target.querySelector('button.add-row');
@@ -153,7 +152,7 @@ test('add button uses loaded data to determine columns when no rows are rendered
 
 test('defaultColumnNumber passed as a string is respected', (assert) => {
     const t = new SimpleDataTable($target, {
-        defaultColumnNumber: '7'
+        defaultColumnNumber: '7',
     });
     t.render();
 
@@ -165,14 +164,12 @@ test('defaultColumnNumber passed as a string is respected', (assert) => {
 
 test('editing a cell after removing an earlier row updates the correct record', (assert) => {
     const t = new SimpleDataTable($target);
-    t.load([
-        { foo: 'a' },
-        { foo: 'b' },
-        { foo: 'c' },
-    ]);
+    t.load([{ foo: 'a' }, { foo: 'b' }, { foo: 'c' }]);
     t.render();
 
-    const $firstRemoveButton = t.$el.querySelector('tbody tr button.remove-row');
+    const $firstRemoveButton = t.$el.querySelector(
+        'tbody tr button.remove-row',
+    );
     $firstRemoveButton.dispatchEvent(new window.Event('click'));
     assert.deepEqual(t.data, [{ foo: 'b' }, { foo: 'c' }]);
 
@@ -198,7 +195,10 @@ test('API: function to get rows count', (assert) => {
 test('API: rows count should not include the header row', (assert) => {
     const t = new SimpleDataTable($target);
     t.setHeaders(['Id', 'Value']);
-    t.load([{ id: 'a', val: 1 }, { id: 'b', val: 2 }]);
+    t.load([
+        { id: 'a', val: 1 },
+        { id: 'b', val: 2 },
+    ]);
     t.render();
 
     assert.is(t.getRowsCount(), 2);
@@ -249,7 +249,7 @@ test('remove row action should trigger custom event', (assert) => {
 
 test('default number of columns should be configurable', (assert) => {
     const t = new SimpleDataTable($target, {
-        defaultColumnNumber: 5
+        defaultColumnNumber: 5,
     });
     t.render();
 
@@ -259,39 +259,39 @@ test('default number of columns should be configurable', (assert) => {
     const $firstRow = t.$el.querySelector('tr');
     const $cells = $firstRow.querySelectorAll('td');
     const $cellsWithInput = [...$cells]
-        .map($cell => $cell.querySelector('input'))
-        .filter($element => $element);
+        .map(($cell) => $cell.querySelector('input'))
+        .filter(($element) => $element);
 
     assert.is($cellsWithInput.length, 5);
 });
 
-test("in readonly mode there is no buttons", (assert) => {
+test('in readonly mode there is no buttons', (assert) => {
     const t = new SimpleDataTable($target, {
         readonly: true,
     });
     t.render();
 
-    const $addButton = $target.querySelector("button.add-row");
-    const $removeButton = $target.querySelector("button.remove-row");
+    const $addButton = $target.querySelector('button.add-row');
+    const $removeButton = $target.querySelector('button.remove-row');
 
     assert.is($addButton, null);
     assert.is($removeButton, null);
 });
 
-test("in readonly mode inputs are disabled", (assert) => {
+test('in readonly mode inputs are disabled', (assert) => {
     const t = new SimpleDataTable($target, {
         readonly: true,
     });
     t.load([{ foo: 'bar' }]);
     t.render();
 
-    const $firstInput = $target.querySelector("input");
+    const $firstInput = $target.querySelector('input');
     assert.is($firstInput.disabled, true);
 });
 
 test('API: find cells', (assert) => {
     const t = new SimpleDataTable($target, {
-        defaultColumnNumber: 5
+        defaultColumnNumber: 5,
     });
     t.load([{ foo: 'bar' }, { foo: 'bar2' }]);
     t.render();
@@ -324,7 +324,7 @@ test('API: find cells when headers are set', (assert) => {
 
 test('API: get DOM reference of cell', (assert) => {
     const t = new SimpleDataTable($target, {
-        defaultColumnNumber: 5
+        defaultColumnNumber: 5,
     });
     t.load([{ foo: 'bar' }, { foo: 'bar2' }]);
     t.render();
@@ -342,7 +342,10 @@ test('API: get DOM reference of cell', (assert) => {
 test('API: get DOM reference of cell when headers are set', (assert) => {
     const t = new SimpleDataTable($target);
     t.setHeaders(['Id', 'Value']);
-    t.load([{ id: 'a', val: 1 }, { id: 'b', val: 2 }]);
+    t.load([
+        { id: 'a', val: 1 },
+        { id: 'b', val: 2 },
+    ]);
     t.render();
 
     assert.is(t.getCell(0, 0).firstElementChild.value, 'a');
@@ -352,7 +355,7 @@ test('API: get DOM reference of cell when headers are set', (assert) => {
 test('API: highlight cell by add special CSS class', (assert) => {
     const t = new SimpleDataTable($target, {
         defaultColumnNumber: 5,
-        defaultHighlightedCellClass: 'cookie'
+        defaultHighlightedCellClass: 'cookie',
     });
     t.load([{ foo: 'bar' }]);
     t.render();
@@ -365,7 +368,7 @@ test('API: highlight cell by add special CSS class', (assert) => {
 test('API: clear highlighted cells', (assert) => {
     const t = new SimpleDataTable($target, {
         defaultColumnNumber: 5,
-        defaultHighlightedCellClass: 'cookie'
+        defaultHighlightedCellClass: 'cookie',
     });
     t.load([{ foo: 'bar' }]);
     t.render();
@@ -393,31 +396,41 @@ test('API: set content into cell', (assert) => {
 test('API: function to set headers', (assert) => {
     const t = new SimpleDataTable($target);
     t.setHeaders(['Id', 'Value']);
-    t.load([{
-        id: 'ghi',
-        val: 100,
-    }, {
-        id: 'xyz',
-        val: 1000
-    }, {
-        id: 'abc',
-        val: 10
-    }]);
+    t.load([
+        {
+            id: 'ghi',
+            val: 100,
+        },
+        {
+            id: 'xyz',
+            val: 1000,
+        },
+        {
+            id: 'abc',
+            val: 10,
+        },
+    ]);
     t.render();
 
     const $header = t.$el.querySelector('thead');
     assert.not($header, null);
-    assert.is($header.querySelector('th:nth-child(1)').textContent.trim(), 'Id');
-    assert.is($header.querySelector('th:nth-child(2)').textContent.trim(), 'Value');
+    assert.is(
+        $header.querySelector('th:nth-child(1)').textContent.trim(),
+        'Id',
+    );
+    assert.is(
+        $header.querySelector('th:nth-child(2)').textContent.trim(),
+        'Value',
+    );
 });
 
 test('click on headers will sort the table', (assert) => {
     const t = new SimpleDataTable($target);
     t.setHeaders(['Id', 'Value']);
     t.load([
-        { id: 'b', val: 1, },
-        { id: 'c', val: 3, },
-        { id: 'a', val: 2, },
+        { id: 'b', val: 1 },
+        { id: 'c', val: 3 },
+        { id: 'a', val: 2 },
     ]);
     t.render();
 
@@ -426,18 +439,18 @@ test('click on headers will sort the table', (assert) => {
     $firstHeaderCell.dispatchEvent(new window.Event('click'));
 
     assert.deepEqual(t.data, [
-        { id: 'c', val: 3, },
-        { id: 'b', val: 1, },
-        { id: 'a', val: 2, },
+        { id: 'c', val: 3 },
+        { id: 'b', val: 1 },
+        { id: 'a', val: 2 },
     ]);
 
     const $secondHeaderCell = $header.querySelector('th:nth-child(2)');
     $secondHeaderCell.dispatchEvent(new window.Event('click'));
 
     assert.deepEqual(t.data, [
-        { id: 'c', val: 3, },
-        { id: 'a', val: 2, },
-        { id: 'b', val: 1, },
+        { id: 'c', val: 3 },
+        { id: 'a', val: 2 },
+        { id: 'b', val: 1 },
     ]);
 });
 
@@ -449,7 +462,10 @@ test('when defaultColumnNumber is not defined use headers number', (assert) => {
     const $addButton = $target.querySelector('button.add-row');
     $addButton.dispatchEvent(new window.Event('click'));
 
-    assert.is(t.$el.querySelectorAll('tbody td input[name^="column"]').length, 4);
+    assert.is(
+        t.$el.querySelectorAll('tbody td input[name^="column"]').length,
+        4,
+    );
 });
 
 test('when defaultColumnNumber & headers number are not defined use first row of data', (assert) => {
@@ -462,5 +478,8 @@ test('when defaultColumnNumber & headers number are not defined use first row of
     const $addButton = $target.querySelector('button.add-row');
     $addButton.dispatchEvent(new window.Event('click'));
 
-    assert.is(t.$el.querySelectorAll('tbody tr:nth-child(2) td input').length, 5);
+    assert.is(
+        t.$el.querySelectorAll('tbody tr:nth-child(2) td input').length,
+        5,
+    );
 });
