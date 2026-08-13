@@ -125,6 +125,21 @@ test('removing row should be possible', (assert) => {
     assert.not($removeButton.textContent, '');
 });
 
+test('API: highlightCell and setInputCellContent ignore invalid indexes', (assert) => {
+    const t = new SimpleDataTable($target);
+    t.load([{ foo: 'bar' }]);
+    t.render();
+
+    assert.notThrows(() => t.highlightCell(10, 10));
+    assert.notThrows(() => t.setInputCellContent(10, 10, 'xxx'));
+    assert.notThrows(() => t.setInputCellContent(0, 1, 'xxx'));
+});
+
+test('API: emit without listeners supports fluent API', (assert) => {
+    const t = new SimpleDataTable($target);
+    assert.is(t.emit('unknown-event'), t);
+});
+
 test('add button uses loaded data to determine columns when no rows are rendered', (assert) => {
     const t = new SimpleDataTable($target);
     t.render();

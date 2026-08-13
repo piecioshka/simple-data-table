@@ -141,6 +141,11 @@ class SimpleDataTable {
 
     highlightCell(rowIndex, cellIndex) {
         const $cell = this.getCell(rowIndex, cellIndex);
+
+        if (!$cell) {
+            return;
+        }
+
         $cell.classList.add(this.defaultHighlightedCellClass);
     }
 
@@ -153,7 +158,17 @@ class SimpleDataTable {
 
     setInputCellContent(rowIndex, cellIndex, content) {
         const $cell = this.getCell(rowIndex, cellIndex);
+
+        if (!$cell) {
+            return;
+        }
+
         const $input = $cell.querySelector('input');
+
+        if (!$input) {
+            return;
+        }
+
         $input.value = content;
     }
 
@@ -276,11 +291,10 @@ class SimpleDataTable {
     }
 
     emit(name, payload) {
-        if (!this._events[name]) {
-            return;
+        if (this._events[name]) {
+            this._events[name].forEach((cb) => cb(payload));
         }
 
-        this._events[name].forEach((cb) => cb(payload));
         return this;
     }
 
