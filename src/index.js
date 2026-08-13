@@ -43,11 +43,11 @@ class SimpleDataTable {
     _renderTBody($table) {
         const $tbody = document.createElement('tbody');
 
-        this.data.forEach((item, rowIndex) => {
+        this.data.forEach((item) => {
             const $row = document.createElement('tr');
 
             Object.entries(item).forEach(([key, value]) => {
-                const $cell = this._createCellWithInput(key, value, rowIndex);
+                const $cell = this._createCellWithInput(key, value);
                 $row.appendChild($cell);
             });
 
@@ -194,7 +194,7 @@ class SimpleDataTable {
         return $addButton;
     }
 
-    _createCellWithInput(name, value, rowIndex) {
+    _createCellWithInput(name, value) {
         const $cell = document.createElement('td');
         const $input = document.createElement('input');
         $input.value = value;
@@ -205,6 +205,10 @@ class SimpleDataTable {
         }
 
         $input.addEventListener('change', () => {
+            // Row index is resolved at event time, because removing
+            // an earlier row shifts positions in `this.data`.
+            const $row = $cell.parentNode;
+            const rowIndex = Array.from($row.parentNode.children).indexOf($row);
             this.data[rowIndex][name] = $input.value;
             this.emit(SimpleDataTable.EVENTS.UPDATE, this.data);
         });
@@ -215,14 +219,13 @@ class SimpleDataTable {
 
     _createEmptyRow() {
         const $tbody = this.$el.querySelector('tbody');
-        const rowsCount = $tbody.querySelectorAll('tr').length;
         const $row = document.createElement('tr');
         const columnNames = this._fetchColumnNames();
 
         const record = {};
 
         columnNames.forEach((cellName) => {
-            const $cell = this._createCellWithInput(cellName, '', rowsCount);
+            const $cell = this._createCellWithInput(cellName, '');
             $row.appendChild($cell);
             record[cellName] = '';
         });

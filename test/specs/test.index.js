@@ -125,6 +125,26 @@ test('removing row should be possible', (assert) => {
     assert.not($removeButton.textContent, '');
 });
 
+test('editing a cell after removing an earlier row updates the correct record', (assert) => {
+    const t = new SimpleDataTable($target);
+    t.load([
+        { foo: 'a' },
+        { foo: 'b' },
+        { foo: 'c' },
+    ]);
+    t.render();
+
+    const $firstRemoveButton = t.$el.querySelector('tbody tr button.remove-row');
+    $firstRemoveButton.dispatchEvent(new window.Event('click'));
+    assert.deepEqual(t.data, [{ foo: 'b' }, { foo: 'c' }]);
+
+    const $input = t.$el.querySelector('tbody tr input');
+    $input.value = 'xxx';
+    $input.dispatchEvent(new window.Event('change'));
+
+    assert.deepEqual(t.data, [{ foo: 'xxx' }, { foo: 'c' }]);
+});
+
 test('API: function to get rows count', (assert) => {
     const t = new SimpleDataTable($target);
     t.load([{ foo: 'bar' }]);
