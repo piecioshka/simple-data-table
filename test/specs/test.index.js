@@ -1,6 +1,6 @@
 'use strict';
 
-const test = require('ava');
+const test = require('ava').default;
 
 const jsdom = require('jsdom');
 const window = global.window = new jsdom.JSDOM().window;
