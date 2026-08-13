@@ -30,7 +30,8 @@
         "src",
         "package.json",
         "README.md",
-        "LICENSE"
+        "LICENSE",
+        "types"
     ],
     "keywords": [
         "simple",
@@ -48,5 +49,6 @@
     "main": "./src/index.js",
     "engines": {
         "node": ">=22"
-    }
+    },
+    "types": "types/index.d.ts"
 }
