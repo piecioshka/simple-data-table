@@ -56,10 +56,17 @@
     "main": "./src/index.js",
     "exports": {
         ".": {
-            "types": "./types/index.d.ts",
-            "default": "./src/index.js"
+            "import": {
+                "types": "./types/index.d.mts",
+                "default": "./src/index.mjs"
+            },
+            "default": {
+                "types": "./types/index.d.ts",
+                "default": "./src/index.js"
+            }
         },
         "./src/index.js": "./src/index.js",
+        "./src/index.mjs": "./src/index.mjs",
         "./src/skins/*.css": "./src/skins/*.css",
         "./package.json": "./package.json"
     },

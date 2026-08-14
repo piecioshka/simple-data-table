@@ -29,7 +29,7 @@ npm run demo
 
 - 📦 No dependencies, no build step _(a single `<script>` tag is enough)_
 - 🪶 Tiny package _(~4 kB of plain JavaScript)_
-- 🔌 Works as UMD, CommonJS or AMD module
+- 🔌 Works as ES module, UMD, CommonJS or AMD module
 - 📊 Display any data (array with objects) in simple table layout
 - ✏️ Edit cells, add and remove rows out of the box
 - 🔀 Smart sorting _(numbers as numbers, ISO dates chronologically, text in natural order, empty values last)_
@@ -86,6 +86,24 @@ t.load([
     },
 ]);
 t.render();
+```
+
+### ES modules
+
+The package also ships an ES module entry point, so `import` works with a bundler and in Node:
+
+```javascript
+import { SimpleDataTable } from 'simple-data-table';
+// a default export is available too:
+// import SimpleDataTable from 'simple-data-table';
+```
+
+Straight from a browser, without a bundler, point the import at the file itself:
+
+```html
+<script type="module">
+    import { SimpleDataTable } from './node_modules/simple-data-table/src/index.mjs';
+</script>
 ```
 
 ## Skins
