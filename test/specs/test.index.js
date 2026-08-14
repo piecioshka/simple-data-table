@@ -47,6 +47,35 @@ test('lazy load data', (assert) => {
     assert.not(t.data, DUMMY_3_ROWS);
 });
 
+test('load copies rows, so editing a cell does not mutate the input', (assert) => {
+    const input = [{ foo: 'bar' }];
+    const t = new SimpleDataTable($target);
+    t.load(input);
+    t.render();
+
+    assert.not(t.data[0], input[0]);
+
+    const $input = $target.querySelector('input');
+    $input.value = 'xxx';
+    $input.dispatchEvent(new window.Event('change'));
+
+    assert.is(t.data[0].foo, 'xxx');
+    assert.is(input[0].foo, 'bar');
+});
+
+test('load copies rows, so removing a row does not mutate the input', (assert) => {
+    const input = [{ foo: 'a' }, { foo: 'b' }];
+    const t = new SimpleDataTable($target);
+    t.load(input);
+    t.render();
+
+    const $removeButton = t.$el.querySelector('button.remove-row');
+    $removeButton.dispatchEvent(new window.Event('click'));
+
+    assert.is(t.data.length, 1);
+    assert.is(input.length, 2);
+});
+
 test('render loaded data into DOM', (assert) => {
     const t = new SimpleDataTable($target);
     t.load(DUMMY_3_ROWS);

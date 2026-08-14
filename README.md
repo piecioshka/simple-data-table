@@ -189,7 +189,7 @@ Setup column headers. Sorting is enabled by default.
 
 #### `load( data: Array<object> )`
 
-Loading data into table component.
+Loading data into table component. Rows are copied, so editing cells never mutates the objects passed in.
 
 #### `emit( name: string, payload: any )`
 

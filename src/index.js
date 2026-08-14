@@ -288,7 +288,9 @@ class SimpleDataTable {
     }
 
     load(data) {
-        this.data = Array.from(data);
+        // Rows are copied, so editing cells never mutates the objects
+        // passed in by the caller.
+        this.data = Array.from(data, (row) => ({ ...row }));
         return this;
     }
 
