@@ -13,6 +13,18 @@
 
 🔨 Lightweight and simple data table with no dependencies
 
+## Preview 🎉
+
+<https://piecioshka.github.io/simple-data-table/demo/>
+
+![](./screenshots/example-1.png)
+
+To run the demo locally (it starts on the first free port from 3000 up):
+
+```bash
+npm run demo
+```
+
 ## Features
 
 - 📦 No dependencies, no build step _(a single `<script>` tag is enough)_
@@ -81,18 +93,6 @@ t.load([
     },
 ]);
 t.render();
-```
-
-## Preview 🎉
-
-<https://piecioshka.github.io/simple-data-table/demo/>
-
-![](./screenshots/example-1.png)
-
-To run the demo locally (it starts on the first free port from 3000 up):
-
-```bash
-npm run demo
 ```
 
 ## Skins
