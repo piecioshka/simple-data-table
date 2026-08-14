@@ -104,6 +104,41 @@ t.render();</code></pre>
 
             <section class="section">
                 <div class="wrapper">
+                    <h2 class="section__title">ES modules</h2>
+                    <p class="section__lead">
+                        Prefer <code>import</code> over a global? The package
+                        ships an ES module entry point, so it works with a
+                        bundler, with <code>&lt;script type="module"&gt;</code>
+                        and in Node. The table below is rendered by an imported
+                        module, not by the global build.
+                    </p>
+
+                    <div class="demo-box">
+                        <div id="example-esm"></div>
+                    </div>
+
+                    <pre><code class="language-javascript">import { SimpleDataTable } from 'simple-data-table';
+// a default export is available too:
+// import SimpleDataTable from 'simple-data-table';
+
+const t = new SimpleDataTable(document.querySelector('#table'));
+t.setHeaders(['Name', 'Role', 'City']);
+t.load(team);
+t.render();</code></pre>
+
+                    <p class="hint">
+                        Straight from a browser, without a bundler, point the
+                        import at the file itself:
+                    </p>
+
+                    <pre><code class="language-html">&lt;script type="module"&gt;
+    import { SimpleDataTable } from './node_modules/simple-data-table/src/index.mjs';
+&lt;/script&gt;</code></pre>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="wrapper">
                     <h2 class="section__title">
                         Sorting that understands data
                     </h2>
@@ -355,5 +390,6 @@ $container.querySelector('.simple-data-table').classList.add('midnight');</code>
         <script src="data.js"></script>
         <script src="../src/index.js"></script>
         <script src="app.js"></script>
+        <script type="module" src="esm-example.mjs"></script>
     </body>
 </html>
