@@ -5,21 +5,18 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <link
-            href="https://fonts.googleapis.com/css?family=Chivo|Overpass"
-            rel="stylesheet"
-        />
-
         <link rel="stylesheet" href="styles/main.css" />
         <link rel="stylesheet" href="../src/skins/default.css" />
         <script src="../test/dummies/2-rows.js"></script>
         <script src="../test/dummies/3-rows.js"></script>
         <script src="../src/index.js"></script>
 
-        <link rel="stylesheet" href="vendors/highlight/styles/github.css" />
-        <script src="vendors/highlight/highlight.pack.js"></script>
+        <link rel="stylesheet" href="vendors/highlight/styles/github.min.css" />
+        <script src="vendors/highlight/highlight.min.js"></script>
         <script>
-            hljs.initHighlightingOnLoad();
+            document.addEventListener('DOMContentLoaded', () => {
+                hljs.highlightAll();
+            });
         </script>
     </head>
     <body>

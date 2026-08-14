@@ -5,14 +5,19 @@
 }
 
 body {
-    width: 620px;
+    max-width: 620px;
     margin: 0 auto;
+    padding: 0 16px;
     font-weight: normal;
-    font-family: 'Overpass', sans-serif;
+    font-family:
+        system-ui,
+        -apple-system,
+        'Segoe UI',
+        Roboto,
+        sans-serif;
 }
 
 h1 {
-    font-family: 'Chivo', sans-serif;
     border-bottom: 1px solid;
 }
 
