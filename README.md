@@ -15,26 +15,28 @@
 
 ## Features
 
-- ✅ No dependencies, no build step _(a single `<script>` tag is enough)_
-- ✅ Works as UMD, CommonJS or AMD module
-- ✅ Display any data (array with objects) in simple table layout
-- ✅ Edit cells, add and remove rows out of the box
-- ✅ Smart sorting, with a per-column comparing function (`setSortComparingFn()`)
+- 📦 No dependencies, no build step _(a single `<script>` tag is enough)_
+- 🪶 Tiny package _(~4 kB of plain JavaScript)_
+- 🔌 Works as UMD, CommonJS or AMD module
+- 📊 Display any data (array with objects) in simple table layout
+- ✏️ Edit cells, add and remove rows out of the box
+- 🔀 Smart sorting, with a custom comparing function (`setSortComparingFn()`)
     - Numbers compared as numbers, so `2` comes before `10`
     - ISO dates compared chronologically
     - Text compared in natural order, so `item2` comes before `item10`
     - Empty values always sink to the bottom
-- ✅ Custom events (`on()`, `emit()`)
+- 📡 Custom events (`on()`, `emit()`)
     - Updated cell content
     - Row added
     - Row removed
     - Sorted table
-- ✅ Two skins included _(light `default.css` and dark `midnight.css`)_
-- ✅ Support custom skins _(style children of `div.simple-data-table`)_
-- ✅ Readonly mode _(disabled inputs, no add and remove buttons)_
-- ✅ Your data is never mutated _(rows are copied on `load()`)_
-- ✅ TypeScript definitions included
-- ✅ Fluent API _(not available in all public methods)_
+- 🎨 Two skins included _(light `default.css` and dark `midnight.css`)_
+- 🖌️ Support custom skins _(style children of `div.simple-data-table`)_
+- 🔒 Readonly mode _(disabled inputs, no add and remove buttons)_
+- 🛡️ Your data is never mutated _(rows are copied on `load()`)_
+- 📘 TypeScript definitions included
+- ⛓️ Fluent API _(not available in all public methods)_
+- ♿ Keyboard accessible _(visible focus ring on inputs and buttons)_
 
 ## Usage
 
