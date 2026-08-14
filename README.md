@@ -207,7 +207,21 @@ Sorts data and triggers `DATA_SORTED` event.
 
 #### `setSortComparingFn( fn: (val1, val2) => number )`
 
-Set `_sortComparingFn()` which by default use [`String.prototype.localeCompare`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare).
+Replace the default comparing function. Empty values are handled before the function is called, so it never receives `null`, `undefined` or `''`.
+
+#### `SimpleDataTable.compareValues( val1, val2 ): number`
+
+Default comparing function, which picks a strategy from the value types:
+
+- **numbers** (also numeric strings like `'10'`) are compared numerically, so `2` comes before `10`
+- **ISO dates** (`2026-01-05`, `2026-01-05T12:00:00Z`) are compared chronologically
+- **anything else** is compared as text with natural ordering, so `item2` comes before `item10`
+
+Empty values (`null`, `undefined`, `''`) always sink to the bottom, regardless of the sort direction.
+
+#### `SimpleDataTable.isEmptyValue( value ): boolean`
+
+Checks whether a value is treated as empty by the sorting logic.
 
 ## Events
 

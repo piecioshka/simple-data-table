@@ -54,6 +54,18 @@ export declare class SimpleDataTable {
      */
     static clearElement($element: HTMLElement): void;
 
+    /**
+     * Checks whether a value is treated as empty by the sorting logic
+     * (null, undefined or an empty string).
+     */
+    static isEmptyValue(value: unknown): boolean;
+
+    /**
+     * Default comparing function. Compares numbers numerically, ISO dates
+     * chronologically and anything else as text with natural ordering.
+     */
+    static compareValues(value1: unknown, value2: unknown): number;
+
     data: SimpleDataTableRow[];
 
     constructor($el: HTMLElement, options?: SimpleDataTableOptions);

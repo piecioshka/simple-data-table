@@ -14,8 +14,7 @@ class SimpleDataTable {
             columnIndex: -1,
             descending: false,
         };
-        this._sortComparingFn = (a, b) =>
-            a.toString().localeCompare(b.toString());
+        this._sortComparingFn = SimpleDataTable.compareValues;
     }
 
     _renderTHead($table) {
@@ -313,19 +312,101 @@ class SimpleDataTable {
     sortByColumn(index) {
         this._sorted.columnIndex = index;
         const order = this._sorted.descending ? 1 : -1;
-        this.data.sort(
-            (firstRow, secondRow) =>
-                this._sortComparingFn(
-                    Object.values(firstRow)[index],
-                    Object.values(secondRow)[index],
-                ) * order,
-        );
+        this.data.sort((firstRow, secondRow) => {
+            const value1 = Object.values(firstRow)[index];
+            const value2 = Object.values(secondRow)[index];
+
+            // Empty values always sink to the bottom, regardless of the
+            // sort direction, and never reach the comparing function.
+            const isEmpty1 = SimpleDataTable.isEmptyValue(value1);
+            const isEmpty2 = SimpleDataTable.isEmptyValue(value2);
+
+            if (isEmpty1 || isEmpty2) {
+                if (isEmpty1 && isEmpty2) {
+                    return 0;
+                }
+                return isEmpty1 ? 1 : -1;
+            }
+
+            return this._sortComparingFn(value1, value2) * order;
+        });
         this.render();
         this.emit(SimpleDataTable.EVENTS.DATA_SORTED);
     }
 
     setSortComparingFn(fn) {
         this._sortComparingFn = fn;
+    }
+
+    static isEmptyValue(value) {
+        return value === null || typeof value === 'undefined' || value === '';
+    }
+
+    /**
+     * Compares two cell values, picking the strategy from their type:
+     * numbers numerically, dates chronologically and anything else as
+     * text with natural ordering ("item2" before "item10").
+     *
+     * @param {unknown} value1
+     * @param {unknown} value2
+     * @returns {number}
+     */
+    static compareValues(value1, value2) {
+        const number1 = SimpleDataTable.toNumber(value1);
+        const number2 = SimpleDataTable.toNumber(value2);
+
+        if (number1 !== null && number2 !== null) {
+            return number1 - number2;
+        }
+
+        const date1 = SimpleDataTable.toTimestamp(value1);
+        const date2 = SimpleDataTable.toTimestamp(value2);
+
+        if (date1 !== null && date2 !== null) {
+            return date1 - date2;
+        }
+
+        // An empty locales list means "use the default locale".
+        return String(value1).localeCompare(String(value2), [], {
+            numeric: true,
+            sensitivity: 'base',
+        });
+    }
+
+    static toNumber(value) {
+        if (typeof value === 'number') {
+            return Number.isNaN(value) ? null : value;
+        }
+
+        if (typeof value === 'boolean') {
+            return Number(value);
+        }
+
+        if (typeof value !== 'string' || value.trim() === '') {
+            return null;
+        }
+
+        const parsed = Number(value.trim().replace(',', '.'));
+        return Number.isNaN(parsed) ? null : parsed;
+    }
+
+    static toTimestamp(value) {
+        if (value instanceof Date) {
+            const time = value.getTime();
+            return Number.isNaN(time) ? null : time;
+        }
+
+        // Only ISO-like dates are recognized, because Date parsing of
+        // arbitrary strings is implementation specific.
+        if (
+            typeof value !== 'string' ||
+            !/^\d{4}-\d{2}-\d{2}([T ]|$)/.test(value.trim())
+        ) {
+            return null;
+        }
+
+        const time = new Date(value.trim()).getTime();
+        return Number.isNaN(time) ? null : time;
     }
 
     static clearElement($element) {

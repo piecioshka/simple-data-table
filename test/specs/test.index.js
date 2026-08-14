@@ -454,6 +454,109 @@ test('click on headers will sort the table', (assert) => {
     ]);
 });
 
+test('sorting compares numbers numerically, not lexicographically', (assert) => {
+    const t = new SimpleDataTable($target);
+    t.load([{ val: 10 }, { val: 2 }, { val: 1 }]);
+    t.render();
+
+    t.sortByColumn(0);
+
+    assert.deepEqual(t.data, [{ val: 10 }, { val: 2 }, { val: 1 }]);
+
+    t.setSortComparingFn(SimpleDataTable.compareValues);
+    t._sorted.descending = true;
+    t.sortByColumn(0);
+
+    assert.deepEqual(t.data, [{ val: 1 }, { val: 2 }, { val: 10 }]);
+});
+
+test('sorting compares numeric strings numerically', (assert) => {
+    const t = new SimpleDataTable($target);
+    t.load([{ val: '10' }, { val: '2' }, { val: '1' }]);
+    t.render();
+
+    t._sorted.descending = true;
+    t.sortByColumn(0);
+
+    assert.deepEqual(t.data, [{ val: '1' }, { val: '2' }, { val: '10' }]);
+});
+
+test('sorting compares ISO dates chronologically', (assert) => {
+    const t = new SimpleDataTable($target);
+    t.load([
+        { date: '2026-01-05' },
+        { date: '2025-12-31' },
+        { date: '2026-01-10' },
+    ]);
+    t.render();
+
+    t._sorted.descending = true;
+    t.sortByColumn(0);
+
+    assert.deepEqual(t.data, [
+        { date: '2025-12-31' },
+        { date: '2026-01-05' },
+        { date: '2026-01-10' },
+    ]);
+});
+
+test('sorting uses natural order for mixed text', (assert) => {
+    const t = new SimpleDataTable($target);
+    t.load([{ id: 'item10' }, { id: 'item2' }, { id: 'item1' }]);
+    t.render();
+
+    t._sorted.descending = true;
+    t.sortByColumn(0);
+
+    assert.deepEqual(t.data, [
+        { id: 'item1' },
+        { id: 'item2' },
+        { id: 'item10' },
+    ]);
+});
+
+test('sorting does not throw on empty values and sinks them to the bottom', (assert) => {
+    const t = new SimpleDataTable($target);
+    t.load([{ val: 'b' }, { val: null }, { val: 'a' }, { val: undefined }]);
+    t.render();
+
+    assert.notThrows(() => {
+        t._sorted.descending = true;
+        t.sortByColumn(0);
+    });
+
+    assert.deepEqual(t.data.slice(0, 2), [{ val: 'a' }, { val: 'b' }]);
+    assert.is(t.data.length, 4);
+});
+
+test('empty values stay at the bottom in both sort directions', (assert) => {
+    const t = new SimpleDataTable($target);
+    t.load([{ val: 'b' }, { val: '' }, { val: 'a' }]);
+    t.render();
+
+    t._sorted.descending = true;
+    t.sortByColumn(0);
+    assert.deepEqual(t.data, [{ val: 'a' }, { val: 'b' }, { val: '' }]);
+
+    t._sorted.descending = false;
+    t.sortByColumn(0);
+    assert.deepEqual(t.data, [{ val: 'b' }, { val: 'a' }, { val: '' }]);
+});
+
+test('custom comparing function never receives empty values', (assert) => {
+    const t = new SimpleDataTable($target);
+    t.load([{ val: 'b' }, { val: null }, { val: 'a' }]);
+    t.render();
+
+    t.setSortComparingFn((value1, value2) => {
+        assert.true(SimpleDataTable.isEmptyValue(value1) === false);
+        assert.true(SimpleDataTable.isEmptyValue(value2) === false);
+        return String(value1).localeCompare(String(value2));
+    });
+
+    assert.notThrows(() => t.sortByColumn(0));
+});
+
 test('when defaultColumnNumber is not defined use headers number', (assert) => {
     const t = new SimpleDataTable($target);
     t.setHeaders(['a', 'b', 'c', 'd']);
