@@ -32,16 +32,9 @@ npm run demo
 - 🔌 Works as UMD, CommonJS or AMD module
 - 📊 Display any data (array with objects) in simple table layout
 - ✏️ Edit cells, add and remove rows out of the box
-- 🔀 Smart sorting, with a custom comparing function (`setSortComparingFn()`)
-    - Numbers compared as numbers, so `2` comes before `10`
-    - ISO dates compared chronologically
-    - Text compared in natural order, so `item2` comes before `item10`
-    - Empty values always sink to the bottom
-- 📡 Custom events (`on()`, `emit()`)
-    - Updated cell content
-    - Row added
-    - Row removed
-    - Sorted table
+- 🔀 Smart sorting _(numbers as numbers, ISO dates chronologically, text in natural order, empty values last)_
+- 🧮 Custom comparing function for full control over sorting (`setSortComparingFn()`)
+- 📡 Custom events for updated cells, added and removed rows and sorting (`on()`, `emit()`)
 - 🎨 Two skins included _(light `default.css` and dark `midnight.css`)_
 - 🖌️ Support custom skins _(style children of `div.simple-data-table`)_
 - 🔒 Readonly mode _(disabled inputs, no add and remove buttons)_
