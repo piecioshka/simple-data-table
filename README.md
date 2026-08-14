@@ -15,26 +15,26 @@
 
 ## Features
 
+- ✅ No dependencies, no build step _(a single `<script>` tag is enough)_
+- ✅ Works as UMD, CommonJS or AMD module
 - ✅ Display any data (array with objects) in simple table layout
-- ✅ Support custom skins _(style children of `div.simple-data-table`)_
-- ✅ Small size of package
-- ✅ No dependencies
-- ✅ Support custom events (`on`, `emit`)
+- ✅ Edit cells, add and remove rows out of the box
+- ✅ Smart sorting, with a per-column comparing function (`setSortComparingFn()`)
+    - Numbers compared as numbers, so `2` comes before `10`
+    - ISO dates compared chronologically
+    - Text compared in natural order, so `item2` comes before `item10`
+    - Empty values always sink to the bottom
+- ✅ Custom events (`on()`, `emit()`)
     - Updated cell content
-    - Row removed
     - Row added
+    - Row removed
     - Sorted table
+- ✅ Two skins included _(light `default.css` and dark `midnight.css`)_
+- ✅ Support custom skins _(style children of `div.simple-data-table`)_
+- ✅ Readonly mode _(disabled inputs, no add and remove buttons)_
+- ✅ Your data is never mutated _(rows are copied on `load()`)_
+- ✅ TypeScript definitions included
 - ✅ Fluent API _(not available in all public methods)_
-- ✅ API
-    - Lazy loading of data (`load()`)
-    - Read number of rows (`getRowsCount()`)
-    - Get content from concrete cell (`getCell`)
-    - Find cells which contains concrete text (`findCellsByContent()`)
-    - Highlight cells (`highlightCell`, `clearHighlightedCells()`)
-    - Support put value into single cell (`setInputCellContent()`)
-    - Sorting by a concrete cell with a given function (`sortByColumn()` & `setSortComparingFn`)
-    - Define headers, as a first row (`setHeaders()`)
-- ✅ Readonly Mode
 
 ## Usage
 
@@ -86,6 +86,37 @@ t.render();
 <https://piecioshka.github.io/simple-data-table/demo/>
 
 ![](./screenshots/example-1.png)
+
+To run the demo locally (it starts on the first free port from 3000 up):
+
+```bash
+npm run demo
+```
+
+## Skins
+
+The package ships two stylesheets:
+
+```html
+<!-- light, used by default -->
+<link
+    rel="stylesheet"
+    href="node_modules/simple-data-table/src/skins/default.css"
+/>
+
+<!-- optional dark skin -->
+<link
+    rel="stylesheet"
+    href="node_modules/simple-data-table/src/skins/midnight.css"
+/>
+```
+
+The dark skin is opt-in, so it never overrides your own styles. Add the `midnight` class to the wrapper after rendering:
+
+```js
+t.render();
+$container.querySelector('.simple-data-table').classList.add('midnight');
+```
 
 ## Options
 

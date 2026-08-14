@@ -16,12 +16,15 @@
         "lint": "eslint .",
         "format": "prettier --write .",
         "format:check": "prettier --check .",
-        "prepublishOnly": "npm run format:check && npm run lint && npm test"
+        "prepublishOnly": "npm run format:check && npm run lint && npm test",
+        "demo": "http-server . -p $(detect-port 3000) -o /demo/ -c-1"
     },
     "devDependencies": {
         "ava": "^8.0.1",
+        "detect-port": "^2.1.0",
         "eslint": "^8.57.1",
         "eslint-config-piecioshka": "^3.0.0",
+        "http-server": "^14.1.1",
         "jsdom": "^30.0.1",
         "nyc": "^18.0.0",
         "prettier": "^3.9.6"
