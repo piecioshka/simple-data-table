@@ -1,167 +1,359 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>simple-data-table</title>
+        <title>
+            simple-data-table — editable data table with no dependencies
+        </title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+            name="description"
+            content="Lightweight, dependency-free editable data table. Drop in one script, call render() and get sortable, editable rows."
+        />
+
+        <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 
         <link rel="stylesheet" href="styles/main.css" />
         <link rel="stylesheet" href="../src/skins/default.css" />
-        <script src="../test/dummies/2-rows.js"></script>
-        <script src="../test/dummies/3-rows.js"></script>
-        <script src="../src/index.js"></script>
+        <link rel="stylesheet" href="../src/skins/midnight.css" />
 
         <link rel="stylesheet" href="vendors/highlight/styles/github.min.css" />
         <script src="vendors/highlight/highlight.min.js"></script>
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                hljs.highlightAll();
-            });
-        </script>
     </head>
     <body>
-        <h1>SimpleDataTable</h1>
+        <header class="hero">
+            <div class="wrapper">
+                <h1 class="hero__title">simple-data-table</h1>
+                <p class="hero__tagline">
+                    An editable, sortable data table in three lines of
+                    JavaScript. No dependencies, no build step, no framework.
+                </p>
 
-        <section>
-            <h2><em>Example 1</em>: Minimal</h2>
-            <div id="example-1"></div>
-            <script>
-                (function () {
-                    const t = new SimpleDataTable(
-                        document.querySelector('#example-1'),
-                    );
-                    t.load(DUMMY_2_ROWS);
-                    t.render();
-                })();
-            </script>
-            <pre><code>
-const t = new SimpleDataTable(document.querySelector('#example-1'));
-t.load(...);
-t.render();
-    </code></pre>
-        </section>
+                <div class="hero__actions">
+                    <span class="install">
+                        <code id="install-command"
+                            >npm i simple-data-table</code
+                        >
+                        <button
+                            type="button"
+                            class="install__copy"
+                            id="copy-install"
+                        >
+                            copy
+                        </button>
+                    </span>
+                    <a
+                        class="button button--primary"
+                        href="https://www.npmjs.com/package/simple-data-table"
+                        >View on npm</a
+                    >
+                    <a
+                        class="button button--secondary"
+                        href="https://github.com/piecioshka/simple-data-table"
+                        >GitHub</a
+                    >
+                </div>
 
-        <section>
-            <h2><em>Example 2</em>: Change label of add button</h2>
-            <div id="example-2"></div>
-            <script>
-                (function () {
-                    const t = new SimpleDataTable(
-                        document.querySelector('#example-2'),
-                        {
-                            addButtonLabel: 'Add',
-                        },
-                    );
-                    t.load(DUMMY_2_ROWS);
-                    t.render();
-                })();
-            </script>
-            <pre><code>
-const t = new SimpleDataTable(document.querySelector('#example-2'), {
-    addButtonLabel: 'Add'
-});
-t.load(...);
-t.render();
-    </code></pre>
-        </section>
+                <ul class="highlights">
+                    <li>
+                        <strong>0</strong>
+                        <span>runtime dependencies</span>
+                    </li>
+                    <li>
+                        <strong>~4 kB</strong>
+                        <span>of plain JavaScript</span>
+                    </li>
+                    <li>
+                        <strong>UMD</strong>
+                        <span>script tag, CommonJS or AMD</span>
+                    </li>
+                    <li>
+                        <strong>Typed</strong>
+                        <span>TypeScript definitions included</span>
+                    </li>
+                </ul>
+            </div>
+        </header>
 
-        <section>
-            <h2>
-                <em>Example 3</em>: Change prefix of default column (use
-                DevTools to watch)
-            </h2>
-            <div id="example-3"></div>
-            <script>
-                (function () {
-                    const t = new SimpleDataTable(
-                        document.querySelector('#example-3'),
-                        {
-                            defaultColumnNumber: 2,
-                            defaultColumnPrefix: 'col-',
-                        },
-                    );
-                    t.render();
-                    const $addButton = t.$el.querySelector('button.add-row');
-                    $addButton.dispatchEvent(new Event('click'));
-                })();
-            </script>
-            <pre><code>
-const t = new SimpleDataTable(document.querySelector('#example-3'), {
-    defaultColumnPrefix: 'col-'
-});
-t.render();
-    </code></pre>
-        </section>
+        <main>
+            <section class="section">
+                <div class="wrapper">
+                    <h2 class="section__title">Start in 30 seconds</h2>
+                    <p class="section__lead">
+                        Point the table at a container, hand it an array of
+                        objects and call <code>render()</code>. Every cell is
+                        editable, and rows can be added or removed right away.
+                    </p>
 
-        <section>
-            <h2><em>Example 4</em>: Change default number of columns</h2>
-            <div id="example-4"></div>
-            <script>
-                (function () {
-                    const t = new SimpleDataTable(
-                        document.querySelector('#example-4'),
-                        {
-                            defaultColumnNumber: 1,
-                        },
-                    );
-                    t.render();
-                    const $addButton = t.$el.querySelector('button.add-row');
-                    $addButton.dispatchEvent(new Event('click'));
-                    $addButton.dispatchEvent(new Event('click'));
-                })();
-            </script>
-            <pre><code>
-const t = new SimpleDataTable(document.querySelector('#example-4'), {
-    defaultColumnNumber: 1
-});
-t.render();
-    </code></pre>
-        </section>
+                    <div class="demo-box">
+                        <div id="example-basic"></div>
+                    </div>
 
-        <section>
-            <h2><em>Example 5</em>: Readonly Mode</h2>
-            <div id="example-5"></div>
-            <script>
-                (function () {
-                    const t = new SimpleDataTable(
-                        document.querySelector('#example-5'),
-                        {
-                            readonly: true,
-                        },
-                    );
-                    t.load(DUMMY_2_ROWS);
-                    t.render();
-                })();
-            </script>
-            <pre><code>
-const t = new SimpleDataTable(document.querySelector('#example-5'), {
-    readonly: true
-});
-t.render();
-    </code></pre>
-        </section>
+                    <pre><code class="language-html">&lt;link rel="stylesheet" href="node_modules/simple-data-table/src/skins/default.css"&gt;
+&lt;script src="node_modules/simple-data-table/src/index.js"&gt;&lt;/script&gt;</code></pre>
 
-        <section>
-            <h2><em>Example 6</em>: Headers + Sorting</h2>
-            <div id="example-6"></div>
-            <script>
-                (function () {
-                    const t = new SimpleDataTable(
-                        document.querySelector('#example-6'),
-                    );
-                    t.setHeaders(['Value', 'Color', 'Name']);
-                    t.load(DUMMY_3_ROWS);
-                    t.render();
-                    t.sortByColumn(0);
-                })();
-            </script>
-            <pre><code>
-const t = new SimpleDataTable(document.querySelector('#example-6'));
-t.setHeaders(['Value', 'Color', 'Name']);
-t.load(...);
+                    <pre><code class="language-javascript">const t = new SimpleDataTable(document.querySelector('#table'));
+
+t.load([
+    { name: 'Ada Lovelace', role: 'Engineering', city: 'London' },
+    { name: 'Grace Hopper', role: 'Compilers', city: 'New York' },
+]);
+t.render();</code></pre>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="wrapper">
+                    <h2 class="section__title">
+                        Sorting that understands data
+                    </h2>
+                    <p class="section__lead">
+                        Click a header to sort. Numbers are compared as numbers,
+                        so 1280 lands below 15300 rather than above it. ISO
+                        dates sort chronologically, text sorts naturally, and
+                        empty cells always sink to the bottom.
+                    </p>
+
+                    <div class="demo-box">
+                        <div id="example-sorting"></div>
+                    </div>
+                    <p class="hint">
+                        Try the <em>downloads</em> and <em>released</em> columns
+                        — one row has no release date on purpose.
+                    </p>
+
+                    <pre><code class="language-javascript">t.setHeaders(['Version', 'Downloads', 'Released']);
+t.load(releases);
 t.render();
-t.sortByColumn(0);
-    </code></pre>
-        </section>
+
+// Sorting is wired to the headers, but you can also trigger it:
+t.sortByColumn(1);</code></pre>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="wrapper">
+                    <h2 class="section__title">Events for everything</h2>
+                    <p class="section__lead">
+                        The table tells you when a cell changes, a row is added
+                        or removed and when data gets sorted. Edit the table
+                        below and watch the log fill up.
+                    </p>
+
+                    <div class="demo-box">
+                        <div id="example-events"></div>
+                    </div>
+                    <ul class="event-log" id="event-log">
+                        <li class="event-log__empty">
+                            No events yet — edit a cell, add or remove a row.
+                        </li>
+                    </ul>
+
+                    <pre><code class="language-javascript">t.on(SimpleDataTable.EVENTS.UPDATE, (data) =&gt; console.log('updated', data));
+t.on(SimpleDataTable.EVENTS.ROW_ADDED, () =&gt; console.log('row added'));
+t.on(SimpleDataTable.EVENTS.ROW_REMOVED, () =&gt; console.log('row removed'));
+t.on(SimpleDataTable.EVENTS.DATA_SORTED, () =&gt; console.log('sorted'));</code></pre>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="wrapper">
+                    <h2 class="section__title">Read-only mode</h2>
+                    <p class="section__lead">
+                        Flip one option to turn the same table into a display
+                        grid: inputs are disabled and the add and remove buttons
+                        are gone.
+                    </p>
+
+                    <div class="demo-box">
+                        <div id="example-readonly"></div>
+                    </div>
+
+                    <pre><code class="language-javascript">const t = new SimpleDataTable($container, { readonly: true });
+t.load(invoices);
+t.render();</code></pre>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="wrapper">
+                    <h2 class="section__title">Bring your own skin</h2>
+                    <p class="section__lead">
+                        Styling is a plain stylesheet targeting children of
+                        <code>div.simple-data-table</code>. The package ships a
+                        light default and a dark <code>midnight</code> skin.
+                    </p>
+
+                    <div class="demo-box demo-box--dark">
+                        <div id="example-skin"></div>
+                    </div>
+
+                    <pre><code class="language-html">&lt;link rel="stylesheet" href="node_modules/simple-data-table/src/skins/midnight.css"&gt;</code></pre>
+
+                    <pre><code class="language-javascript">t.render();
+
+// The dark skin is opt-in, so it never overrides your own styles:
+$container.querySelector('.simple-data-table').classList.add('midnight');</code></pre>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="wrapper">
+                    <h2 class="section__title">Playground</h2>
+                    <p class="section__lead">
+                        Change the data or the options and the table below
+                        re-renders as you type.
+                    </p>
+
+                    <div class="playground">
+                        <div class="playground__panel">
+                            <label
+                                class="playground__label"
+                                for="playground-data"
+                                >Data (JSON array of objects)</label
+                            >
+                            <textarea
+                                id="playground-data"
+                                class="playground__editor"
+                                spellcheck="false"
+                            ></textarea>
+
+                            <div class="playground__options">
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        id="playground-headers"
+                                    />
+                                    headers
+                                </label>
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        id="playground-readonly"
+                                    />
+                                    readonly
+                                </label>
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        id="playground-dark"
+                                    />
+                                    dark skin
+                                </label>
+                                <label>
+                                    add button
+                                    <input
+                                        type="text"
+                                        id="playground-label"
+                                        value="✚"
+                                        maxlength="16"
+                                    />
+                                </label>
+                            </div>
+
+                            <p
+                                class="playground__error"
+                                id="playground-error"
+                            ></p>
+                        </div>
+
+                        <div class="playground__panel">
+                            <span class="playground__label">Preview</span>
+                            <div
+                                class="playground__preview"
+                                id="playground-preview"
+                            ></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="wrapper">
+                    <h2 class="section__title">API at a glance</h2>
+                    <p class="section__lead">
+                        The full reference lives in the
+                        <a
+                            href="https://github.com/piecioshka/simple-data-table#readme"
+                            >README</a
+                        >.
+                    </p>
+
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>Method</th>
+                                <th>What it does</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>load(data)</code></td>
+                                <td>
+                                    Loads rows. Objects are copied, so your data
+                                    is never mutated.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><code>render()</code></td>
+                                <td>Renders the table into the container.</td>
+                            </tr>
+                            <tr>
+                                <td><code>setHeaders(items)</code></td>
+                                <td>
+                                    Adds a header row and enables click-to-sort.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><code>sortByColumn(index)</code></td>
+                                <td>Sorts by a column and re-renders.</td>
+                            </tr>
+                            <tr>
+                                <td><code>setSortComparingFn(fn)</code></td>
+                                <td>
+                                    Replaces the default comparing function.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><code>getCell(row, cell)</code></td>
+                                <td>
+                                    Returns a cell element, or
+                                    <code>null</code> when it does not exist.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <code>findCellsByContent(...text)</code>
+                                </td>
+                                <td>Finds positions of cells matching text.</td>
+                            </tr>
+                            <tr>
+                                <td><code>highlightCell(row, cell)</code></td>
+                                <td>Adds the highlight class to a cell.</td>
+                            </tr>
+                            <tr>
+                                <td><code>on(name, handler)</code></td>
+                                <td>Subscribes to a table event.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="wrapper">
+                <a href="https://github.com/piecioshka/simple-data-table"
+                    >simple-data-table</a
+                >
+                —
+                <a href="https://piecioshka.mit-license.org">The MIT License</a>
+                @ 2026
+            </div>
+        </footer>
+
+        <script src="data.js"></script>
+        <script src="../src/index.js"></script>
+        <script src="app.js"></script>
     </body>
 </html>
