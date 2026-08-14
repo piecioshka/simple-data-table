@@ -586,6 +586,31 @@ test('custom comparing function never receives empty values', (assert) => {
     assert.notThrows(() => t.sortByColumn(0));
 });
 
+test('compareValues sorts Date objects chronologically', (assert) => {
+    const older = new Date('2025-12-31T00:00:00Z');
+    const newer = new Date('2026-01-05T00:00:00Z');
+
+    assert.true(SimpleDataTable.compareValues(older, newer) < 0);
+    assert.true(SimpleDataTable.compareValues(newer, older) > 0);
+    assert.is(SimpleDataTable.compareValues(older, older), 0);
+});
+
+test('compareValues sorts booleans as numbers', (assert) => {
+    assert.true(SimpleDataTable.compareValues(false, true) < 0);
+    assert.true(SimpleDataTable.compareValues(true, false) > 0);
+});
+
+test('compareValues falls back to text for invalid dates and NaN', (assert) => {
+    assert.is(SimpleDataTable.compareValues('abc', 'abc'), 0);
+    assert.true(SimpleDataTable.compareValues('2026-13-45', 'abc') !== 0);
+    assert.true(SimpleDataTable.compareValues(Number.NaN, 'abc') !== 0);
+    assert.true(SimpleDataTable.compareValues(new Date('nope'), 'abc') !== 0);
+});
+
+test('compareValues accepts decimal commas in numeric strings', (assert) => {
+    assert.true(SimpleDataTable.compareValues('1,5', '10,5') < 0);
+});
+
 test('when defaultColumnNumber is not defined use headers number', (assert) => {
     const t = new SimpleDataTable($target);
     t.setHeaders(['a', 'b', 'c', 'd']);
