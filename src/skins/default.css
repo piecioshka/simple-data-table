@@ -1,46 +1,90 @@
+.simple-data-table {
+    --sdt-border: #d0d5db;
+    --sdt-header-bg: #eef1f4;
+    --sdt-text: #1f2933;
+    --sdt-accent: #2f6f9f;
+    --sdt-danger: #c0392b;
+    --sdt-focus: #1a73e8;
+}
+
+.simple-data-table table {
+    border-collapse: collapse;
+}
+
 .simple-data-table th {
     border: none;
-    background-color: #d7d7d7;
-    padding: 0;
+    background-color: var(--sdt-header-bg);
+    color: var(--sdt-text);
+    text-align: left;
+    font-weight: 600;
+    padding: 6px 8px;
+    white-space: nowrap;
+}
+
+.simple-data-table thead th {
+    cursor: pointer;
+    user-select: none;
+}
+
+.simple-data-table thead th:hover {
+    background-color: #e2e7ec;
 }
 
 .simple-data-table td {
     border: none;
-    padding: 0;
+    padding: 1px;
 }
 
 .simple-data-table input {
-    border: 1px solid #d7d7d7;
+    border: 1px solid var(--sdt-border);
+    border-radius: 2px;
     display: inline-block;
-    padding: 5px;
+    padding: 6px 8px;
+    color: var(--sdt-text);
+    background: #fff;
+    font: inherit;
 }
 
-.simple-data-table input:focus {
-    border: 1px solid #3498db;
+.simple-data-table input:hover:not(:disabled) {
+    border-color: #b3bcc6;
+}
+
+.simple-data-table input:focus-visible {
+    border-color: var(--sdt-focus);
+    outline: 2px solid var(--sdt-focus);
+    outline-offset: -1px;
+}
+
+.simple-data-table input:disabled {
+    background: #f6f7f9;
+    color: #5c6b7a;
+    cursor: not-allowed;
 }
 
 .simple-data-table button.remove-row {
     background: transparent;
-    color: #de5b49;
-    border: 1px solid #de5b49;
+    color: var(--sdt-danger);
+    border: 1px solid var(--sdt-danger);
     border-radius: 2px;
     cursor: pointer;
     margin: 2px;
     font-size: 15px;
+    line-height: 1;
     padding: 0;
-    height: 25px;
-    width: 25px;
+    height: 27px;
+    width: 27px;
 }
 
 .simple-data-table button.remove-row:hover {
-    background: #de5b49;
+    background: var(--sdt-danger);
     color: #fff;
 }
 
-.simple-data-table button.remove-row:focus {
-    background: #de5b49;
+.simple-data-table button.remove-row:focus-visible {
+    background: var(--sdt-danger);
     color: #fff;
-    outline: none;
+    outline: 2px solid var(--sdt-focus);
+    outline-offset: 2px;
 }
 
 .simple-data-table button.remove-row::-moz-focus-inner {
@@ -49,25 +93,27 @@
 
 .simple-data-table button.add-row {
     background: transparent;
-    color: #324d5c;
-    border: 1px solid #324d5c;
+    color: var(--sdt-accent);
+    border: 1px solid var(--sdt-accent);
     border-radius: 2px;
     cursor: pointer;
-    margin: 2px;
+    margin: 4px 2px 2px;
     font-size: 15px;
-    height: 25px;
-    padding: 0 6px;
+    line-height: 1;
+    height: 27px;
+    padding: 0 10px;
 }
 
 .simple-data-table button.add-row:hover {
-    background: #324d5c;
+    background: var(--sdt-accent);
     color: #fff;
 }
 
-.simple-data-table button.add-row:focus {
-    background: #324d5c;
+.simple-data-table button.add-row:focus-visible {
+    background: var(--sdt-accent);
     color: #fff;
-    outline: none;
+    outline: 2px solid var(--sdt-focus);
+    outline-offset: 2px;
 }
 
 .simple-data-table button.add-row::-moz-focus-inner {

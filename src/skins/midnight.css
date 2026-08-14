@@ -1,0 +1,129 @@
+/*
+ * Optional dark skin. Add the "midnight" class to the table wrapper:
+ *
+ *   t.render();
+ *   $container.querySelector('.simple-data-table').classList.add('midnight');
+ */
+
+.simple-data-table.midnight {
+    --sdt-bg: #161b22;
+    --sdt-border: #30363d;
+    --sdt-header-bg: #21262d;
+    --sdt-text: #e6edf3;
+    --sdt-muted: #8b949e;
+    --sdt-accent: #58a6ff;
+    --sdt-danger: #f85149;
+}
+
+.simple-data-table.midnight table {
+    border-collapse: collapse;
+}
+
+.simple-data-table.midnight th {
+    border: none;
+    background-color: var(--sdt-header-bg);
+    color: var(--sdt-text);
+    text-align: left;
+    font-weight: 600;
+    padding: 6px 8px;
+    white-space: nowrap;
+}
+
+.simple-data-table.midnight thead th {
+    cursor: pointer;
+    user-select: none;
+}
+
+.simple-data-table.midnight thead th:hover {
+    background-color: #2d333b;
+}
+
+.simple-data-table.midnight td {
+    border: none;
+    padding: 1px;
+}
+
+.simple-data-table.midnight input {
+    border: 1px solid var(--sdt-border);
+    border-radius: 2px;
+    display: inline-block;
+    padding: 6px 8px;
+    color: var(--sdt-text);
+    background: var(--sdt-bg);
+    font: inherit;
+}
+
+.simple-data-table.midnight input:hover:not(:disabled) {
+    border-color: #484f58;
+}
+
+.simple-data-table.midnight input:focus-visible {
+    border-color: var(--sdt-accent);
+    outline: 2px solid var(--sdt-accent);
+    outline-offset: -1px;
+}
+
+.simple-data-table.midnight input:disabled {
+    background: #1c2128;
+    color: var(--sdt-muted);
+    cursor: not-allowed;
+}
+
+.simple-data-table.midnight button.remove-row {
+    background: transparent;
+    color: var(--sdt-danger);
+    border: 1px solid var(--sdt-danger);
+    border-radius: 2px;
+    cursor: pointer;
+    margin: 2px;
+    font-size: 15px;
+    line-height: 1;
+    padding: 0;
+    height: 27px;
+    width: 27px;
+}
+
+.simple-data-table.midnight button.remove-row:hover {
+    background: var(--sdt-danger);
+    color: #0d1117;
+}
+
+.simple-data-table.midnight button.remove-row:focus-visible {
+    background: var(--sdt-danger);
+    color: #0d1117;
+    outline: 2px solid var(--sdt-accent);
+    outline-offset: 2px;
+}
+
+.simple-data-table.midnight button.remove-row::-moz-focus-inner {
+    border: 0;
+}
+
+.simple-data-table.midnight button.add-row {
+    background: transparent;
+    color: var(--sdt-accent);
+    border: 1px solid var(--sdt-accent);
+    border-radius: 2px;
+    cursor: pointer;
+    margin: 4px 2px 2px;
+    font-size: 15px;
+    line-height: 1;
+    height: 27px;
+    padding: 0 10px;
+}
+
+.simple-data-table.midnight button.add-row:hover {
+    background: var(--sdt-accent);
+    color: #0d1117;
+}
+
+.simple-data-table.midnight button.add-row:focus-visible {
+    background: var(--sdt-accent);
+    color: #0d1117;
+    outline: 2px solid var(--sdt-accent);
+    outline-offset: 2px;
+}
+
+.simple-data-table.midnight button.add-row::-moz-focus-inner {
+    border: 0;
+}
