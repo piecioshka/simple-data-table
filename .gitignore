@@ -6,7 +6,8 @@ coverage/
 coverage.lcov
 
 dist/
-tmp/
+tmp/*
+!tmp/.gitkeep
 
 .env
 .env.*
