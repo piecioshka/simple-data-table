@@ -15,7 +15,8 @@
         "coverage": "nyc npm run test && nyc report --reporter=html",
         "lint": "eslint .",
         "format": "prettier --write .",
-        "format:check": "prettier --check ."
+        "format:check": "prettier --check .",
+        "prepublishOnly": "npm run format:check && npm run lint && npm test"
     },
     "devDependencies": {
         "ava": "^8.0.1",
@@ -50,6 +51,15 @@
         "no dependencies"
     ],
     "main": "./src/index.js",
+    "exports": {
+        ".": {
+            "types": "./types/index.d.ts",
+            "default": "./src/index.js"
+        },
+        "./src/index.js": "./src/index.js",
+        "./src/skins/*.css": "./src/skins/*.css",
+        "./package.json": "./package.json"
+    },
     "engines": {
         "node": ">=22"
     },
