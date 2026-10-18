@@ -6,7 +6,6 @@ coverage/
 coverage.lcov
 
 dist/
-tmp/*
 tmp/
 
 .env
