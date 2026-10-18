@@ -7,7 +7,7 @@ coverage.lcov
 
 dist/
 tmp/*
-!tmp/.gitkeep
+tmp/
 
 .env
 .env.*
